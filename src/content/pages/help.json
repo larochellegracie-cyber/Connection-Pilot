@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "title": "Help & Support | Connection Pilot",
+    "description": "Get help using Connection Pilot and contact the support team."
+  },
+  "hero": {
+    "title": "Help & Support",
+    "description": "Find your next step or send the Connection Pilot support team a message."
+  },
+  "topics": [
+    {
+      "title": "Set up your workspace",
+      "description": "Complete your business profile, connect your phone number, and add the information your receptionist needs.",
+      "href": "/dashboard/business-profile",
+      "action": "Open business profile",
+      "id": "FxeESoifBi0WqVVMpzUTM"
+    },
+    {
+      "title": "Manage appointments",
+      "description": "Use the calendar to create, reschedule, complete, or cancel appointments while Booking Rules protect your availability.",
+      "href": "/calendar",
+      "action": "Open calendar",
+      "id": "SxJqthkJ6-uyb1uh_4NHC"
+    },
+    {
+      "title": "Review Booking Rules",
+      "description": "Control your availability, durations, buffers, notice requirements, and appointment policies.",
+      "href": "/dashboard/booking-rules",
+      "action": "Open Booking Rules",
+      "id": "PdeUbi7XwjgAIPNmr-60Q"
+    }
+  ],
+  "support": {
+    "title": "Contact Connection Pilot support",
+    "description": "Send us a message and include the email address you use to sign in along with any relevant details.",
+    "action": "Contact support",
+    "href": "/contact"
+  }
+}

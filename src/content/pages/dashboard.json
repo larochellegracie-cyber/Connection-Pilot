@@ -1,0 +1,97 @@
+{
+  "hero": {
+    "greeting": "Good morning",
+    "subtitle": "Here’s what’s happening with your business today.",
+    "overviewLabel": "Business overview",
+    "openSchedule": "Open calendar",
+    "openLeads": "View customers"
+  },
+  "summary": {
+    "title": "Today at a glance",
+    "description": "A live view of the business activity you need to know about.",
+    "todaySchedule": {
+      "label": "Today’s schedule",
+      "detail": "Appointments scheduled today"
+    },
+    "openLeads": {
+      "label": "Open leads",
+      "detail": "Active pipeline records"
+    },
+    "activeJobs": {
+      "label": "Active jobs",
+      "detail": "Booked or in progress"
+    },
+    "unpaidBalance": {
+      "label": "Outstanding",
+      "detail": "Invoices not marked paid"
+    },
+    "revenue": {
+      "label": "Sales",
+      "detail": "Completed payment records"
+    }
+  },
+  "schedule": {
+    "title": "Today’s schedule",
+    "description": "Your next appointments, jobs, and business activity.",
+    "emptyTitle": "Nothing is scheduled today",
+    "emptyDescription": "New bookings will show here as soon as they are saved.",
+    "open": "Open calendar",
+    "customer": "Customer",
+    "service": "Service",
+    "time": "Time",
+    "status": "Status"
+  },
+  "attention": {
+    "title": "Pilot’s Flight Plan",
+    "description": "Things that need your attention.",
+    "emptyTitle": "Your flight plan is clear",
+    "emptyDescription": "When a record needs a response, Pilot will surface it here.",
+    "open": "Review",
+    "followUp": "Follow-up requested",
+    "cancelled": "Cancelled appointment",
+    "unread": "Unread notification"
+  },
+  "pipeline": {
+    "title": "Business pipeline",
+    "description": "A live snapshot of your customers, jobs, quotes, and invoices.",
+    "leads": {
+      "label": "Open leads",
+      "detail": "New or active leads"
+    },
+    "jobs": {
+      "label": "Active jobs",
+      "detail": "Booked or in-progress jobs"
+    },
+    "estimates": {
+      "label": "Quotes",
+      "detail": "Draft or sent estimates"
+    },
+    "invoices": {
+      "label": "Invoices",
+      "detail": "Open invoices"
+    },
+    "emptyFinance": "No finance records are stored yet."
+  },
+  "activity": {
+    "title": "Recent activity",
+    "description": "The newest updates across your connected business records.",
+    "emptyTitle": "No recent activity yet",
+    "emptyDescription": "Customer, lead, job, and appointment updates will appear here.",
+    "openCustomer": "Open customer"
+  },
+  "briefing": {
+    "title": "Ask Pilot",
+    "description": "Get help understanding today’s opportunities and next steps.",
+    "emptyTitle": "Your workspace is ready",
+    "emptyDescription": "As customers, leads, jobs, and appointments are recorded, Pilot will surface a useful daily briefing here.",
+    "todayAppointments": "appointments scheduled today",
+    "attentionItems": "items need attention",
+    "openLeads": "open leads",
+    "activeJobs": "active jobs"
+  },
+  "status": {
+    "unknown": "Scheduled",
+    "overdue": "Overdue",
+    "noStoredRevenue": "No completed payment records yet."
+  }
+}

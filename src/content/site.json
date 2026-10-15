@@ -1,0 +1,284 @@
+{
+  "brandName": "Connection Pilot",
+  "contactEmail": "support@connectionpilot.net",
+  "footer": {
+    "statement": "Helping businesses stay connected with their customers.",
+    "supportLabel": "Questions? Contact us at",
+    "supportEmail": "support@connectionpilot.net",
+    "copyright": "© 2026 Connection Pilot. All rights reserved."
+  },
+  "navigation": [
+    {
+      "label": "Pricing",
+      "href": "/pricing",
+      "id": "5HY9CkDg_t5EXEdAt3j8R"
+    }
+  ],
+  "megaNavigation": {
+    "product": {
+      "label": "Product",
+      "description": "A connected workspace for customer communication, scheduling, and day-to-day service operations.",
+      "actionLabel": "Explore all features",
+      "actionHref": "/features",
+      "groups": [
+        {
+          "title": "AI Receptionist",
+          "href": "/features",
+          "items": [
+            {
+              "label": "24/7 AI phone receptionist",
+              "id": "x3ok-bYkBkd-8xl8HAEzy"
+            },
+            {
+              "label": "Answer customer questions",
+              "id": "9EEaHingdFBtR5onZvr6D"
+            },
+            {
+              "label": "Book and manage appointments",
+              "id": "HCGaTZ2vOEeDgKvzGt92B"
+            },
+            {
+              "label": "Customize how the receptionist speaks",
+              "id": "VSaltqLaWP9dH591ofy3C"
+            },
+            {
+              "label": "Train it with your business information",
+              "id": "fEuZJwPnZO88oG1UoJ6JY"
+            }
+          ],
+          "id": "Mo_So9Ut99ku03zfGmWSz"
+        },
+        {
+          "title": "Customer Hub",
+          "href": "/features",
+          "items": [
+            {
+              "label": "Customer profiles",
+              "id": "cblllWaeZ63JJseh6Z4Xp"
+            },
+            {
+              "label": "Customer history",
+              "id": "E9eYnNzfE-yalySN85frV"
+            },
+            {
+              "label": "Important activity",
+              "id": "wVom72VQlMHEe8zgHRYS9"
+            },
+            {
+              "label": "Notes",
+              "id": "HnJCXxkDfGq8bsT7XdvyR"
+            },
+            {
+              "label": "Conversations",
+              "id": "-aHWi3j5h0RqraOXSjSeA"
+            },
+            {
+              "label": "Customer insights",
+              "id": "XE9YOTYzR5U-jCY3nLpho"
+            }
+          ],
+          "id": "qw45vYX9r6tPP0FQW48Pi"
+        },
+        {
+          "title": "Scheduling",
+          "href": "/features",
+          "items": [
+            {
+              "label": "Appointments",
+              "id": "xXnP7O2B413vQF1AyTYWn"
+            },
+            {
+              "label": "Calendar",
+              "id": "updcz9ZpvnPhXtIYBwRjf"
+            },
+            {
+              "label": "Booking rules",
+              "id": "mIwKeCAO_ZVwZ3HWmj4c5"
+            },
+            {
+              "label": "Online booking",
+              "id": "TmrBq-8vo5NVIMOo06xID"
+            },
+            {
+              "label": "Reminders",
+              "id": "2D6-hNQc4bGeq5we5KZ1s"
+            }
+          ],
+          "id": "pJaSP2JIBnpMUWUrcRSbc"
+        },
+        {
+          "title": "Business Management",
+          "href": "/features",
+          "items": [
+            {
+              "label": "Quotes",
+              "id": "64kV4VoF0TNxqslqUzk2l"
+            },
+            {
+              "label": "Invoices",
+              "id": "CxXImiXAeQGneseRl5n8D"
+            },
+            {
+              "label": "Payments",
+              "id": "Xi4iCICFtLxKkpltjdDDF"
+            },
+            {
+              "label": "Team management",
+              "id": "dtTbHqxMzWoGrOYMuSXEP"
+            },
+            {
+              "label": "Reports & insights",
+              "id": "0wNgrcIwXKa5u1kwNGZj-"
+            }
+          ],
+          "id": "4Rq0D_wbSgbESSPUb0Rrl"
+        },
+        {
+          "title": "AI & Automation",
+          "href": "/features",
+          "items": [
+            {
+              "label": "AI customer summaries",
+              "id": "MmQx1r3iOMUPscshWBk6t"
+            },
+            {
+              "label": "Automated follow-ups",
+              "id": "Skz3Qtxzw6cUAhXxM6W2Z"
+            },
+            {
+              "label": "Customer memory",
+              "id": "YRNjX0be5vOQa1hm1_cL4"
+            },
+            {
+              "label": "Business AI assistant",
+              "id": "le6ENUL_Ooj6veYHnAnID"
+            },
+            {
+              "label": "Workflow automation",
+              "id": "pNBv0whbY2ZgftccJuPQO"
+            }
+          ],
+          "id": "QMy62V07KNMcZwOL3J6SN"
+        },
+        {
+          "title": "Integrations",
+          "href": "/features",
+          "items": [
+            {
+              "label": "Phone",
+              "id": "kik9o-q53L17k6QF_OgHz"
+            },
+            {
+              "label": "SMS",
+              "id": "kNcXofyfRDeH86q95e4v1"
+            },
+            {
+              "label": "Calendar",
+              "id": "XKHC4-H0lRC9LtLQrgm6w"
+            },
+            {
+              "label": "Accounting",
+              "id": "dvVs3jYvutJKIoD1Sj1Pm"
+            },
+            {
+              "label": "Other business tools",
+              "id": "cpVBVGQvNKS2zmrkjqI_X"
+            }
+          ],
+          "id": "qgL6ERtcHTybaKF3Zeyec"
+        }
+      ]
+    },
+    "solutions": {
+      "label": "Solutions",
+      "items": [
+        {
+          "label": "Plumbing",
+          "href": "/solutions",
+          "id": "b2V2vyvtbAQMc7Lb20YCR"
+        },
+        {
+          "label": "HVAC",
+          "href": "/solutions",
+          "id": "CQ2QTnFQ348WzzH63As59"
+        },
+        {
+          "label": "Electrical",
+          "href": "/solutions",
+          "id": "sE7TrqS6MeQMVF_JA-MyV"
+        },
+        {
+          "label": "Cleaning",
+          "href": "/solutions",
+          "id": "idJPFEtHrxEXYKt5AuhyY"
+        },
+        {
+          "label": "Landscaping",
+          "href": "/solutions",
+          "id": "JzgQjhVDZmUNnH2d2WmGC"
+        },
+        {
+          "label": "Contractors",
+          "href": "/solutions",
+          "id": "HbQ7cVE_oMJkv8b3JFwYz"
+        },
+        {
+          "label": "Other service businesses",
+          "href": "/solutions",
+          "id": "9rlNM2MTrohuFsUpDXlC3"
+        }
+      ]
+    },
+    "resources": {
+      "label": "Resources",
+      "items": [
+        {
+          "label": "How It Works",
+          "href": "/how-it-works",
+          "id": "ZYQMF7QhGZbzOYhZq2Ov9"
+        },
+        {
+          "label": "Help Center",
+          "href": "/help",
+          "id": "3A4XXfMMEZ7E_3SsR1fL7"
+        },
+        {
+          "label": "Customer Stories",
+          "href": "/features",
+          "id": "teqSkvJisSxIigI3Vi1-r"
+        },
+        {
+          "label": "FAQs",
+          "href": "/how-it-works",
+          "id": "rs3d-JdTDk651IVC4yQtI"
+        },
+        {
+          "label": "Blog",
+          "href": "/features",
+          "id": "AZXmuWbpRW_bB9CMoLm90"
+        }
+      ]
+    },
+    "company": {
+      "label": "Company",
+      "items": [
+        {
+          "label": "About",
+          "href": "/about",
+          "id": "d_peVApBfyabDvpWDfX7J"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact",
+          "id": "dveuE-NsfrP1zGtFl8p4C"
+        },
+        {
+          "label": "Careers",
+          "href": "/about",
+          "id": "3sxE1d7kH5e_GUQSFNml-"
+        }
+      ]
+    }
+  },
+  "tagline": "Clear Communication. Stronger Connections."
+}

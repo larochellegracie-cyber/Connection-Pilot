@@ -1,0 +1,145 @@
+{
+  "hero": {
+    "eyebrow": "A simple, clear process",
+    "title": "Your Customers Reach Out. Connection Pilot Takes It From There.",
+    "description": "Connection Pilot helps businesses respond to customer inquiries, collect important information, and keep leads organized—all through one simple communication system.",
+    "flow": [
+      {
+        "label": "Customer Contact",
+        "id": "WKzUqpfgUbtTMGWuzaN5g"
+      },
+      {
+        "label": "Connection Pilot",
+        "id": "aMasbFBU0pBrElJoJi4rq"
+      },
+      {
+        "label": "Information Collected",
+        "id": "eFbzPJVOwDgGrRVmflheX"
+      },
+      {
+        "label": "Lead Organized",
+        "id": "bqbVkbIcALE-QYOwc4zoJ"
+      },
+      {
+        "label": "Business Follow-Up",
+        "id": "nVikwMeLLrrvgQ7mD9fNj"
+      }
+    ]
+  },
+  "stepOne": {
+    "eyebrow": "Step one",
+    "title": "1. A Customer Contacts Your Business",
+    "description": "Customers can contact your business by phone or text when they have a question, need a service, or want to request information.",
+    "callLabel": "Incoming Call",
+    "customerLabel": "Customer",
+    "customerMessage": "Hi, I need help with my air conditioner."
+  },
+  "stepTwo": {
+    "eyebrow": "Step two",
+    "title": "2. Connection Pilot Responds",
+    "description": "When a customer contacts your business, Connection Pilot can respond with a professional message and begin gathering the information your team needs.",
+    "messages": [
+      {
+        "sender": "Connection Pilot",
+        "text": "Hi! Sorry we missed your call. How can we help today?",
+        "id": "-LtenhL3pyOcqpA9jiJb3"
+      },
+      {
+        "sender": "Customer",
+        "text": "My AC isn't working.",
+        "id": "ZermmkOOni-bH-1BV-fRZ"
+      },
+      {
+        "sender": "Connection Pilot",
+        "text": "We'd be happy to help. What's your name?",
+        "id": "Cr8T1cb2U_mATZVgmamH-"
+      }
+    ]
+  },
+  "stepThree": {
+    "eyebrow": "Step three",
+    "title": "3. Important Details Are Captured",
+    "description": "Connection Pilot can collect the helpful details your team needs for a thoughtful follow-up.",
+    "leadLabel": "New lead",
+    "lead": {
+      "customer": "Sarah",
+      "phone": "519-XXX-XXXX",
+      "address": "123 Main Street",
+      "service": "AC not working",
+      "priority": "High priority"
+    },
+    "items": [
+      {
+        "label": "Customer name",
+        "id": "W_6PmvpNQuuLc70Gg55jB"
+      },
+      {
+        "label": "Phone number",
+        "id": "W-NYhu8l4u8Ts_ZARXSpV"
+      },
+      {
+        "label": "Address",
+        "id": "YSB1Mx8ydeSd3VT9Tbzwn"
+      },
+      {
+        "label": "Service needed",
+        "id": "Pys56sqvlcUw2iTLM5qyc"
+      },
+      {
+        "label": "Description of the issue",
+        "id": "Fiq-wqG6_VpAzumV3vv2h"
+      },
+      {
+        "label": "Urgency",
+        "id": "DKVB4SYVErhn9SANL_wPY"
+      }
+    ]
+  },
+  "stepFour": {
+    "eyebrow": "Step four",
+    "title": "4. Your Team Gets the Information",
+    "description": "Instead of searching through missed calls and text messages, your team sees the customer's information in an organized format so they can follow up.",
+    "headers": [
+      {
+        "label": "Customer",
+        "id": "g-28g5grrosdGAMuHlRbu"
+      },
+      {
+        "label": "Service",
+        "id": "4nCSl1Uv5dE-VQl50W5MV"
+      },
+      {
+        "label": "Status",
+        "id": "KVDbxRDrx85sOleyJXMCz"
+      }
+    ],
+    "rows": [
+      {
+        "customer": "Sarah",
+        "service": "AC Repair",
+        "status": "New",
+        "id": "X1xcZC3DqcfHSzJfj6_6M"
+      },
+      {
+        "customer": "Mike",
+        "service": "Furnace Repair",
+        "status": "Contacted",
+        "id": "bzZzWmY9j1XJfOcJmCszh"
+      }
+    ]
+  },
+  "stepFive": {
+    "eyebrow": "Step five",
+    "title": "5. Your Team Stays in Control",
+    "description": "Connection Pilot is designed to assist your team, not replace it. When a conversation needs a person, your business can step in and continue the conversation.",
+    "controlNote": "Your business remains in control of every customer relationship.",
+    "humanTitle": "Human handoff ready",
+    "humanText": "A team member can join the conversation with the important details already in view."
+  },
+  "cta": {
+    "title": "Less Time Chasing Messages. More Time Serving Customers.",
+    "description": "Connection Pilot helps turn customer communication into an organized, manageable process.",
+    "primary": "Get Started",
+    "secondary": "Contact Us"
+  }
+}

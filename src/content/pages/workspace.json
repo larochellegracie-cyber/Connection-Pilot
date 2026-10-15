@@ -1,0 +1,59 @@
+{
+  "eyebrow": "Business workspace",
+  "title": "Dashboard",
+  "welcomePrefix": "Welcome back, ",
+  "welcomeSuffix": "Here’s your communications workspace.",
+  "manageBusiness": "Manage business",
+  "addCustomer": "Add customer",
+  "stats": [
+    {
+      "label": "Calls",
+      "id": "5Ci2Tu9NJlAq0SWMoG4jq"
+    },
+    {
+      "label": "Messages",
+      "id": "50JxGz0OETHVZ-ztyynxu"
+    },
+    {
+      "label": "Customers",
+      "id": "s-wTP_0os7rBrC8gsD-Nn"
+    },
+    {
+      "label": "Appointments",
+      "id": "X88j88cqyd9pPMeBJai4c"
+    }
+  ],
+  "scheduleEyebrow": "Schedule",
+  "appointmentsTitle": "Appointments",
+  "appointmentsDescription": "Bookings confirmed by your AI receptionist appear here.",
+  "connectNumber": "Connect a number",
+  "loadingAppointments": "Loading appointments...",
+  "noAppointments": "No appointments yet.",
+  "openCustomer": "Open customer",
+  "receptionistEyebrow": "AI receptionist",
+  "receptionistActive": "Active and ready",
+  "receptionistSetup": "Setup needed",
+  "receptionistActiveDescription": "Your connected business number can use your tenant-specific receptionist knowledge.",
+  "receptionistSetupDescription": "Complete your business information and connect a number to activate your AI receptionist.",
+  "manageReceptionist": "Manage AI receptionist settings",
+  "activityEyebrow": "Recent activity",
+  "activityTitle": "Customer activity",
+  "loadingActivity": "Loading activity...",
+  "noActivity": "New conversations will appear here as customers contact your business.",
+  "customerEyebrow": "Customer management",
+  "customersTitle": "Customers",
+  "customersDescription": "Review tenant-scoped customer histories, conversations, and appointments.",
+  "loadingCustomers": "Loading customers...",
+  "noCustomers": "No customer profiles yet.",
+  "createCustomerTitle": "Add customer",
+  "createCustomerDescription": "Create a profile your team can build on.",
+  "close": "Close",
+  "customerName": "Customer name",
+  "phoneNumber": "Phone number",
+  "email": "Email",
+  "tags": "Tags",
+  "tagsHint": "(comma separated)",
+  "cancel": "Cancel",
+  "create": "Create customer",
+  "saving": "Saving..."
+}

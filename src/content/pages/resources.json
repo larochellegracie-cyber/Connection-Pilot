@@ -1,0 +1,165 @@
+{
+  "pilot": {
+    "eyebrow": "Meet Pilot",
+    "title": "Your AI business assistant.",
+    "description": "Pilot helps you manage your business, keep up with customers, appointments, follow-ups, and everyday tasks — all from one place.",
+    "audienceNote": "Built for business owners and authorized team members — not customers.",
+    "greeting": "Hi! I’m Pilot 👋 Your AI business assistant.",
+    "capabilitiesTitle": "Pilot can help you…",
+    "highlights": [
+      {
+        "title": "Manage customers",
+        "description": "Find customer history and keep records up to date.",
+        "id": "PkJfzpy-8usNKUo5Bts5x"
+      },
+      {
+        "title": "Stay on top of appointments",
+        "description": "Check schedules, reschedule bookings, and spot changes.",
+        "id": "5VyAOd-e2sqbSfEhcLpbe"
+      },
+      {
+        "title": "Handle follow-ups",
+        "description": "Remember who needs a call, message, or follow-up.",
+        "id": "aiAYzucnHXL0wY74iNYYV"
+      },
+      {
+        "title": "Manage your business",
+        "description": "Ask questions about your services, hours, policies, and business information.",
+        "id": "jV4GNLc-ZM_DSH3idOt3o"
+      }
+    ],
+    "chatTitle": "Just ask Pilot.",
+    "chatSubtitle": "Tell Pilot what you need, and it can help you get it done.",
+    "chatMessages": [
+      {
+        "speaker": "Business owner",
+        "content": "Can you reschedule Coop’s appointment to Friday at 2?",
+        "role": "owner",
+        "id": "3kPk7Tw3JMGshOOLVca5x"
+      },
+      {
+        "speaker": "Pilot",
+        "content": "Sure! Coop is currently booked for Thursday at 10 AM. I can move it to Friday at 2 PM. Would you like me to make that change?",
+        "role": "pilot",
+        "id": "nWEJu-5PbEmBMtwKV4CR2"
+      },
+      {
+        "speaker": "Business owner",
+        "content": "Yes.",
+        "role": "owner",
+        "id": "7A-dutBY7IbHHEqiStUms"
+      },
+      {
+        "speaker": "Pilot",
+        "content": "Done! Coop’s appointment has been moved to Friday at 2 PM.",
+        "role": "pilot",
+        "id": "g1li7oiaXiIroeNRcDx97"
+      }
+    ],
+    "ctaTitle": "Ready to meet Pilot?",
+    "ctaDescription": "Set up your business and start working with your new AI assistant.",
+    "cta": "Get Started"
+  },
+  "receptionist": {
+    "eyebrow": "AI Voice Receptionist — Coming Soon",
+    "title": "A future customer-ready front desk for your business calls.",
+    "description": "Pilot will answer your business calls, help customers, book appointments or orders, and capture important details automatically.",
+    "highlights": [
+      {
+        "title": "Answer calls with context",
+        "description": "When available, Pilot will use your business guidance to handle common caller questions.",
+        "id": "DhptEQdDz2BCn66B6egPo"
+      },
+      {
+        "title": "Support bookings and orders",
+        "description": "Pilot will capture appointment or order details and send them to the right workflow.",
+        "id": "ttqDaqwIzTmeb-eZRyly7"
+      },
+      {
+        "title": "Keep your team informed",
+        "description": "Important caller details will remain connected to your workspace.",
+        "id": "RFlI0DEhRrOOAtUhREyRP"
+      }
+    ],
+    "cta": "Explore Connection Pilot"
+  },
+  "customers": {
+    "eyebrow": "Customer Management",
+    "title": "Every customer relationship, organized and ready for the next conversation.",
+    "description": "Keep customer details, notes, activity, conversations, and appointments together so your team has context when it matters.",
+    "highlights": [
+      {
+        "title": "See the whole history",
+        "description": "Review customer details, recent calls and messages, notes, and past or upcoming appointments.",
+        "id": "IdhkzbNPoqVo508sk3NDR"
+      },
+      {
+        "title": "Make follow-up clear",
+        "description": "Capture the next step, record a note, and keep important activity visible to your team.",
+        "id": "RnisIdxSt4-oiMSx4BmeL"
+      },
+      {
+        "title": "Keep records connected",
+        "description": "Calls, messages, bookings, and customer information come together in one shared workspace.",
+        "id": "iijLQNu_IZImYyy8grqRu"
+      }
+    ],
+    "cta": "Explore customer management"
+  },
+  "faqs": {
+    "eyebrow": "FAQs",
+    "title": "Straight answers about Connection Pilot.",
+    "description": "Learn how Connection Pilot helps small businesses organize customer communications, schedules, and customer service.",
+    "questions": [
+      {
+        "question": "What is Connection Pilot?",
+        "answer": "Connection Pilot is a connected business workspace for managing customers, appointments, messages, and AI-supported business operations.",
+        "id": "5W2YVOaJMkpfx2eN4vMKk"
+      },
+      {
+        "question": "What does Pilot do?",
+        "answer": "Pilot is your AI business assistant. It helps surface important customer and appointment context, answers questions about workspace records, and supports clear follow-up.",
+        "id": "lya2WmK8HduqK_tFQZcIu"
+      },
+      {
+        "question": "Is the AI Voice Receptionist available?",
+        "answer": "Not yet. The AI Voice Receptionist is coming soon and will not answer or route calls until the feature is released.",
+        "id": "RsfixGWJA9z21nnMlWpBs"
+      },
+      {
+        "question": "Will my team still have control?",
+        "answer": "Yes. Your team controls the business information and booking rules the assistant follows. Record updates happen only when you explicitly request an available action.",
+        "id": "thLH-TNnoknit7UraAUer"
+      },
+      {
+        "question": "Can I manage appointments and customer history?",
+        "answer": "Yes. Connection Pilot keeps customer profiles, activities, conversations, notes, and appointments connected in the same workspace.",
+        "id": "hf53SNfwCAcZ7uQ9A8wTn"
+      }
+    ],
+    "cta": "See how it works"
+  },
+  "help": {
+    "eyebrow": "Help Center",
+    "title": "Guidance for getting your Connection Pilot workspace ready.",
+    "description": "Use these starting points to set up your team’s workspace, organize customer operations, and work confidently day to day.",
+    "highlights": [
+      {
+        "title": "Set up your business profile",
+        "description": "Add the business details, services, FAQs, policies, and response guidance that represent your business.",
+        "id": "uxTVBY3rzVpJ2lRSUnrmI"
+      },
+      {
+        "title": "Connect your workflow",
+        "description": "Organize customers, set booking rules, and make sure your schedule is ready for the work ahead.",
+        "id": "43jc_NaQJ_4E2yqPS0p-k"
+      },
+      {
+        "title": "AI Voice Receptionist",
+        "description": "This upcoming capability is visible in Connection Pilot but is not ready for phone setup or activation.",
+        "id": "AJsWpOK1PvnRtLapEy8kr"
+      }
+    ],
+    "cta": "Contact Connection Pilot support"
+  }
+}

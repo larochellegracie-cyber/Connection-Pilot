@@ -1,0 +1,511 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --background: 214 100% 99%;
+    --foreground: 0 0% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 66% 14%;
+    --popover: 214 100% 99%;
+    --popover-foreground: 0 0% 4%;
+    --primary: 225 80% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 66% 14%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 100% 97%;
+    --muted-foreground: 216 21% 41%;
+    --accent: 217 100% 96%;
+    --accent-foreground: 0 0% 39%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 100%;
+    --pilot-glow: 268 82% 68%;
+    --pilot-glow-soft: 267 100% 96%;
+    --pilot-grid: 223 56% 24%;
+    --border: 214 58% 91%;
+    --input: 214 58% 91%;
+    --ring: 225 80% 45%;
+
+    /* Workspace semantic accents */
+    --workspace-sales: 158 68% 34%;
+    --workspace-sales-soft: 153 58% 94%;
+    --workspace-sales-ink: 158 68% 28%;
+    --workspace-customers: 268 82% 58%;
+    --workspace-customers-soft: 267 100% 96%;
+    --workspace-customers-ink: 268 82% 44%;
+    --workspace-appointments: 2 76% 56%;
+    --workspace-appointments-soft: 4 100% 96%;
+    --workspace-appointments-ink: 2 76% 45%;
+    --workspace-jobs: 211 89% 48%;
+    --workspace-jobs-soft: 208 100% 96%;
+    --workspace-jobs-ink: 211 89% 38%;
+    --workspace-opportunity: 31 91% 47%;
+    --workspace-opportunity-soft: 35 100% 95%;
+    --workspace-opportunity-ink: 27 86% 40%;
+    --workspace-pilot: 235 78% 55%;
+    --workspace-pilot-soft: 236 100% 97%;
+    --workspace-pilot-ink: 254 70% 49%;
+    /* Extended Colors */
+    --chart-1: 225 81% 75%;
+    --chart-2: 225 80% 60%;
+    --chart-3: 225 80% 45%;
+    --chart-4: 225 81% 30%;
+    --chart-5: 225 80% 15%;
+
+    /* Sidebar Colors */
+    --sidebar: 217 100% 97%;
+    --sidebar-foreground: 0 0% 4%;
+    --sidebar-primary: 225 80% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 100% 96%;
+    --sidebar-accent-foreground: 0 0% 39%;
+    --sidebar-border: 214 58% 91%;
+    --sidebar-ring: 225 80% 45%;
+
+    /* Typography */
+    --font-sans: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-heading: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: ui-serif, Georgia, "Times New Roman", serif;
+    --font-mono: ui-monospace, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+
+    /* Border Radius */
+    --radius: 0.5rem;
+    /* Button radius: the kit's radiusButton is written here at install time;
+       the default matches shadcn `rounded-md` (calc(var(--radius) - 2px)) so a
+       kit without a button radius renders unchanged. Consumed by the Button
+       `cva` via `rounded-[var(--radius-button)]` (AIROBUILD-3249). */
+    --radius-button: calc(var(--radius) - 2px);
+
+    /* Spacing scale — every spacing utility takes these rungs: p-base, py-xxl,
+       mb-lg, gap-base, mt-xs. Retune the site's rhythm from here. */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-base: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 4rem;
+    --space-xxxl: 6rem;
+
+    /* Content container width (max-w-content) */
+    --width-content: 72rem;
+
+    /* Shadows */
+    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
+    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
+    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Shared long-form type scale (RUBICON-554). Single source of truth for
+   page titles and rich markdown content; anchored to the site heading range so
+   blog posts match the rest of the customer's site. */
+@layer components {
+  .page-title {
+    font-size: clamp(1.875rem, 2vw + 1rem, 2.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: normal;
+    color: hsl(var(--foreground));
+  }
+
+  .rich-text {
+    color: hsl(var(--muted-foreground));
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  /* Defensive: a stray body H1 renders one step below .page-title and is
+     visually distinct from the real page title above it. */
+  .rich-text h1 {
+    font-size: clamp(1.5rem, 1.5vw + 1rem, 1.875rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: hsl(var(--foreground));
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .rich-text h2 {
+    font-size: clamp(1.5rem, 1.5vw + 1rem, 1.875rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: hsl(var(--foreground));
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .rich-text h3 {
+    font-size: clamp(1.25rem, 1vw + 0.9rem, 1.5rem);
+    font-weight: 700;
+    color: hsl(var(--foreground));
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .rich-text h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .rich-text p {
+    margin-bottom: 1.25rem;
+  }
+  .rich-text a {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+  }
+  .rich-text ul,
+  .rich-text ol {
+    margin: 1.25rem 0;
+    padding-left: 1.5rem;
+  }
+  .rich-text ul { list-style: disc; }
+  .rich-text ol { list-style: decimal; }
+  .rich-text li { margin-bottom: 0.5rem; }
+  .rich-text blockquote {
+    border-left: 3px solid hsl(var(--primary));
+    padding-left: 1rem;
+    font-style: italic;
+    margin: 1.5rem 0;
+    color: hsl(var(--foreground));
+  }
+  .rich-text code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: hsl(var(--muted));
+    padding: 0.15rem 0.35rem;
+    border-radius: 0.25rem;
+  }
+  .rich-text pre {
+    background: hsl(var(--muted));
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+  .rich-text pre code {
+    background: transparent;
+    padding: 0;
+  }
+  .rich-text img {
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+    max-width: 100%;
+    height: auto;
+  }
+  .rich-text table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+  }
+  .rich-text th,
+  .rich-text td {
+    border: 1px solid hsl(var(--border));
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+}
+
+/* Custom utility classes */
+
+/* Authenticated Connection Pilot workspace: semantic colour communicates what
+   needs attention without turning the working surface into a wall of colour. */
+@layer components {
+  .workspace-page {
+    --tone-primary: var(--primary);
+    --tone-primary-soft: var(--accent);
+    --tone-primary-ink: var(--primary);
+  }
+
+  .workspace-page--dashboard { --tone-primary: var(--workspace-pilot); --tone-primary-soft: var(--workspace-pilot-soft); --tone-primary-ink: var(--workspace-pilot-ink); }
+  .workspace-page--customers { --tone-primary: var(--workspace-customers); --tone-primary-soft: var(--workspace-customers-soft); --tone-primary-ink: var(--workspace-customers-ink); }
+  .workspace-page--leads { --tone-primary: var(--workspace-opportunity); --tone-primary-soft: var(--workspace-opportunity-soft); --tone-primary-ink: var(--workspace-opportunity-ink); }
+  .workspace-page--jobs { --tone-primary: var(--workspace-jobs); --tone-primary-soft: var(--workspace-jobs-soft); --tone-primary-ink: var(--workspace-jobs-ink); }
+  .workspace-page--calendar, .workspace-page--booking-rules { --tone-primary: var(--workspace-appointments); --tone-primary-soft: var(--workspace-appointments-soft); --tone-primary-ink: var(--workspace-appointments-ink); }
+  .workspace-page--finance { --tone-primary: var(--workspace-sales); --tone-primary-soft: var(--workspace-sales-soft); --tone-primary-ink: var(--workspace-sales-ink); }
+  .workspace-page--messages, .workspace-page--phone-connection { --tone-primary: var(--workspace-jobs); --tone-primary-soft: var(--workspace-jobs-soft); --tone-primary-ink: var(--workspace-jobs-ink); }
+  .workspace-page--assistant, .workspace-page--ai-receptionist { --tone-primary: var(--workspace-pilot); --tone-primary-soft: var(--workspace-pilot-soft); --tone-primary-ink: var(--workspace-pilot-ink); }
+  .workspace-page--business-knowledge, .workspace-page--profile, .workspace-page--settings, .workspace-page--help { --tone-primary: var(--workspace-customers); --tone-primary-soft: var(--workspace-customers-soft); --tone-primary-ink: var(--workspace-customers-ink); }
+  .workspace-page--notifications { --tone-primary: var(--workspace-opportunity); --tone-primary-soft: var(--workspace-opportunity-soft); --tone-primary-ink: var(--workspace-opportunity-ink); }
+
+  .workspace-page main > section:first-child > div > p:first-child,
+  .workspace-page main > section:first-child > p:first-child {
+    color: hsl(var(--tone-primary-ink));
+  }
+  .workspace-page main button.bg-primary,
+  .workspace-page main a.bg-primary {
+    background-color: hsl(var(--tone-primary));
+  }
+  .workspace-page main button.bg-primary:hover,
+  .workspace-page main a.bg-primary:hover { background-color: hsl(var(--tone-primary-ink)); }
+  .workspace-page main .text-primary { color: hsl(var(--tone-primary-ink)); }
+  .workspace-page main .bg-accent { background-color: hsl(var(--tone-primary-soft)); }
+  .workspace-page main .border-primary { border-color: hsl(var(--tone-primary)); }
+  .workspace-page main .focus\:border-primary:focus { border-color: hsl(var(--tone-primary)); }
+
+  .workspace-page main > section,
+  .workspace-page main article,
+  .workspace-page main table,
+  .workspace-page main [role="group"] {
+    border-radius: 1rem;
+  }
+  .workspace-page main > section.border-b { border-radius: 0; }
+  .workspace-page main thead { background-color: hsl(var(--tone-primary-soft)); }
+  .workspace-page main tr:hover { background-color: hsl(var(--tone-primary-soft)); }
+  .workspace-page--customers main .rounded-lg.bg-accent,
+  .workspace-page--customers main .rounded-xl.bg-accent { background-color: hsl(var(--workspace-customers-soft)); color: hsl(var(--workspace-customers-ink)); }
+  .workspace-page--calendar main .bg-accent { background-color: hsl(var(--workspace-appointments-soft)); }
+  .workspace-page--jobs main .bg-accent { background-color: hsl(var(--workspace-jobs-soft)); }
+  .workspace-page--finance main .bg-accent { background-color: hsl(var(--workspace-sales-soft)); }
+
+  .workspace-kpi { position: relative; overflow: hidden; }
+  .workspace-kpi::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; background: hsl(var(--kpi-tone)); }
+  .workspace-kpi > span { background-color: hsl(var(--kpi-soft)); color: hsl(var(--kpi-ink)); }
+  .workspace-kpi--sales { --kpi-tone: var(--workspace-sales); --kpi-soft: var(--workspace-sales-soft); --kpi-ink: var(--workspace-sales-ink); }
+  .workspace-kpi--opportunity { --kpi-tone: var(--workspace-opportunity); --kpi-soft: var(--workspace-opportunity-soft); --kpi-ink: var(--workspace-opportunity-ink); }
+  .workspace-kpi--jobs { --kpi-tone: var(--workspace-jobs); --kpi-soft: var(--workspace-jobs-soft); --kpi-ink: var(--workspace-jobs-ink); }
+  .workspace-kpi--attention { --kpi-tone: var(--workspace-appointments); --kpi-soft: var(--workspace-appointments-soft); --kpi-ink: var(--workspace-appointments-ink); }
+
+  .workspace-icon--sales { background-color: hsl(var(--workspace-sales-soft)); color: hsl(var(--workspace-sales-ink)); }
+  .workspace-icon--customers { background-color: hsl(var(--workspace-customers-soft)); color: hsl(var(--workspace-customers-ink)); }
+  .workspace-icon--appointments { background-color: hsl(var(--workspace-appointments-soft)); color: hsl(var(--workspace-appointments-ink)); }
+  .workspace-icon--jobs { background-color: hsl(var(--workspace-jobs-soft)); color: hsl(var(--workspace-jobs-ink)); }
+  .workspace-icon--opportunity { background-color: hsl(var(--workspace-opportunity-soft)); color: hsl(var(--workspace-opportunity-ink)); }
+  .workspace-icon--attention { background-color: hsl(var(--workspace-appointments-soft)); color: hsl(var(--workspace-appointments-ink)); }
+  .workspace-chart-bar--0 { background-color: hsl(var(--workspace-sales)); }
+  .workspace-chart-bar--1 { background-color: hsl(var(--workspace-customers)); }
+  .workspace-chart-bar--2 { background-color: hsl(var(--workspace-jobs)); }
+  .workspace-chart-bar--3 { background-color: hsl(var(--workspace-opportunity)); }
+}
+
+@layer utilities {
+  .organic-surface {
+    isolation: isolate;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .organic-surface::before,
+  .organic-surface::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+    display: block;
+    filter: blur(20px);
+    opacity: 0.76;
+  }
+
+  .organic-surface::before {
+    width: clamp(28rem, 58vw, 62rem);
+    height: clamp(13rem, 26vw, 29rem);
+    background: linear-gradient(104deg, hsl(var(--accent)), hsl(var(--muted)), hsl(var(--accent)));
+    clip-path: polygon(0 32%, 12% 16%, 28% 22%, 42% 5%, 59% 18%, 75% 9%, 91% 29%, 100% 58%, 87% 76%, 70% 71%, 54% 94%, 34% 80%, 17% 92%, 4% 68%);
+  }
+
+  .organic-surface::after {
+    width: clamp(20rem, 42vw, 44rem);
+    height: clamp(9rem, 19vw, 21rem);
+    background: linear-gradient(118deg, hsl(var(--muted)), hsl(var(--accent)), hsl(var(--muted)));
+    clip-path: polygon(0 44%, 16% 22%, 32% 30%, 47% 8%, 64% 21%, 79% 13%, 100% 41%, 91% 68%, 73% 76%, 58% 94%, 42% 77%, 25% 90%, 8% 72%);
+    opacity: 0.54;
+  }
+
+  .organic-surface--hero::before { right: -18rem; top: -6rem; transform: rotate(-9deg); }
+  .organic-surface--hero::after { bottom: -9rem; right: 5%; transform: rotate(15deg); }
+  .organic-surface--left::before { left: -23rem; bottom: -8rem; transform: rotate(13deg); }
+  .organic-surface--left::after { right: -18rem; top: 15%; transform: rotate(-19deg); }
+  .organic-surface--right::before { right: -24rem; bottom: -8rem; transform: rotate(-16deg); }
+  .organic-surface--right::after { left: -17rem; top: 13%; transform: rotate(12deg); }
+  .organic-surface--dark::before { background: linear-gradient(104deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary))); opacity: 0.34; }
+  .organic-surface--dark::after { background: linear-gradient(118deg, hsl(var(--accent)), hsl(var(--primary)), hsl(var(--accent))); opacity: 0.18; }
+
+  .organic-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .organic-panel {
+    isolation: isolate;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .organic-panel::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    right: -6rem;
+    bottom: -3rem;
+    z-index: 0;
+    width: 17rem;
+    height: 8rem;
+    filter: blur(14px);
+    opacity: 0.5;
+    background: linear-gradient(105deg, hsl(var(--muted)), hsl(var(--accent)), hsl(var(--muted)));
+    clip-path: polygon(0 38%, 17% 18%, 35% 28%, 50% 5%, 67% 22%, 86% 11%, 100% 43%, 89% 73%, 70% 79%, 54% 95%, 33% 78%, 13% 87%);
+    transform: rotate(-12deg);
+  }
+
+  .organic-panel > * {
+    position: relative;
+
+@layer utilities {
+  .pilot-network {
+    background-image: linear-gradient(hsl(var(--pilot-grid) / 0.45) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--pilot-grid) / 0.45) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .pilot-orbit {
+    border-color: hsl(var(--primary) / 0.32);
+  }
+
+  .pilot-glow {
+    box-shadow: 0 0 0 8px hsl(var(--primary) / 0.1), 0 0 72px hsl(var(--pilot-glow) / 0.34);
+  }
+
+  .pilot-node-line {
+    background: linear-gradient(90deg, hsl(var(--primary) / 0), hsl(var(--primary) / 0.72), hsl(var(--pilot-glow) / 0));
+  }
+}
+    z-index: 1;
+  }
+}
+
+@layer utilities {
+  .animate-in {
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+  }
+
+  .fade-in {
+    animation-name: fadeIn;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@layer utilities {
+  .pilot-avatar {
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+    flex: none;
+    transform-origin: 62% 82%;
+    will-change: transform;
+  }
+
+  .pilot-avatar-idle {
+    animation: pilot-wave 8s ease-in-out infinite;
+  }
+
+  .pilot-avatar-float {
+    animation: pilot-float 4.6s ease-in-out infinite;
+  }
+
+  .pilot-avatar-thinking {
+    animation: pilot-think 1.6s ease-in-out infinite;
+  }
+
+  .pilot-avatar-speaking {
+    animation: pilot-speak 720ms ease-in-out infinite;
+  }
+
+  @keyframes pilot-wave {
+    0%, 70%, 100% { transform: translateY(0) rotate(0deg); }
+    74% { transform: translateY(-2px) rotate(-4deg); }
+    78% { transform: translateY(-3px) rotate(5deg); }
+    82% { transform: translateY(-3px) rotate(-4deg); }
+    86% { transform: translateY(-2px) rotate(3deg); }
+    90% { transform: translateY(0) rotate(0deg); }
+  }
+
+  @keyframes pilot-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(1deg); }
+  }
+
+  @keyframes pilot-think {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    35% { transform: translateY(-2px) rotate(-3deg) scale(1.02); }
+    70% { transform: translateY(-1px) rotate(2deg) scale(1.01); }
+  }
+
+  @keyframes pilot-speak {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-2px) rotate(1deg) scale(1.035); }
+  }
+
+  .pilot-chat-attention {
+    animation: pilot-chat-pulse 5s ease-in-out infinite;
+  }
+
+  @keyframes pilot-chat-pulse {
+    0%, 82%, 100% { transform: scale(1); }
+    88% { transform: scale(1.06); }
+    94% { transform: scale(1); }
+  }
+
+  .pilot-call-ring {
+    animation: pilot-call-ring 2.8s ease-in-out infinite;
+  }
+
+  .pilot-chart-bar {
+    animation: pilot-chart-rise 1.8s ease-out infinite alternate;
+  }
+
+  @keyframes pilot-call-ring {
+    0%, 72%, 100% { transform: scale(1); }
+    78% { transform: scale(1.08); }
+    84% { transform: scale(1); }
+    90% { transform: scale(1.06); }
+  }
+
+  @keyframes pilot-chart-rise {
+    from { transform: scaleY(0.72); transform-origin: bottom; }
+    to { transform: scaleY(1); transform-origin: bottom; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pilot-avatar, .pilot-avatar-idle, .pilot-avatar-float, .pilot-avatar-thinking, .pilot-avatar-speaking, .pilot-chat-attention, .pilot-call-ring, .pilot-chart-bar { animation: none; }
+  }
+}
+
+/* Unless told otherwise, keep it for smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

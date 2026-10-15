@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "title": "Create Your Account | Connection Pilot",
+    "description": "Create your Connection Pilot account and set up your workspace with Pilot."
+  },
+  "hero": {
+    "eyebrow": "Connection Pilot",
+    "title": "Create your account.",
+    "description": "Start with your account, then Pilot will help you set up the business details that power your workspace."
+  },
+  "fields": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm password"
+  },
+  "placeholders": {
+    "firstName": "Jordan",
+    "lastName": "Lee",
+    "email": "you@business.com",
+    "password": "At least 8 characters",
+    "confirmPassword": "Repeat your password"
+  },
+  "actions": {
+    "submit": "Create account",
+    "creating": "Creating your account…",
+    "login": "Sign in instead"
+  },
+  "supporting": {
+    "account": "Already have an account?",
+    "notice": "You’ll describe your business in your own words after creating your account."
+  },
+  "errors": {
+    "passwordLength": "Please choose a password with at least 8 characters.",
+    "passwordMatch": "Your passwords do not match.",
+    "generic": "Something went wrong. Please try again.",
+    "signup": "We could not create your account."
+  }
+}

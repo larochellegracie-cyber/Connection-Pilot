@@ -1,0 +1,11 @@
+{
+  "success": {
+    "workspaceCta": "Go to workspace",
+    "title": "Subscription Confirmed | Connection Pilot",
+    "description": "Confirm your Connection Pilot subscription and continue to your business workspace."
+  },
+  "cancel": {
+    "title": "Checkout Cancelled | Connection Pilot",
+    "description": "Your Connection Pilot checkout was cancelled. Review plans and choose the right option when you are ready."
+  }
+}

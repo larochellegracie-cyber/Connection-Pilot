@@ -1,0 +1,38 @@
+{
+  "seo": {
+    "title": "AI Voice Receptionist Coming Soon | Connection Pilot",
+    "description": "Preview the upcoming AI Voice Receptionist for Connection Pilot."
+  },
+  "hero": {
+    "eyebrow": "Future capability",
+    "title": "AI Voice Receptionist — Coming Soon",
+    "description": "Pilot will answer your business calls, help customers, book appointments or orders, and capture important details automatically."
+  },
+  "receptionist": {
+    "title": "AI Voice Receptionist — Coming Soon",
+    "description": "Voice calling is not available yet. Setup and activation will stay disabled until the phone connection is ready.",
+    "badge": "Coming Soon",
+    "disabledAction": "Activation unavailable",
+    "note": "No phone number, call routing, or call activity is connected or stored for this feature yet."
+  },
+  "availability": {
+    "title": "What it will do",
+    "items": [
+      {
+        "title": "Answer business calls",
+        "description": "Pilot will greet callers using your business guidance and help with common questions.",
+        "id": "SWqtKt1VoTnRiSL_MUUzf"
+      },
+      {
+        "title": "Support bookings and orders",
+        "description": "Pilot will help customers request appointments or orders and capture the details your team needs.",
+        "id": "mNA5FcigKnI0NvuoowAt0"
+      },
+      {
+        "title": "Keep details connected",
+        "description": "Pilot will make important caller details available in your Connection Pilot workspace.",
+        "id": "FwCHbMtr_73B60H0d-Ldb"
+      }
+    ]
+  }
+}

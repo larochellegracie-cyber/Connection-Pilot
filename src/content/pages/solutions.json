@@ -1,0 +1,191 @@
+{
+  "hero": {
+    "eyebrow": "Clearer customer conversations",
+    "title": "Solutions Built Around Your Business",
+    "description": "Connection Pilot helps businesses respond faster, capture more customer inquiries, and create a more seamless communication experience.",
+    "primaryCta": "Get Started",
+    "secondaryCta": "Contact Us"
+  },
+  "missedCalls": {
+    "eyebrow": "Missed calls",
+    "title": "Turn Missed Calls Into Opportunities",
+    "description": "When your team is busy, after hours, or helping another customer, a missed call does not have to become a lost conversation. Connection Pilot can send a helpful text so customers can share what they need and your team has the context to follow up.",
+    "cta": "Learn How It Works",
+    "flow": [
+      {
+        "id": "AZkNbYQbbZJm3ZTzErPE6",
+        "label": "Missed Call"
+      },
+      {
+        "id": "KFNc1OxblByLP0ZMxKIjp",
+        "label": "Automatic Text"
+      },
+      {
+        "id": "x5T8uK9L42dRWs3jPEpw4",
+        "label": "Customer Response"
+      },
+      {
+        "id": "jkHBoEP-gVkr39jxDm8Us",
+        "label": "Business Notification"
+      }
+    ]
+  },
+  "aiConversations": {
+    "eyebrow": "Guided conversations",
+    "title": "Give Customers Answers When They Need Them",
+    "description": "Connection Pilot can guide common customer conversations, collect the details that matter, and make it easy to bring in a team member when a human touch is needed.",
+    "controlNote": "Your business stays in control. Conversations can be escalated to a human whenever they need more attention.",
+    "items": [
+      {
+        "id": "MwTeqCtE-HNGS1OB43wPT",
+        "label": "Answer common questions"
+      },
+      {
+        "id": "AaKkEGrCDGI7hcPLstWda",
+        "label": "Collect customer information"
+      },
+      {
+        "id": "REBR3Jl8ocRtWKn-5vN9B",
+        "label": "Understand service needs"
+      },
+      {
+        "id": "h4B6kgWez_1dEuGLMuKh0",
+        "label": "Gather addresses and details"
+      },
+      {
+        "id": "c7L5U5vof2Rj84DE1HZhR",
+        "label": "Identify urgent requests"
+      },
+      {
+        "id": "RniyIaAuNg8USgsA-PxnT",
+        "label": "Hand off important conversations"
+      }
+    ]
+  },
+  "leadCapture": {
+    "eyebrow": "Lead capture",
+    "title": "Keep Every Customer Inquiry Organized",
+    "description": "Connection Pilot can turn the useful details from customer conversations into an organized lead view, so your team has context without manually recording every inquiry.",
+    "table": {
+      "headers": [
+        {
+          "id": "KUiVcSRV-vpZmSQjnqq9k",
+          "label": "Customer"
+        },
+        {
+          "id": "V9AtgJ9c4KFXkwI-PsSzw",
+          "label": "Service"
+        },
+        {
+          "id": "M3xyEBYKW5AsvL9rP3qza",
+          "label": "Address"
+        },
+        {
+          "id": "BzWiUgWb9PzNVCzF_AwyO",
+          "label": "Urgency"
+        },
+        {
+          "id": "reY2J8G3oPYUDSqzuVA3L",
+          "label": "Status"
+        }
+      ],
+      "row": {
+        "customer": "Jordan Lee",
+        "service": "Repair inquiry",
+        "address": "82 Lakeview Ave",
+        "urgency": "Today",
+        "status": "Follow up"
+      }
+    }
+  },
+  "followUps": {
+    "eyebrow": "Follow-up communication",
+    "title": "Stay Connected After the First Conversation",
+    "description": "Keep conversations moving with thoughtful communication throughout the customer journey. Connection Pilot helps your team stay present without suggesting that any appointment is automatically booked.",
+    "items": [
+      {
+        "id": "ot7xwBKRmo2vBQQtwjFVi",
+        "label": "Appointment confirmations"
+      },
+      {
+        "id": "ZYjLqRCeDg3tdexvcTQoW",
+        "label": "Appointment reminders"
+      },
+      {
+        "id": "IYHUQih96EJ0CPVzWWJMh",
+        "label": "Follow-up messages"
+      },
+      {
+        "id": "8PQXFUjyK3qyiC2LkYGCH",
+        "label": "Customer updates"
+      },
+      {
+        "id": "0-uVBO7sS-EX8ImM4lcYT",
+        "label": "Service notifications"
+      },
+      {
+        "id": "F83NUPzQ8lWwCGIIVqsbJ",
+        "label": "Re-engaging customers"
+      }
+    ]
+  },
+  "unified": {
+    "eyebrow": "Connected workflow",
+    "title": "Bring Customer Communication Together",
+    "description": "Connection Pilot is designed to connect customer conversations with your workflow, so useful information does not stay scattered across different tools.",
+    "steps": [
+      {
+        "id": "yn2PmGhGRqvClIV5mQ4iN",
+        "label": "Phone Calls"
+      },
+      {
+        "id": "UjJZIN2EO-RxKl_QJWDcP",
+        "label": "Text Messages"
+      },
+      {
+        "id": "eN6n0yHuxwg5o_Bo_m0dd",
+        "label": "AI Conversations"
+      },
+      {
+        "id": "VjntLQkXUEg9DmAK-TuYi",
+        "label": "Lead Information"
+      },
+      {
+        "id": "fURSFkYz58GFvOgEVZ_uH",
+        "label": "Business Team"
+      }
+    ]
+  },
+  "industries": {
+    "eyebrow": "Flexible by design",
+    "title": "Solutions for Businesses of All Sizes",
+    "items": [
+      {
+        "id": "M6HGl6q0TRHjdneSAY61b",
+        "title": "Home Services",
+        "description": "For plumbing, HVAC, roofing, electrical, and other service teams managing active customer requests."
+      },
+      {
+        "id": "1o4_-U5eeKSzMkxr7c_wI",
+        "title": "Appointment-Based Businesses",
+        "description": "For businesses that rely on customer appointments, confirmations, reminders, and follow-up."
+      },
+      {
+        "id": "n3xz0LvSgb-21H6PqP5PV",
+        "title": "Local Businesses",
+        "description": "For businesses that receive customer inquiries by phone and text throughout the day."
+      },
+      {
+        "id": "oOe-17tZKta8TsDU5VWFD",
+        "title": "Growing Businesses",
+        "description": "For teams that need a more organized way to manage customer communication as they grow."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Make Customer Communication Clearer?",
+    "description": "See how Connection Pilot can fit into your business.",
+    "primaryCta": "Get Started",
+    "secondaryCta": "Contact Us"
+  }
+}

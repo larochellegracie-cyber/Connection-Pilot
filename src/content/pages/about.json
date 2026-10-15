@@ -1,0 +1,169 @@
+{
+  "hero": {
+    "eyebrow": "About Connection Pilot",
+    "title": "We're Building a Better Way for Businesses to Connect.",
+    "description": "Connection Pilot was created around a simple idea: businesses shouldn't have to choose between great customer service and having enough time to run their business.",
+    "primaryCta": "Get Started",
+    "secondaryCta": "See How It Works"
+  },
+  "story": {
+    "eyebrow": "Our story",
+    "title": "Why Connection Pilot?",
+    "paragraphs": [
+      {
+        "id": "pfG1sVsd4TiSDIAVlOFFc",
+        "text": "Every day, businesses miss calls, lose track of leads, and spend valuable time answering the same questions over and over again. Meanwhile, customers expect businesses to respond quickly and remember who they are."
+      },
+      {
+        "id": "AcSPRdJuM5YeM4NJ7_nyZ",
+        "text": "We built Connection Pilot to bring those two problems together."
+      },
+      {
+        "id": "rhcod0J4S6Eg_pznOH_B1",
+        "text": "Connection Pilot uses AI to help businesses communicate with customers, organize customer information, capture leads, and understand what is happening across their customer conversations."
+      },
+      {
+        "id": "UVRwaQV7OVjgztm8bYO1r",
+        "text": "But we believe AI should work alongside people—not replace the human connection that makes a business special."
+      }
+    ]
+  },
+  "mission": {
+    "eyebrow": "Our mission",
+    "title": "Make every customer connection clearer, simpler, and more meaningful.",
+    "description": "We're building technology that helps businesses spend less time managing conversations and more time building relationships with the people they serve."
+  },
+  "beliefs": {
+    "eyebrow": "What we believe",
+    "title": "Technology that keeps the human connection in view.",
+    "items": [
+      {
+        "id": "_Ranc5PkLZ1iHL-XL9BW_",
+        "title": "People First",
+        "description": "Technology should make customer experiences better, not make them feel less human."
+      },
+      {
+        "id": "fD2w2AVXp79fFVKEEkUFU",
+        "title": "Simple Is Better",
+        "description": "Powerful technology shouldn't require a complicated learning curve."
+      },
+      {
+        "id": "9OxwUfF7iVtYiN4cdCY15",
+        "title": "Every Conversation Matters",
+        "description": "A missed call, unanswered question, or forgotten follow-up can mean a missed opportunity."
+      },
+      {
+        "id": "VjgtNw5DWhS-HKTsKTQRm",
+        "title": "AI Should Assist, Not Replace",
+        "description": "Connection Pilot is designed to give businesses an intelligent assistant while keeping people in control."
+      }
+    ]
+  },
+  "platform": {
+    "eyebrow": "What Connection Pilot does",
+    "title": "More Than an AI Receptionist.",
+    "description": "Connection Pilot brings customer communication and customer intelligence together in one platform.",
+    "steps": [
+      {
+        "id": "9X-eQGmMc1zbKZylQxzM-",
+        "label": "Customer Calls"
+      },
+      {
+        "id": "w8p8C-7BSYvjPrKoD5oaI",
+        "label": "AI Responds"
+      },
+      {
+        "id": "f8Lz3Gf_-Yjlp9Vnh0RPb",
+        "label": "Customer Profile"
+      },
+      {
+        "id": "TK7OMNyh8CvgZ5oWiMi-3",
+        "label": "Lead Captured"
+      },
+      {
+        "id": "UN0VHKRsJxtF7zY2SiIGl",
+        "label": "Follow-Up"
+      },
+      {
+        "id": "RffPx1uWHpEDJwZxBTqyL",
+        "label": "Business Insights"
+      }
+    ],
+    "closing": "From the first conversation to the next time a customer comes back, Connection Pilot is designed to help businesses stay connected."
+  },
+  "difference": {
+    "eyebrow": "The Connection Pilot difference",
+    "title": "Built Around the Customer Relationship.",
+    "description": "Connection Pilot isn't only designed to answer a phone call. It is designed to help businesses understand their customers, remember previous interactions, organize leads, follow up, identify patterns, give employees the information they need, and create a more connected customer experience.",
+    "items": [
+      {
+        "id": "X9N4wY4bR0NFHKs0kfj-O",
+        "label": "Understand their customers"
+      },
+      {
+        "id": "Vz1ErbCsvk9sDBfC9kjKW",
+        "label": "Remember previous interactions"
+      },
+      {
+        "id": "El2AfbODcndL3BladVxk2",
+        "label": "Organize leads"
+      },
+      {
+        "id": "nIPE0CLk6DtdAzluhXHYZ",
+        "label": "Follow up"
+      },
+      {
+        "id": "qoCDacT5W2w6Ur-CDw7o5",
+        "label": "Identify patterns"
+      },
+      {
+        "id": "sLwjLuo_C6scytZ9g3HZh",
+        "label": "Give employees the information they need"
+      }
+    ],
+    "highlight": "When a customer comes back months or even years later, the goal is for businesses to have the context they need to make that customer feel remembered."
+  },
+  "vision": {
+    "eyebrow": "Our vision",
+    "title": "Where We're Going",
+    "description": "We're building Connection Pilot into a complete AI-powered customer communication platform for growing businesses.",
+    "items": [
+      {
+        "id": "Hk16CXW9XeGUBx-NXWvKq",
+        "label": "AI Customer Assistant"
+      },
+      {
+        "id": "mmTYUscFKMYstXcNBwXGj",
+        "label": "AI Voice Receptionist"
+      },
+      {
+        "id": "3xYpeJYjfuoK22g5AJf4Z",
+        "label": "Customer Profiles"
+      },
+      {
+        "id": "tPMzoRMZXVo-Aiu5Di4qL",
+        "label": "Lead Management"
+      },
+      {
+        "id": "c9AS-_QRGNBpbI_KIiMme",
+        "label": "Automated Follow-Ups"
+      },
+      {
+        "id": "7G5Ox_8O8fZP8OVScGwDJ",
+        "label": "Customer Insights"
+      },
+      {
+        "id": "-w6_IWmECfT9U7yhuGjhn",
+        "label": "Business Analytics"
+      }
+    ],
+    "closing": "We're starting with communication. Our vision is to help businesses build stronger customer relationships through every interaction."
+  },
+  "cta": {
+    "title": "Let's Make Every Connection Count.",
+    "description": "See how Connection Pilot can help your business communicate more clearly and stay connected with the customers who matter.",
+    "primaryCta": "Get Started",
+    "secondaryCta": "See How It Works",
+    "brandStatement": "Clear communication. Stronger connections."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "seo": {
+    "title": "Employees | Connection Pilot",
+    "description": "Manage your team and employee availability."
+  },
+  "hero": {
+    "eyebrow": "Team",
+    "title": "Employees",
+    "description": "Add, update, and deactivate employee profiles for this business."
+  },
+  "actions": {
+    "add": "Add employee",
+    "save": "Save employee",
+    "cancel": "Cancel",
+    "deactivate": "Deactivate",
+    "activate": "Reactivate"
+  },
+  "empty": "No employees yet. Add your first employee to begin scheduling."
+}

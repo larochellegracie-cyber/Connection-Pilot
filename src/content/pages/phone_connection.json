@@ -1,0 +1,17 @@
+{
+  "seo": {
+    "title": "Phone Connection Coming Soon | Connection Pilot",
+    "description": "Phone connection is a future Connection Pilot capability."
+  },
+  "hero": {
+    "eyebrow": "Future capability",
+    "badge": "Coming Soon",
+    "title": "Phone connection",
+    "description": "Phone connection is not available yet. Connection Pilot is not provisioning, porting, connecting, or routing business phone numbers at this time."
+  },
+  "status": {
+    "title": "No phone service is active",
+    "description": "The upcoming AI Voice Receptionist will be available only after a real phone connection is ready. Until then, no phone number is shown as connected and no calls are handled.",
+    "action": "View AI Voice Receptionist"
+  }
+}

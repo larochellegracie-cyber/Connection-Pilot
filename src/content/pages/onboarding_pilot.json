@@ -1,0 +1,29 @@
+{
+  "eyebrow": "Meet Pilot",
+  "title": "Hi! I’m Pilot.",
+  "subtitle": "Your AI business assistant.",
+  "description": "I’ll help keep your customers, appointments, conversations, and day-to-day business tasks organized — all in one place.",
+  "steps": [
+    {
+      "title": "Know your business",
+      "description": "Teach Pilot your services, hours, pricing, policies, FAQs, and service area.",
+      "id": "6wD3lkhsgiaC0asZxD7N4"
+    },
+    {
+      "title": "Keep work moving",
+      "description": "Use customer history, appointments, and follow-ups to stay ready for the next task.",
+      "id": "LVrRrEli6jnXIBw1jSX5e"
+    },
+    {
+      "title": "Support your receptionist",
+      "description": "Set clear behavior, boundaries, and handoff guidance for customer conversations.",
+      "id": "Zl35tRMjOdH5IOYDqNALe"
+    }
+  ],
+  "promptTitle": "Tell Pilot about your business",
+  "promptDescription": "Share a short introduction in your own words. Pilot will save it as starting context for your workspace.",
+  "placeholder": "We’re a plumbing company in Windsor. We handle residential plumbing, water heaters, drains, and emergency repairs.",
+  "response": "Thanks — I’ll use that as your starting business context. You can add the details next.",
+  "continue": "Continue with Pilot",
+  "skip": "Set up manually"
+}

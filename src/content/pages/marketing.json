@@ -1,0 +1,117 @@
+{
+  "hero": {
+    "eyebrow": "Pilot Marketing",
+    "headline": "Let Pilot handle your marketing.",
+    "body": "Give Pilot your website and it will learn your business, your services, your products, and your brand.",
+    "cta": "Connect Your Website"
+  },
+  "whatComesNext": {
+    "heading": "Once Pilot knows your business",
+    "body": "You can generate social posts, plan your content, and manage your marketing from one place.",
+    "disclaimer": "Social post generation and content calendar are coming soon.",
+    "features": [
+      {
+        "id": "f1",
+        "label": "Generate social posts",
+        "detail": "Pilot creates content that sounds like you."
+      },
+      {
+        "id": "f2",
+        "label": "Plan your content",
+        "detail": "Build a content calendar around your business."
+      },
+      {
+        "id": "f3",
+        "label": "Manage your marketing",
+        "detail": "One place for all your marketing activity."
+      }
+    ]
+  },
+  "connectScreen": {
+    "heading": "What's your business website?",
+    "body": "Pilot will read your website and learn your business — your services, products, brand, and story.",
+    "cta": "Let Pilot Learn My Business",
+    "disclaimer": "Pilot will only read publicly available content from your website.",
+    "urlPlaceholder": "https://yourwebsite.com"
+  },
+  "uploadFallback": {
+    "heading": "Upload Your Business Information",
+    "body": "If your website can't be analyzed, you can upload a document — a Word file, PDF, or text file — describing your business.",
+    "cta": "Upload a Document",
+    "orDivider": "or",
+    "tryAgainCta": "Try a different URL"
+  },
+  "loadingSteps": [
+    {
+      "id": "s1",
+      "text": "Pilot is learning your business…"
+    },
+    {
+      "id": "s2",
+      "text": "Analysing your website…"
+    },
+    {
+      "id": "s3",
+      "text": "Understanding your services…"
+    },
+    {
+      "id": "s4",
+      "text": "Learning your brand…"
+    },
+    {
+      "id": "s5",
+      "text": "Identifying your customers…"
+    },
+    {
+      "id": "s6",
+      "text": "Reviewing your content…"
+    }
+  ],
+  "loadingSubtext": "This usually takes 15–30 seconds.",
+  "profileHeader": {
+    "title": "Pilot Marketing",
+    "reanalyseLabel": "Re-analyse website",
+    "reviewBadge": "Review & edit",
+    "sectionHeading": "Business Profile",
+    "sectionBody": "Review the information Pilot found. Add what is missing, remove anything you do not offer, and correct any details before you confirm it as your official Business Profile.",
+    "reviewStatus": "Needs your confirmation",
+    "confirmedStatus": "Official Business Profile"
+  },
+  "sections": {
+    "overview": "Business overview",
+    "servicesProducts": "Services & products",
+    "customers": "Customers",
+    "brand": "Brand",
+    "marketing": "Marketing information"
+  },
+  "fields": {
+    "businessName": "Business name",
+    "location": "Location",
+    "contactPhone": "Contact phone",
+    "contactEmail": "Contact email",
+    "businessHours": "Business hours",
+    "website": "Website",
+    "businessDescription": "Business description",
+    "services": "Services",
+    "products": "Products",
+    "pricing": "Pricing information",
+    "targetCustomers": "Target customers",
+    "customerNeeds": "Customer needs & problems",
+    "brandTone": "Brand tone",
+    "brandColors": "Brand colours",
+    "brandDescription": "Brand description",
+    "logoUrl": "Logo URL (if available)",
+    "socialLinks": "Social media links",
+    "keySellingPoints": "Key selling points",
+    "promotions": "Current promotions",
+    "faq": "Frequently asked questions",
+    "importantNotes": "Important notes for Pilot"
+  },
+  "saveBar": {
+    "savedMessage": "Your official Business Profile is saved.",
+    "savedSubtext": "Pilot will use only this approved information for future marketing and business answers.",
+    "pendingMessage": "Review the information above, then confirm it as your official Business Profile.",
+    "saveCta": "Confirm Business Profile",
+    "savingLabel": "Saving…"
+  }
+}

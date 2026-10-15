@@ -1,0 +1,65 @@
+{
+  "eyebrow": "Meet Pilot",
+  "title": "Your AI business assistant.",
+  "description": "Pilot helps you manage your business, keep up with customers, appointments, follow-ups, and everyday tasks — all from one place.",
+  "privacyNote": "Built for business owners and authorized team members — not customers.",
+  "greeting": "Hi! I’m Pilot 👋 Your AI business assistant.",
+  "capabilitiesTitle": "Pilot can help you…",
+  "actions": [
+    {
+      "icon": "users",
+      "title": "Manage customers",
+      "description": "Find customer history and keep records up to date.",
+      "id": "pVuhYgBF7n73IZ2VK3RFg"
+    },
+    {
+      "icon": "calendar",
+      "title": "Stay on top of appointments",
+      "description": "Check schedules, reschedule bookings, and spot changes.",
+      "id": "N_an2WNbp2Cg5G6oLpP5Y"
+    },
+    {
+      "icon": "message",
+      "title": "Handle follow-ups",
+      "description": "Remember who needs a call, message, or follow-up.",
+      "id": "J6-GoiAnCaZHeaeXu_D2R"
+    },
+    {
+      "icon": "sparkles",
+      "title": "Manage your business",
+      "description": "Ask questions about your services, hours, policies, and business information.",
+      "id": "P1zEXAZdfXDExBUAajrPP"
+    }
+  ],
+  "chatTitle": "Just ask Pilot.",
+  "chatSubtitle": "Tell Pilot what you need, and it can help you get it done.",
+  "chatMessages": [
+    {
+      "speaker": "Business owner",
+      "content": "Can you reschedule Coop’s appointment to Friday at 2?",
+      "role": "owner",
+      "id": "4W24GwG4sX3kp7yqMz5Wf"
+    },
+    {
+      "speaker": "Pilot",
+      "content": "Sure! Coop is currently booked for Thursday at 10 AM. I can move it to Friday at 2 PM. Would you like me to make that change?",
+      "role": "pilot",
+      "id": "hVf0MAttCkhL6ek0Oi1uG"
+    },
+    {
+      "speaker": "Business owner",
+      "content": "Yes.",
+      "role": "owner",
+      "id": "zKX2zZz0h_5J4Tqhiu2kT"
+    },
+    {
+      "speaker": "Pilot",
+      "content": "Done! Coop’s appointment has been moved to Friday at 2 PM.",
+      "role": "pilot",
+      "id": "Spyz-MPnTQTz3idcs5wtC"
+    }
+  ],
+  "ctaTitle": "Ready to meet Pilot?",
+  "ctaDetail": "Set up your business and start working with your new AI assistant.",
+  "cta": "Get Started"
+}

@@ -1,0 +1,36 @@
+{
+  "hero": {
+    "eyebrow": "Your AI assistant",
+    "title": "AI receptionist",
+    "description": "Configure the customer-facing call capability of Pilot — how it answers, books, and hands off to your team.",
+    "action": "Edit training"
+  },
+  "overview": {
+    "title": "Receptionist overview",
+    "active": "Active",
+    "inactive": "Inactive",
+    "calls": "Calls handled",
+    "bookings": "Appointments booked",
+    "messages": "Messages handled"
+  },
+  "setup": {
+    "title": "Setup progress",
+    "test": "Test receptionist"
+  },
+  "training": {
+    "title": "Train your assistant",
+    "description": "Give Pilot the business knowledge and boundaries it needs to handle customer calls correctly and confidently."
+  },
+  "voice": {
+    "title": "Customize how it talks",
+    "description": "Set a clear greeting, tone, response length, and custom instructions that match your business."
+  },
+  "booking": {
+    "title": "Booking rules",
+    "description": "Control business hours, appointment duration, availability, buffers, same-day booking, and cancellation policies."
+  },
+  "test": {
+    "title": "Test your receptionist",
+    "description": "Call your connected business number from another phone to experience the greeting, questions, and booking flow exactly as a customer would."
+  }
+}

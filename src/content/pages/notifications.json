@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "title": "Notifications | Connection Pilot",
+    "description": "Review customer appointment change notifications in Connection Pilot."
+  },
+  "hero": {
+    "eyebrow": "Business updates",
+    "title": "Appointment notifications",
+    "description": "See every customer appointment change in one place. Notifications are also emailed to the business email on your profile when it is configured."
+  },
+  "empty": {
+    "title": "You’re all caught up",
+    "description": "Appointment changes will appear here automatically."
+  },
+  "labels": {
+    "new": "New",
+    "original": "Original:",
+    "updated": "New:",
+    "markRead": "Mark read",
+    "openProfile": "Open customer profile",
+    "unavailable": "Not available"
+  }
+}

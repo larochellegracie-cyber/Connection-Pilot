@@ -1,0 +1,29 @@
+{
+  "hero": {
+    "eyebrow": "Customer communications",
+    "title": "Messages",
+    "description": "Review real inbound and outbound customer conversations from your connected business channels."
+  },
+  "meta": {
+    "title": "Messages | Connection Pilot",
+    "description": "Review customer message history and AI Customer Messaging status in Connection Pilot."
+  },
+  "empty": {
+    "title": "No messages yet",
+    "description": "Customer conversations will appear here once a connected business channel receives a message."
+  },
+  "labels": {
+    "openCustomer": "Open customer",
+    "inbound": "Inbound",
+    "outbound": "Outbound",
+    "aiMessaging": "AI Customer Messaging",
+    "comingSoon": "Coming Soon",
+    "proRequired": "Available on Pro",
+    "active": "Active",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "provider": "Supported provider",
+    "notConnected": "No business messaging number connected",
+    "deliveryNote": "Messages are recorded only when received from or returned to a connected provider. Delivery confirmations appear when the provider reports them."
+  }
+}

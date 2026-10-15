@@ -1,0 +1,104 @@
+{
+  "seo": {
+    "title": "Booking Rules | Connection Pilot",
+    "description": "Set appointment policies and business availability for Connection Pilot."
+  },
+  "navigation": {
+    "back": "Back to calendar"
+  },
+  "hero": {
+    "eyebrow": "Scheduling controls",
+    "title": "Booking rules",
+    "description": "Set the rules your calendar and receptionist use before confirming an appointment."
+  },
+  "sections": {
+    "appointments": "Appointment rules",
+    "availability": "Business availability"
+  },
+  "fields": {
+    "duration": "Appointment duration",
+    "durationHelp": "How long does a typical appointment last?",
+    "buffer": "Time between appointments",
+    "bufferHelp": "How much time should be left between appointments?",
+    "overlaps": "Allow overlapping appointments?",
+    "overlapsNo": "No — never allow appointments to overlap",
+    "overlapsYes": "Yes — allow up to this many appointments at the same time",
+    "minimumNotice": "Minimum notice required",
+    "minimumNoticeHelp": "How soon before an appointment can a customer book?",
+    "bookingWindow": "How far ahead can customers book?",
+    "bookingWindowHelp": "Set the maximum number of days customers can schedule in advance.",
+    "sameDay": "Same-day appointments",
+    "sameDayAllow": "Allow",
+    "sameDayDisallow": "Don't allow",
+    "rescheduling": "Customer rescheduling",
+    "cancellations": "Customer cancellations",
+    "anytime": "Anytime",
+    "notice": "Up to this many hours before the appointment",
+    "disabledRescheduling": "Don't allow online rescheduling",
+    "disabledCancellations": "Don't allow online cancellations",
+    "hours": "Booking hours",
+    "hoursHelp": "Edit the normal hours when customers can request appointments.",
+    "closed": "Closed"
+  },
+  "actions": {
+    "save": "Save booking rules",
+    "saving": "Saving rules...",
+    "saved": "Booking rules saved. New requests will follow these settings immediately."
+  },
+  "errors": {
+    "load": "Unable to load booking rules.",
+    "save": "Unable to save booking rules."
+  },
+  "days": [
+    {
+      "key": "monday",
+      "label": "Monday",
+      "id": "PB7RqY36NkQAYHWXW5jmW"
+    },
+    {
+      "key": "tuesday",
+      "label": "Tuesday",
+      "id": "8skb94tpsRF0lq0hBbJ4_"
+    },
+    {
+      "key": "wednesday",
+      "label": "Wednesday",
+      "id": "2tW4bR2-PDLyNb1S-HAJJ"
+    },
+    {
+      "key": "thursday",
+      "label": "Thursday",
+      "id": "pgN30tvxi17jt6e14f3cE"
+    },
+    {
+      "key": "friday",
+      "label": "Friday",
+      "id": "uWSh3HWkOlr67Q3qVL7Wu"
+    },
+    {
+      "key": "saturday",
+      "label": "Saturday",
+      "id": "1g6I6J8LSX9Y_p-srwpqq"
+    },
+    {
+      "key": "sunday",
+      "label": "Sunday",
+      "id": "gpk31r3o7Ybw8UNWYxtec"
+    }
+  ],
+  "durationOptions": [
+    15,
+    30,
+    45,
+    60,
+    90,
+    120
+  ],
+  "bufferOptions": [
+    0,
+    15,
+    30,
+    45,
+    60
+  ]
+}

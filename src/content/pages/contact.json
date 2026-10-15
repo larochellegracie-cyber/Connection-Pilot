@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "eyebrow": "Talk to our team",
+    "title": "A clearer path to better customer communication.",
+    "description": "Tell us what your team needs. We'll help you choose the right Connection Pilot starting point."
+  },
+  "details": {
+    "title": "Have questions? We’re here to help.",
+    "description": "If you have questions about Connection Pilot, our plans, features, or getting started, feel free to reach out.",
+    "emailLabel": "Email us:",
+    "email": "support@connectionpilot.net",
+    "responseTitle": "Built for the way your customers reach you",
+    "responseDescription": "Whether you are handling calls, text conversations, or a growing customer list, Connection Pilot is designed to make the next step easier."
+  },
+  "form": {
+    "title": "Request a conversation",
+    "description": "Tell us about your business and what you want to improve.",
+    "name": "Your name",
+    "email": "Work email",
+    "company": "Company name",
+    "phone": "Phone number",
+    "teamSize": "Team size",
+    "teamOptions": [
+      "Just me",
+      "2–10 people",
+      "11–50 people",
+      "51+ people"
+    ],
+    "interest": "What would you like to explore?",
+    "interestOptions": [
+      "AI-assisted customer conversations",
+      "AI Voice Receptionist",
+      "Calls and text conversations",
+      "Customer profiles and follow-up",
+      "Plans and pricing",
+      "Something else"
+    ],
+    "message": "How can we help?",
+    "submit": "Send inquiry",
+    "sending": "Sending inquiry...",
+    "success": "Thanks — your inquiry is on its way. We'll be in touch.",
+    "error": "We couldn't send your inquiry. Please try again."
+  }
+}

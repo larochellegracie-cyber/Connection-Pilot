@@ -1,0 +1,216 @@
+{
+  "pricing": {
+    "hero": {
+      "eyebrow": "Connection Pilot plans",
+      "title": "Run your business with more clarity.",
+      "description": "Start with a 7-day free trial, then choose the capabilities that fit the way you work."
+    },
+    "plans": [
+      {
+        "id": "starter-plan",
+        "name": "Starter",
+        "tagline": "Run your business.",
+        "description": "Essential business management for keeping customers, work, and finances connected.",
+        "monthlyPrice": "$49",
+        "monthlySuffix": "/month",
+        "features": [
+          {
+            "id": "starter-customers",
+            "label": "Customers"
+          },
+          {
+            "id": "starter-leads",
+            "label": "Leads"
+          },
+          {
+            "id": "starter-orders-jobs",
+            "label": "Orders / Jobs"
+          },
+          {
+            "id": "starter-scheduling",
+            "label": "Scheduling"
+          },
+          {
+            "id": "starter-quotes-invoices",
+            "label": "Quotes & Invoices"
+          },
+          {
+            "id": "starter-payments",
+            "label": "Payments"
+          },
+          {
+            "id": "starter-business-knowledge",
+            "label": "Business Knowledge"
+          },
+          {
+            "id": "starter-pilot-assistant",
+            "label": "Pilot AI Assistant"
+          }
+        ],
+        "cta": "Start 7-day free trial"
+      },
+      {
+        "id": "growth-plan",
+        "name": "Growth",
+        "tagline": "Understand your business.",
+        "description": "More intelligence and proactive help, so you can see what needs attention next.",
+        "monthlyPrice": "$89",
+        "monthlySuffix": "/month",
+        "features": [
+          {
+            "id": "growth-starter",
+            "label": "Everything in Starter"
+          },
+          {
+            "id": "growth-business-insights",
+            "label": "Business Insights"
+          },
+          {
+            "id": "growth-advanced-insights",
+            "label": "Advanced Insights"
+          },
+          {
+            "id": "growth-proactive-pilot",
+            "label": "Proactive Pilot"
+          },
+          {
+            "id": "growth-pilot-actions",
+            "label": "Pilot Actions"
+          }
+        ],
+        "cta": "Start 7-day free trial"
+      },
+      {
+        "id": "pro-plan",
+        "name": "Pro",
+        "tagline": "Let Pilot do more of the work.",
+        "description": "Automation and customer-facing AI for businesses ready to make Pilot part of the team.",
+        "monthlyPrice": "$149",
+        "monthlySuffix": "/month",
+        "features": [
+          {
+            "id": "pro-growth",
+            "label": "Everything in Growth"
+          },
+          {
+            "id": "pro-customer-messaging",
+            "label": "AI Customer Messaging",
+            "comingSoon": false
+          },
+          {
+            "id": "pro-automation",
+            "label": "Advanced Automation"
+          },
+          {
+            "id": "pro-forecasting",
+            "label": "Advanced Forecasting"
+          },
+          {
+            "id": "pro-pilot-actions",
+            "label": "Advanced Pilot Actions"
+          },
+          {
+            "id": "pro-voice-receptionist",
+            "label": "AI Voice Receptionist",
+            "comingSoon": true
+          }
+        ],
+        "cta": "Start 7-day free trial"
+      }
+    ],
+    "comparison": {
+      "eyebrow": "At a glance",
+      "title": "Choose the level of help you need.",
+      "features": [
+        {
+          "id": "comparison-business-management",
+          "name": "Customers, leads, orders / jobs, and scheduling",
+          "starter": true,
+          "growth": true,
+          "pro": true
+        },
+        {
+          "id": "comparison-finance-knowledge",
+          "name": "Quotes & invoices, payments, and Business Knowledge",
+          "starter": true,
+          "growth": true,
+          "pro": true
+        },
+        {
+          "id": "comparison-pilot-assistant",
+          "name": "Pilot AI Assistant",
+          "starter": true,
+          "growth": true,
+          "pro": true
+        },
+        {
+          "id": "comparison-intelligence",
+          "name": "Business and Advanced Insights",
+          "starter": false,
+          "growth": true,
+          "pro": true
+        },
+        {
+          "id": "comparison-proactive-pilot",
+          "name": "Proactive Pilot and Pilot Actions",
+          "starter": false,
+          "growth": true,
+          "pro": true
+        },
+        {
+          "id": "comparison-automation",
+          "name": "Advanced Automation, Forecasting, and Pilot Actions",
+          "starter": false,
+          "growth": false,
+          "pro": true
+        },
+        {
+          "id": "comparison-customer-messaging",
+          "name": "AI Customer Messaging",
+          "starter": false,
+          "growth": false,
+          "pro": true
+        },
+        {
+          "id": "comparison-voice-receptionist",
+          "name": "AI Voice Receptionist — Coming Soon",
+          "starter": false,
+          "growth": false,
+          "pro": true
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Details when you need them",
+      "title": "Common questions",
+      "items": [
+        {
+          "id": "pricing-faq-trial",
+          "question": "How does the 7-day free trial work?",
+          "answer": "Start your trial, create your account, and explore the Connection Pilot workspace before choosing a plan."
+        },
+        {
+          "id": "pricing-faq-plans",
+          "question": "Can I change plans later?",
+          "answer": "Yes. Choose the plan that fits your business now, then update as your needs change."
+        },
+        {
+          "id": "pricing-faq-messaging",
+          "question": "Is AI Customer Messaging available now?",
+          "answer": "Yes. AI Customer Messaging is active and included with the Pro plan."
+        },
+        {
+          "id": "pricing-faq-receptionist",
+          "question": "Is AI Voice Receptionist available now?",
+          "answer": "No. AI Voice Receptionist is coming soon and is not active in Connection Pilot yet."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to bring your business into focus?",
+      "description": "Start your 7-day free trial and set up the workspace that works the way you do.",
+      "primaryCta": "Start 7-day free trial",
+      "secondaryCta": "Contact us"
+    }
+  }
+}

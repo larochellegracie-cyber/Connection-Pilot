@@ -1,0 +1,406 @@
+{
+  "hero": {
+    "eyebrow": "Designed for every customer moment",
+    "title": "Everything You Need to Stay Connected.",
+    "description": "Connection Pilot brings customer conversations, lead management, AI assistance, and business insights together in one simple platform.",
+    "primaryCta": "Get Started",
+    "secondaryCta": "See How It Works"
+  },
+  "dashboard": {
+    "title": "Your Connection Pilot workspace",
+    "subtitle": "A product preview",
+    "metrics": [
+      {
+        "label": "New leads",
+        "value": "24",
+        "id": "LE7gfZPvgNi4RbT7lvpgK"
+      },
+      {
+        "label": "Conversations",
+        "value": "48",
+        "id": "bUbpfihntyvyy1W8mng1R"
+      },
+      {
+        "label": "Response time",
+        "value": "4m",
+        "id": "aA-8aTmxMmiJd8f9SeHi-"
+      }
+    ],
+    "conversations": [
+      {
+        "name": "Maya R.",
+        "message": "I need help with a repair request.",
+        "status": "New",
+        "id": "r1Kl8UjxS076bQ_dz3t1t"
+      },
+      {
+        "name": "Daniel K.",
+        "message": "Can I ask a quick question?",
+        "status": "Active",
+        "id": "SpxuN6E9Ls_OGgxgWYmd8"
+      }
+    ],
+    "insights": [
+      {
+        "label": "Customer conversations",
+        "value": "72%",
+        "id": "Bt6c-0KeL3zzYCU07LhoG"
+      },
+      {
+        "label": "Lead follow-up",
+        "value": "58%",
+        "id": "fPcv30XyL6gO67YdlyHaM"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "eyebrow": "AI customer conversations",
+      "title": "AI-Powered Customer Conversations",
+      "description": "Connection Pilot is designed to help businesses guide customer text conversations while keeping their team in control.",
+      "items": [
+        {
+          "label": "Respond to common questions",
+          "id": "Yeh7tZ5oxRvQdliGyV-gr"
+        },
+        {
+          "label": "Collect important customer details",
+          "id": "FaLdRt65ep6E_T3onNdBw"
+        },
+        {
+          "label": "Understand service needs",
+          "id": "Gb_XOMceYGXu9QzDjvWEK"
+        },
+        {
+          "label": "Ask helpful follow-up questions",
+          "id": "Jb2clOMaeoFSNxmiZgoCb"
+        },
+        {
+          "label": "Recognize when a human should step in",
+          "id": "UdsZ4WDYpiKI8akTMolGh"
+        }
+      ],
+      "id": "kybZcOE260sWOvLhT-LtZ"
+    },
+    {
+      "eyebrow": "Missed-call texting",
+      "title": "Never Leave a Customer Wondering",
+      "description": "When a call is missed, Connection Pilot can help start a text conversation so the customer has another way to share what they need.",
+      "items": [
+        {
+          "label": "Missed Call",
+          "id": "nQX5cOXgmRMQP7xyYNzrb"
+        },
+        {
+          "label": "Automatic Text",
+          "id": "iE0wpBPDFb5g9aDDTUlPA"
+        },
+        {
+          "label": "Customer Responds",
+          "id": "qSwxbjXVng30vH9ZGBcEa"
+        },
+        {
+          "label": "Lead Captured",
+          "id": "IKCw85_UXZHoy3X_dpZHc"
+        }
+      ],
+      "id": "tClBBqkUFv9-E4g-zVFFA"
+    },
+    {
+      "eyebrow": "Lead management",
+      "title": "Every Lead, Organized",
+      "description": "Details collected in conversations can be gathered into a centralized lead view, giving your team useful context in one place.",
+      "items": [
+        {
+          "label": "Customer name and phone",
+          "id": "eJZ_2JnBY3ma66WBD1nMP"
+        },
+        {
+          "label": "Requested service and date",
+          "id": "SCXMycowRQCNz4Ely7W_r"
+        },
+        {
+          "label": "Priority and lead status",
+          "id": "sy1a4vdthFqZ43DjtKX1t"
+        },
+        {
+          "label": "Conversation history",
+          "id": "NBF6MiX7l_BmICggFMNIO"
+        }
+      ],
+      "id": "vcmuEbby3lI_6_vJlXntV"
+    },
+    {
+      "eyebrow": "Customer insights",
+      "title": "Turn Conversations Into Insights",
+      "description": "See examples of the types of activity Connection Pilot is designed to make easier to understand across your customer communication.",
+      "items": [
+        {
+          "label": "New leads",
+          "id": "OaHMuNRoZD4mHfxB7a6Qd"
+        },
+        {
+          "label": "Customer conversations",
+          "id": "zBYIDL12RgyUJlbeW2hxf"
+        },
+        {
+          "label": "Missed calls",
+          "id": "81SkzNHyTf1im_UsXEepO"
+        },
+        {
+          "label": "Response time",
+          "id": "1m5tAax8SdvrHZiugkIW2"
+        },
+        {
+          "label": "Most requested services",
+          "id": "E6Zi1L9eMmixl27VkUA3x"
+        },
+        {
+          "label": "Lead status",
+          "id": "9f7Y_v8tYAYeveyWWOl5O"
+        }
+      ],
+      "id": "8624ckrny98UVSUyFvvw_"
+    },
+    {
+      "eyebrow": "Thoughtful follow-ups",
+      "title": "Stay Connected After the First Conversation",
+      "description": "Connection Pilot can help your team keep the conversation moving after an inquiry, while you choose the right next step for each customer.",
+      "items": [
+        {
+          "label": "Customer follow-up prompts",
+          "id": "2kXPU2ZrH4nljsbZvBogD"
+        },
+        {
+          "label": "Appointment reminders",
+          "id": "P1dlHwGiPLJCNCX52zbMH"
+        },
+        {
+          "label": "Service updates",
+          "id": "SDTAE0X82l2jB6GBvfr3P"
+        },
+        {
+          "label": "Inquiry check-ins",
+          "id": "T054zB7V7_2_y05VKTfGf"
+        }
+      ],
+      "id": "3EPNpYkR5aGBT-yQ2R22Q"
+    },
+    {
+      "eyebrow": "Private business workspace",
+      "title": "Your Business. One Dashboard.",
+      "description": "Each business is designed to have its own private Connection Pilot workspace for its customer conversations, leads, and settings.",
+      "items": [
+        {
+          "label": "Overview",
+          "id": "ZFE791EsIBFcRAIu_M15b"
+        },
+        {
+          "label": "Conversations",
+          "id": "8R0el-GyyiuaIu_eHecDB"
+        },
+        {
+          "label": "Leads",
+          "id": "KZw2W9MR6F9qqSdb3soky"
+        },
+        {
+          "label": "Customers",
+          "id": "gBwu9GtS9sDj0IbuzfceF"
+        },
+        {
+          "label": "Insights",
+          "id": "o1mw8_6hPttCuXFqem4wF"
+        },
+        {
+          "label": "Settings",
+          "id": "a6rQm7WDdNIKgXbSIXL2h"
+        }
+      ],
+      "id": "xknOfd6eFAcRoPwLAd5Rk"
+    },
+    {
+      "eyebrow": "Human handoff",
+      "title": "AI When You Need It. Humans When You Want Them.",
+      "description": "Connection Pilot is designed to support your employees, not replace them. Your team can step into a conversation when personal help matters.",
+      "items": [
+        {
+          "label": "AI conversation",
+          "id": "wxTPpELE0YzGT_f9TKZPl"
+        },
+        {
+          "label": "Human handoff",
+          "id": "rgwYSJdt0tTqFl_17sNtQ"
+        },
+        {
+          "label": "Employee continues the conversation",
+          "id": "LlLxa6qbx7Mzu5Q5qVYo_"
+        }
+      ],
+      "id": "8p-Pq6cQLW5eIsBmxJjgj"
+    },
+    {
+      "eyebrow": "Business customization",
+      "title": "Built Around Your Business",
+      "description": "Shape the experience around how your business communicates, serves customers, and decides when a conversation needs attention.",
+      "items": [
+        {
+          "label": "Business hours",
+          "id": "rBaCchdfsf6UzipqihXkf"
+        },
+        {
+          "label": "Services and service area",
+          "id": "0IDaOXauVMor_py2-3x-b"
+        },
+        {
+          "label": "Frequently asked questions",
+          "id": "SwWie5Pruzo5uXU6RH3le"
+        },
+        {
+          "label": "Communication preferences",
+          "id": "wGpiQmON8RAmwReSqIQfa"
+        },
+        {
+          "label": "AI instructions",
+          "id": "P68E22h28INQ423PPWN_f"
+        },
+        {
+          "label": "Escalation preferences",
+          "id": "-2TVcgNiM5lOmqt2olnxN"
+        }
+      ],
+      "id": "sC6ubRYs1NGeTj8RE3mhu"
+    },
+    {
+      "eyebrow": "Business communication",
+      "title": "A Professional Business Number",
+      "description": "Connection Pilot can provide a dedicated communication number for customer calls and texts, based on your selected number and configuration.",
+      "items": [
+        {
+          "label": "Voice",
+          "id": "A_DbnWqhxw3E1whbgk6pf"
+        },
+        {
+          "label": "SMS",
+          "id": "qc42fjjEPeo6prFgJKTY_"
+        },
+        {
+          "label": "Customer communication",
+          "id": "AhbjuE1JA4Mjoq1Dnd10D"
+        }
+      ],
+      "id": "iq5vrJq5NFQZWER27TviI"
+    }
+  ],
+  "memory": {
+    "eyebrow": "Customer memory",
+    "title": "Remember Every Customer. Even Years Later.",
+    "description": "Connection Pilot builds a customer profile from every interaction, so when a customer comes back—even years later—your business can pick up where the conversation left off.",
+    "details": [
+      {
+        "label": "Customer name",
+        "id": "PcZQGHV9BjP8jveT1Uua9"
+      },
+      {
+        "label": "Phone number",
+        "id": "vlb3yF6vuv4iH1jsFxeta"
+      },
+      {
+        "label": "Address",
+        "id": "OFjA2dYpJNs2v-av_L9ka"
+      },
+      {
+        "label": "Services previously requested",
+        "id": "QjvdmAxmhzy_LRKYkNpYI"
+      },
+      {
+        "label": "Previous conversations",
+        "id": "OU_tIgBDaeND4FJksJBDD"
+      },
+      {
+        "label": "Appointments",
+        "id": "r_h7R6ttKUcsMO4RPD5XV"
+      },
+      {
+        "label": "Customer preferences",
+        "id": "6iwKMeYtcnDd7b_AJxuud"
+      },
+      {
+        "label": "Important notes",
+        "id": "EOOmL9R4fg-oMY6heyYGt"
+      }
+    ],
+    "callLabel": "Incoming Call",
+    "caller": "Sarah is calling...",
+    "assistantLabel": "Connection Pilot",
+    "welcomeMessage": "Welcome back, Sarah! I see we previously helped you with your AC service. How can we help you today?",
+    "profileName": "Sarah Thompson",
+    "customerSince": "Customer since: 2026",
+    "address": "123 Main Street",
+    "phone": "519-XXX-XXXX",
+    "servicesTitle": "Previous Services",
+    "services": [
+      {
+        "label": "AC Repair — 2026",
+        "id": "Eym4qQmWahYD7nLtFQkTF"
+      },
+      {
+        "label": "Furnace Maintenance — 2027",
+        "id": "KGB7T8mCe2QFDrmx6kxXS"
+      },
+      {
+        "label": "AC Maintenance — 2028",
+        "id": "dFoXDOAesMx9BACiQrLUd"
+      }
+    ],
+    "lastConversationTitle": "Last Conversation",
+    "lastConversation": "Customer prefers afternoon appointments.",
+    "closing": "No starting over. No searching through old messages. Just a more connected customer experience."
+  },
+  "summary": {
+    "title": "One Platform. Multiple Ways to Connect.",
+    "items": [
+      {
+        "label": "AI Customer Conversations",
+        "id": "kdAfmc2QmL_t77RFUVALw"
+      },
+      {
+        "label": "Missed-Call Texting",
+        "id": "7wsFITIieJY2-lt2eJtGO"
+      },
+      {
+        "label": "Lead Management",
+        "id": "3Wahy-g5N52fgpcbiEuiK"
+      },
+      {
+        "label": "Customer Insights",
+        "id": "mvrh8jV9kEbvEd18h-6EH"
+      },
+      {
+        "label": "Follow-Ups",
+        "id": "5_b3VXs0MeCnuxNcJz522"
+      },
+      {
+        "label": "Business Communication",
+        "id": "790SG9_7Fb2wUG0ciPeU8"
+      },
+      {
+        "label": "Human Handoff",
+        "id": "tjcIJ9Re7JmMBjqNS_06_"
+      },
+      {
+        "label": "Business Customization",
+        "id": "IU1g_cM9883A9rtVStwDx"
+      },
+      {
+        "label": "Analytics",
+        "id": "bvTWZx8wTBYiCT2O2Y78w"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Make Customer Communication Clearer?",
+    "description": "Bring your customer conversations, leads, and insights together with Connection Pilot.",
+    "primaryCta": "Get Started",
+    "secondaryCta": "Contact Us"
+  }
+}

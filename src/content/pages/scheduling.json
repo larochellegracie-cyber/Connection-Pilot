@@ -1,0 +1,25 @@
+{
+  "actions": {
+    "add": "Add shift",
+    "addEmployee": "Add employee",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "draft": "Draft",
+    "edit": "Edit",
+    "email": "Email schedule to employees",
+    "next": "Next week",
+    "previous": "Previous week",
+    "publish": "Publish schedule",
+    "save": "Save shift"
+  },
+  "empty": "No shifts for this week yet.",
+  "hero": {
+    "description": "Create draft schedules, add employees, assign shifts, publish them, and email each employee only their own shifts.",
+    "eyebrow": "Team schedule",
+    "title": "Weekly scheduling"
+  },
+  "seo": {
+    "description": "Create, publish, update, and email weekly employee schedules.",
+    "title": "Scheduling | Connection Pilot"
+  }
+}

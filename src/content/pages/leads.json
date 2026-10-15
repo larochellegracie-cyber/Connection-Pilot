@@ -1,0 +1,93 @@
+{
+  "seo": {
+    "title": "Leads | Connection Pilot",
+    "description": "Manage incoming leads, follow-ups, and conversions in your Connection Pilot workspace."
+  },
+  "hero": {
+    "eyebrow": "Lead pipeline",
+    "title": "Leads",
+    "description": "Keep every opportunity moving from first contact through to a booked job.",
+    "addButton": "Add lead"
+  },
+  "summary": {
+    "all": "All leads",
+    "new": "New",
+    "followUp": "Follow-up",
+    "won": "Won"
+  },
+  "filters": {
+    "search": "Search by name, contact, service, or source",
+    "allStatuses": "All statuses",
+    "apply": "Apply"
+  },
+  "table": {
+    "lead": "Lead",
+    "service": "Service",
+    "status": "Status",
+    "value": "Value",
+    "assigned": "Assigned",
+    "lastContact": "Last contact",
+    "action": "Action",
+    "open": "Open"
+  },
+  "empty": {
+    "title": "No leads found",
+    "description": "Adjust your search or filters, or add your first lead."
+  },
+  "form": {
+    "title": "Add lead",
+    "description": "Capture the details you need to follow up without creating a customer profile too early.",
+    "name": "Full name",
+    "phone": "Phone number",
+    "email": "Email",
+    "service": "Service requested",
+    "address": "Service address",
+    "source": "Source",
+    "value": "Estimated value",
+    "assigned": "Assigned person",
+    "notes": "Notes",
+    "cancel": "Cancel",
+    "save": "Save lead",
+    "saving": "Saving..."
+  },
+  "detail": {
+    "title": "Lead details",
+    "description": "Update the opportunity, capture follow-up notes, or convert it when the work is ready to move forward.",
+    "activity": "History",
+    "activityEmpty": "No history has been recorded yet.",
+    "note": "Add a note",
+    "saveChanges": "Save changes",
+    "savingChanges": "Saving changes...",
+    "convert": "Convert lead",
+    "convertDescription": "Conversion links an existing matching customer when possible and can create a booked job from this lead.",
+    "createJob": "Create a booked job for this service",
+    "confirmConvert": "Convert now",
+    "close": "Close"
+  },
+  "statuses": [
+    {
+      "id": "new",
+      "label": "New"
+    },
+    {
+      "id": "contacted",
+      "label": "Contacted"
+    },
+    {
+      "id": "estimate_sent",
+      "label": "Estimate sent"
+    },
+    {
+      "id": "follow_up",
+      "label": "Follow-up"
+    },
+    {
+      "id": "won",
+      "label": "Won"
+    },
+    {
+      "id": "lost",
+      "label": "Lost"
+    }
+  ]
+}

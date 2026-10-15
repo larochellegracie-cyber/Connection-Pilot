@@ -1,0 +1,18 @@
+{
+  "orders": {
+    "eyebrow": "Customer orders",
+    "title": "Orders",
+    "description": "Track items, pickup or delivery timing, and order progress in one place.",
+    "newRecord": "New order",
+    "empty": "No orders found",
+    "emptyDescription": "Add an order to get started."
+  },
+  "jobs": {
+    "eyebrow": "Service operations",
+    "title": "Jobs",
+    "description": "Coordinate customer service work, schedules, and job details.",
+    "newRecord": "New job",
+    "empty": "No jobs found",
+    "emptyDescription": "Add a job to get started."
+  }
+}

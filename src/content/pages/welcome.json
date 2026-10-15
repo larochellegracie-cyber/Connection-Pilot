@@ -1,0 +1,39 @@
+{
+  "checklist": [
+    {
+      "label": "Account created",
+      "state": "complete",
+      "id": "WxcXweUtvx6mVTpMcw84N"
+    },
+    {
+      "label": "Connect your business phone number",
+      "state": "upcoming",
+      "id": "OBOiqiEBdAruQtgOSyB0F"
+    },
+    {
+      "label": "Configure your AI assistant",
+      "state": "upcoming",
+      "id": "MJL7jIoh1U37lTEtnE9oN"
+    },
+    {
+      "label": "Set your business hours",
+      "state": "upcoming",
+      "id": "a_RvBOW2PoLYj6rREzJ3w"
+    },
+    {
+      "label": "Customize your customer experience",
+      "state": "upcoming",
+      "id": "czIZtH-bBIUgGJO5pYpDi"
+    },
+    {
+      "label": "Connect your lead dashboard",
+      "state": "upcoming",
+      "id": "w4txiBeu7MSpsnjRgF9M_"
+    }
+  ],
+  "hero": {
+    "description": "Let's get your business set up.",
+    "start": "Start Setup",
+    "title": "Welcome to Connection Pilot!"
+  }
+}

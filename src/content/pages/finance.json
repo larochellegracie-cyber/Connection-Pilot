@@ -1,0 +1,107 @@
+{
+  "seo": {
+    "title": "Quotes & Invoices | Connection Pilot",
+    "description": "Manage customer quotes, invoices, balances, payments, and connected order or job records."
+  },
+  "hero": {
+    "eyebrow": "Quotes & invoices",
+    "title": "Keep quotes and invoices connected",
+    "description": "Create customer quotes and invoices with line items, totals, and connected order or job records.",
+    "addEstimate": "New quote",
+    "addInvoice": "New invoice",
+    "recordPayment": "Record payment",
+    "addFile": "Add external attachment"
+  },
+  "tabs": [
+    {
+      "id": "estimates",
+      "label": "Quotes"
+    },
+    {
+      "id": "invoices",
+      "label": "Invoices"
+    },
+    {
+      "id": "payments",
+      "label": "Payments"
+    },
+    {
+      "id": "jobFiles",
+      "label": "Job files"
+    }
+  ],
+  "summary": {
+    "estimated": "Quoted",
+    "invoiced": "Invoiced",
+    "received": "Received",
+    "outstanding": "Outstanding"
+  },
+  "empty": {
+    "estimates": {
+      "title": "No quotes yet",
+      "description": "Create a quote when you are ready to price an upcoming order or job."
+    },
+    "invoices": {
+      "title": "No invoices yet",
+      "description": "Create an invoice to track billed orders, jobs, and open balances."
+    },
+    "payments": {
+      "title": "No payments recorded",
+      "description": "Record a received payment to keep balances current."
+    },
+    "jobFiles": {
+      "title": "No external attachments yet",
+      "description": "Add a secure external link to keep job documentation together."
+    }
+  },
+  "form": {
+    "customer": "Customer",
+    "job": "Linked order or job",
+    "amount": "Amount (CAD)",
+    "status": "Status",
+    "notes": "Notes",
+    "dueDate": "Due date",
+    "expiresDate": "Expiry date",
+    "method": "Payment method",
+    "receivedDate": "Received date",
+    "fileName": "Attachment name",
+    "fileUrl": "External attachment URL",
+    "fileType": "Attachment type",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "status": {
+    "draft": "Draft",
+    "sent": "Sent",
+    "accepted": "Accepted",
+    "declined": "Declined",
+    "open": "Unpaid",
+    "paid": "Paid",
+    "overdue": "Overdue",
+    "void": "Void",
+    "pending": "Pending",
+    "completed": "Completed",
+    "refunded": "Refunded"
+  },
+  "table": {
+    "record": "Record",
+    "customer": "Customer",
+    "job": "Order or job",
+    "amount": "Amount",
+    "balance": "Balance",
+    "status": "Status",
+    "date": "Date",
+    "action": "Action",
+    "open": "Edit",
+    "delete": "Delete",
+    "download": "Open attachment"
+  },
+  "messages": {
+    "loading": "Loading finance records...",
+    "saveError": "Unable to save this record.",
+    "deleteConfirm": "Delete this record? This cannot be undone.",
+    "noJob": "No linked order or job",
+    "noCustomerInvoice": "Choose a customer to see available invoices.",
+    "externalAttachment": "External attachment"
+  }
+}

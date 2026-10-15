@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "title": "Account Profile | Connection Pilot",
+    "description": "Manage your Connection Pilot account details and password."
+  },
+  "hero": {
+    "title": "Account profile",
+    "description": "Update your owner name and manage your account security."
+  },
+  "fields": {
+    "name": "Your name",
+    "email": "Email address",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password"
+  },
+  "actions": {
+    "saveProfile": "Save profile",
+    "changePassword": "Update password"
+  },
+  "notices": {
+    "profileSaved": "Your account profile has been updated.",
+    "passwordSaved": "Your password has been updated."
+  }
+}

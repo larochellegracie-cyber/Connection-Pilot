@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "eyebrow": "Plans & billing",
+    "title": "Choose the plan that fits your business",
+    "description": "Your data stays in place. Choose the capabilities that fit your business—plans never limit your customers, employees, or leads."
+  },
+  "seo": {
+    "title": "Plans | Connection Pilot",
+    "description": "View your Connection Pilot trial and functionality-based plan options."
+  },
+  "actions": {
+    "choose": "Choose plan",
+    "manage": "Manage billing",
+    "back": "Back to dashboard"
+  },
+  "testBilling": {
+    "title": "Stripe test controls",
+    "description": "Use this controlled test account to reset billing state before another subscription lifecycle test.",
+    "reset": "Reset test billing",
+    "resetting": "Resetting test billing...",
+    "confirm": "This will cancel the current test subscription and reset this account to a fresh trial. Continue?",
+    "success": "Test billing has been reset. You can start another checkout test."
+  },
+  "featureLabels": {
+    "customers": "Customers",
+    "leads": "Leads",
+    "orders_jobs": "Orders & jobs",
+    "scheduling": "Scheduling",
+    "finance": "Quotes & invoices",
+    "payments": "Payments",
+    "business_knowledge": "Business Knowledge",
+    "pilot_assistant": "Pilot AI Assistant",
+    "basic_insights": "Basic Insights",
+    "connections": "Connections",
+    "advanced_insights": "Advanced Insights",
+    "proactive_pilot": "Proactive Pilot",
+    "pilot_actions": "Pilot Actions",
+    "ai_customer_messaging": "AI Customer Messaging",
+    "advanced_automation": "Advanced Automation",
+    "advanced_forecasting": "Advanced Forecasting",
+    "advanced_pilot_actions": "Advanced Pilot Actions",
+    "ai_phone_receptionist": "AI Voice Receptionist · Coming Soon"
+  }
+}

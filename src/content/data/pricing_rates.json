@@ -1,0 +1,32 @@
+[
+  {
+    "plan": "Essential",
+    "monthlyPrice": "$79",
+    "monthlySuffix": "/month",
+    "yearlyMonthlyPrice": "$63.20",
+    "yearlyMonthlySuffix": "/month",
+    "yearlyPrice": "$758.40/year",
+    "savingsLabel": "Save 20%",
+    "id": "tb4pPbjGG_YVlN_QhjUSe"
+  },
+  {
+    "plan": "Growth",
+    "monthlyPrice": "$179",
+    "monthlySuffix": "/month",
+    "yearlyMonthlyPrice": "$143.20",
+    "yearlyMonthlySuffix": "/month",
+    "yearlyPrice": "$1,718.40/year",
+    "savingsLabel": "Save 20%",
+    "id": "k3Z7KVRJI8IYKOm8sti1T"
+  },
+  {
+    "plan": "Pro",
+    "monthlyPrice": "$299",
+    "monthlySuffix": "/month",
+    "yearlyMonthlyPrice": "$239.20",
+    "yearlyMonthlySuffix": "/month",
+    "yearlyPrice": "$2,870.40/year",
+    "savingsLabel": "Save 20%",
+    "id": "ppNnc1-ICcHp5_CBnknxr"
+  }
+]

@@ -1,0 +1,119 @@
+{
+  "seo": {
+    "title": "Connections | Connection Pilot",
+    "description": "Manage the business tools Connection Pilot can use in your workspace."
+  },
+  "hero": {
+    "eyebrow": "Workspace connections",
+    "title": "Connect your business tools",
+    "description": "Connect the tools your business already uses so Pilot can bring your business information together in one workspace.",
+    "connect": "Connect a tool"
+  },
+  "notice": {
+    "title": "Connection status only",
+    "description": "This page saves which tools your business has marked as connected. It does not sign in to, import data from, or send data to any external service yet."
+  },
+  "connected": {
+    "title": "Connected tools",
+    "description": "Tools marked as connected will appear here.",
+    "emptyTitle": "No tools connected yet",
+    "emptyDescription": "Use Connect a tool to choose the first tool you use to run your business.",
+    "disconnect": "Disconnect",
+    "willUse": "Pilot will be able to use"
+  },
+  "available": {
+    "title": "Available tools",
+    "description": "Choose a category or search to find a tool to connect.",
+    "searchLabel": "Search available tools",
+    "searchPlaceholder": "Search tools or categories",
+    "noResults": "No available tools match your search.",
+    "connect": "Connect",
+    "working": "Updating…"
+  },
+  "categories": [
+    {
+      "id": "payments",
+      "name": "Payments",
+      "tools": [
+        {
+          "id": "stripe",
+          "name": "Stripe",
+          "description": "Prepare to connect payment activity from your Stripe account.",
+          "data": "Payments and transactions"
+        }
+      ]
+    },
+    {
+      "id": "accounting",
+      "name": "Accounting",
+      "tools": [
+        {
+          "id": "quickbooks",
+          "name": "QuickBooks",
+          "description": "Prepare to connect your financial records and accounting activity.",
+          "data": "Financial and accounting data"
+        }
+      ]
+    },
+    {
+      "id": "pos",
+      "name": "POS",
+      "tools": [
+        {
+          "id": "toast",
+          "name": "Toast",
+          "description": "Prepare to connect restaurant and point-of-sale activity.",
+          "data": "Orders, sales, and products"
+        }
+      ]
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar",
+      "tools": [
+        {
+          "id": "google-calendar",
+          "name": "Google Calendar",
+          "description": "Prepare to make your working schedule available to Pilot.",
+          "data": "Calendar events"
+        }
+      ]
+    },
+    {
+      "id": "ecommerce",
+      "name": "Ecommerce",
+      "tools": [
+        {
+          "id": "shopify",
+          "name": "Shopify",
+          "description": "Prepare to connect your online store activity to the workspace.",
+          "data": "Online orders and products"
+        }
+      ]
+    },
+    {
+      "id": "delivery",
+      "name": "Delivery",
+      "tools": [
+        {
+          "id": "uber-eats",
+          "name": "U Eats",
+          "description": "Prepare to connect delivery activity from Uber Eats.",
+          "data": "Delivery orders"
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "name": "Other",
+      "tools": [
+        {
+          "id": "business-data-import",
+          "name": "Business data import",
+          "description": "Prepare to bring data from another business tool into Connection Pilot.",
+          "data": "Business information you choose to connect"
+        }
+      ]
+    }
+  ]
+}

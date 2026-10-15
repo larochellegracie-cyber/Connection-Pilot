@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "title": "Settings | Connection Pilot",
+    "description": "Manage Connection Pilot account and business settings."
+  },
+  "hero": {
+    "title": "Settings",
+    "description": "Manage the settings that keep your workspace and customer communications on track."
+  },
+  "cards": [
+    {
+      "title": "Business profile",
+      "description": "Update your business identity, contact details, AI receptionist knowledge, and service information.",
+      "action": "Edit business profile",
+      "href": "/dashboard/business-profile",
+      "id": "KbfDfJZ4DeZ81aD_osKCa"
+    },
+    {
+      "title": "Booking rules",
+      "description": "Set your availability, appointment duration, buffers, booking windows, and change policies.",
+      "action": "Manage booking rules",
+      "href": "/dashboard/booking-rules",
+      "id": "vPB29mUNlaY2MIR76b4KI"
+    },
+    {
+      "title": "Phone connection",
+      "description": "Review your receiving number and manage how customers reach your business.",
+      "action": "Manage phone connection",
+      "href": "/phone-connection",
+      "id": "XVYoWGwwyHwpJtIg-1Ik1"
+    },
+    {
+      "title": "Account profile",
+      "description": "Update your owner name or password for Connection Pilot.",
+      "action": "Manage account",
+      "href": "/profile",
+      "id": "XEb3q7hICUsC08E6bfUO8"
+    }
+  ]
+}

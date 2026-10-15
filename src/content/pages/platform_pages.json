@@ -1,0 +1,368 @@
+{
+  "features": {
+    "hero": {
+      "eyebrow": "The business operating platform",
+      "title": "One place to run the work that keeps your business moving.",
+      "description": "Connection Pilot brings your customers, leads, orders and jobs, scheduling, employees, quotes and invoices, payments, inventory, and insights into one connected workspace.",
+      "primaryCta": "Get Started",
+      "secondaryCta": "See How It Works"
+    },
+    "sections": [
+      {
+        "eyebrow": "Customer operations",
+        "title": "Know every customer and every opportunity.",
+        "description": "Keep customer profiles, leads, conversations, notes, and follow-up context together so your team can keep work moving.",
+        "items": [
+          {
+            "label": "Customer profiles",
+            "id": "features-customer-1"
+          },
+          {
+            "label": "Lead management",
+            "id": "features-customer-2"
+          },
+          {
+            "label": "Customer history and notes",
+            "id": "features-customer-3"
+          },
+          {
+            "label": "Follow-up context",
+            "id": "features-customer-4"
+          }
+        ],
+        "id": "features-section-1"
+      },
+      {
+        "eyebrow": "Daily operations",
+        "title": "Organize the work on your plate.",
+        "description": "Track orders and jobs, schedule appointments, manage employees, and keep the next task visible in one practical workspace.",
+        "items": [
+          {
+            "label": "Orders and jobs",
+            "id": "features-ops-1"
+          },
+          {
+            "label": "Calendar and scheduling",
+            "id": "features-ops-2"
+          },
+          {
+            "label": "Employee management",
+            "id": "features-ops-3"
+          },
+          {
+            "label": "Operational activity",
+            "id": "features-ops-4"
+          }
+        ],
+        "id": "features-section-2"
+      },
+      {
+        "eyebrow": "Money and inventory",
+        "title": "Keep the business details connected.",
+        "description": "Create quotes and invoices, record payments, monitor inventory, and keep the details that affect your decisions close at hand.",
+        "items": [
+          {
+            "label": "Quotes and invoices",
+            "id": "features-money-1"
+          },
+          {
+            "label": "Payment records",
+            "id": "features-money-2"
+          },
+          {
+            "label": "Inventory visibility",
+            "id": "features-money-3"
+          },
+          {
+            "label": "Business records",
+            "id": "features-money-4"
+          }
+        ],
+        "id": "features-section-3"
+      },
+      {
+        "eyebrow": "Pilot intelligence",
+        "title": "Understand what needs attention next.",
+        "description": "Pilot helps the owner turn the business context in Connection Pilot into clearer priorities, questions, and next steps.",
+        "items": [
+          {
+            "label": "Business insights",
+            "id": "features-pilot-1"
+          },
+          {
+            "label": "Priority signals",
+            "id": "features-pilot-2"
+          },
+          {
+            "label": "Opportunities and risks",
+            "id": "features-pilot-3"
+          },
+          {
+            "label": "Guided next steps",
+            "id": "features-pilot-4"
+          }
+        ],
+        "id": "features-section-4"
+      },
+      {
+        "eyebrow": "Business tools",
+        "title": "Start in Connection Pilot or grow into connections.",
+        "description": "Businesses starting from scratch can manage operations directly in Connection Pilot. Connections are available to explore as supported provider integrations are introduced.",
+        "items": [
+          {
+            "label": "Operational workspace",
+            "id": "features-tools-1"
+          },
+          {
+            "label": "Business Knowledge",
+            "id": "features-tools-2"
+          },
+          {
+            "label": "Connection categories",
+            "id": "features-tools-3"
+          },
+          {
+            "label": "Provider integrations coming soon",
+            "id": "features-tools-4"
+          }
+        ],
+        "id": "features-section-5"
+      }
+    ],
+    "summary": {
+      "title": "Your entire business. One place.",
+      "items": [
+        {
+          "label": "Customers and leads",
+          "id": "feature-summary-1"
+        },
+        {
+          "label": "Orders and jobs",
+          "id": "feature-summary-2"
+        },
+        {
+          "label": "Scheduling and employees",
+          "id": "feature-summary-3"
+        },
+        {
+          "label": "Quotes, invoices, and payments",
+          "id": "feature-summary-4"
+        },
+        {
+          "label": "Inventory",
+          "id": "feature-summary-5"
+        },
+        {
+          "label": "Business insights",
+          "id": "feature-summary-6"
+        },
+        {
+          "label": "Business tools and connections",
+          "id": "feature-summary-7"
+        },
+        {
+          "label": "Pilot, your AI business assistant",
+          "id": "feature-summary-8"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Run your entire business with Pilot.",
+      "description": "Build the workspace that fits how your business works today.",
+      "primaryCta": "Get Started",
+      "secondaryCta": "Contact Us"
+    }
+  },
+  "solutions": {
+    "hero": {
+      "eyebrow": "Built for the work of running a business",
+      "title": "Solutions that keep your business connected.",
+      "description": "Connection Pilot brings customer work, daily operations, money, and business insight into one clear workspace.",
+      "primaryCta": "Get Started",
+      "secondaryCta": "Contact Us"
+    },
+    "missedCalls": {
+      "eyebrow": "Customer activity",
+      "title": "Keep customer work from slipping through the cracks.",
+      "description": "Track customer conversations, inquiries, leads, jobs, and follow-up in the same business workspace—without relying on scattered notes or disconnected tools.",
+      "cta": "See how it works",
+      "flow": [
+        {
+          "label": "Customer or lead",
+          "id": "solutions-flow-1"
+        },
+        {
+          "label": "Work captured",
+          "id": "solutions-flow-2"
+        },
+        {
+          "label": "Team context",
+          "id": "solutions-flow-3"
+        },
+        {
+          "label": "Next step visible",
+          "id": "solutions-flow-4"
+        }
+      ]
+    },
+    "aiConversations": {
+      "eyebrow": "One operating picture",
+      "title": "See the work behind the work.",
+      "description": "Bring customer context, jobs, schedules, employee activity, quotes, invoices, payments, and inventory together so you can run the day with confidence.",
+      "controlNote": "Connection Pilot supports the decisions you make. It does not replace your judgement.",
+      "items": [
+        {
+          "label": "Customers and leads",
+          "id": "solutions-ai-1"
+        },
+        {
+          "label": "Orders and jobs",
+          "id": "solutions-ai-2"
+        },
+        {
+          "label": "Scheduling and employees",
+          "id": "solutions-ai-3"
+        },
+        {
+          "label": "Quotes, invoices, and payments",
+          "id": "solutions-ai-4"
+        },
+        {
+          "label": "Inventory",
+          "id": "solutions-ai-5"
+        },
+        {
+          "label": "Business insights",
+          "id": "solutions-ai-6"
+        }
+      ]
+    },
+    "leadCapture": {
+      "eyebrow": "Organized work",
+      "title": "Keep every customer opportunity organized.",
+      "description": "Start with a lead, then keep the customer, work, schedule, notes, and finance details connected as the relationship moves forward.",
+      "table": {
+        "headers": [
+          {
+            "label": "Customer",
+            "id": "solutions-table-1"
+          },
+          {
+            "label": "Work",
+            "id": "solutions-table-2"
+          },
+          {
+            "label": "Schedule",
+            "id": "solutions-table-3"
+          },
+          {
+            "label": "Priority",
+            "id": "solutions-table-4"
+          },
+          {
+            "label": "Status",
+            "id": "solutions-table-5"
+          }
+        ],
+        "row": {
+          "customer": "Jordan Lee",
+          "service": "Repair inquiry",
+          "address": "This week",
+          "urgency": "Needs review",
+          "status": "Follow up"
+        }
+      },
+      "followUps": {
+        "eyebrow": "Better next steps",
+        "title": "Make the right work easier to see.",
+        "description": "Use the customer and operational context already in your workspace to decide which follow-up, schedule change, quote, payment, or inventory task needs attention.",
+        "items": [
+          {
+            "label": "Lead follow-up",
+            "id": "solutions-followup-1"
+          },
+          {
+            "label": "Job and order updates",
+            "id": "solutions-followup-2"
+          },
+          {
+            "label": "Schedule checks",
+            "id": "solutions-followup-3"
+          },
+          {
+            "label": "Quote and invoice review",
+            "id": "solutions-followup-4"
+          },
+          {
+            "label": "Payment tracking",
+            "id": "solutions-followup-5"
+          },
+          {
+            "label": "Inventory review",
+            "id": "solutions-followup-6"
+          }
+        ]
+      },
+      "unified": {
+        "eyebrow": "Connected workflow",
+        "title": "One workspace for the moving parts.",
+        "description": "Connection Pilot lets businesses manage operations directly in the platform today. Business tool connections are shown as future-ready categories, not active provider integrations.",
+        "steps": [
+          {
+            "label": "Customers & leads",
+            "id": "solutions-unified-1"
+          },
+          {
+            "label": "Orders & jobs",
+            "id": "solutions-unified-2"
+          },
+          {
+            "label": "Scheduling",
+            "id": "solutions-unified-3"
+          },
+          {
+            "label": "Money & inventory",
+            "id": "solutions-unified-4"
+          },
+          {
+            "label": "Pilot insights",
+            "id": "solutions-unified-5"
+          }
+        ]
+      },
+      "industries": {
+        "eyebrow": "Flexible by design",
+        "title": "Built for small businesses that do real work.",
+        "items": [
+          {
+            "title": "Home services",
+            "description": "For service teams managing customers, jobs, schedules, quotes, and payments.",
+            "id": "solutions-industry-1"
+          },
+          {
+            "title": "Food and retail",
+            "description": "For teams coordinating orders, customers, inventory, payments, and daily operations.",
+            "id": "solutions-industry-2"
+          },
+          {
+            "title": "Appointment businesses",
+            "description": "For businesses managing customers, appointments, employees, and repeat service.",
+            "id": "solutions-industry-3"
+          },
+          {
+            "title": "Growing local businesses",
+            "description": "For owners who want a clearer, connected view of what needs attention.",
+            "id": "solutions-industry-4"
+          }
+        ]
+      },
+      "cta": {
+        "title": "Your entire business. One place.",
+        "description": "See how Connection Pilot can fit into the way your business works.",
+        "primaryCta": "Get Started",
+        "secondaryCta": "Contact Us"
+      }
+    }
+  },
+  "mode": "merge"
+}

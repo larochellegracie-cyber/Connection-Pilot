@@ -1,0 +1,274 @@
+{
+  "hero": {
+    "eyebrow": "Your AI business assistant",
+    "title": "Your business, on autopilot.",
+    "subtitle": "Meet Pilot — your AI business assistant that helps manage your customers, appointments, marketing, employees, and day-to-day operations.",
+    "tagline": "You run the business. Pilot handles the busywork.",
+    "primaryCta": "Get Started",
+    "secondaryCta": "See How Pilot Works",
+    "hubDetail": "Pilot connects every part of your business",
+    "nodes": [
+      {
+        "id": "node-customers",
+        "label": "Customers",
+        "icon": "users"
+      },
+      {
+        "id": "node-leads",
+        "label": "Leads",
+        "icon": "chart"
+      },
+      {
+        "id": "node-orders",
+        "label": "Orders & jobs",
+        "icon": "clipboard"
+      },
+      {
+        "id": "node-scheduling",
+        "label": "Scheduling",
+        "icon": "calendar"
+      },
+      {
+        "id": "node-inventory",
+        "label": "Inventory",
+        "icon": "boxes"
+      },
+      {
+        "id": "node-payments",
+        "label": "Payments",
+        "icon": "wallet"
+      },
+      {
+        "id": "node-employees",
+        "label": "Employees",
+        "icon": "briefcase"
+      },
+      {
+        "id": "node-insights",
+        "label": "Insights",
+        "icon": "sparkles"
+      }
+    ]
+  },
+  "intro": {
+    "eyebrow": "The work never stops",
+    "title": "The work never stops. Pilot helps you keep up.",
+    "description": "Every day, business owners switch between customers, schedules, employees, marketing, and a hundred other tasks. Connection Pilot brings all of it together — and Pilot takes care of the repetitive work so you can focus on what matters.",
+    "pillars": [
+      {
+        "id": "pillar-customers",
+        "label": "Customers",
+        "icon": "users"
+      },
+      {
+        "id": "pillar-scheduling",
+        "label": "Scheduling",
+        "icon": "calendar"
+      },
+      {
+        "id": "pillar-employees",
+        "label": "Employees",
+        "icon": "briefcase"
+      },
+      {
+        "id": "pillar-marketing",
+        "label": "Marketing",
+        "icon": "sparkles"
+      },
+      {
+        "id": "pillar-operations",
+        "label": "Operations",
+        "icon": "clipboard"
+      },
+      {
+        "id": "pillar-insights",
+        "label": "Insights",
+        "icon": "chart"
+      }
+    ]
+  },
+  "appointments": {
+    "eyebrow": "Appointments & customers",
+    "title": "We book it. You don't have to.",
+    "subtitle": "Appointments, orders, and customer requests — organized automatically.",
+    "capabilities": [
+      {
+        "id": "cap-book",
+        "text": "Book and manage appointments"
+      },
+      {
+        "id": "cap-requests",
+        "text": "Organize customer requests"
+      },
+      {
+        "id": "cap-info",
+        "text": "Keep customer information together"
+      },
+      {
+        "id": "cap-returning",
+        "text": "Remember returning customers"
+      },
+      {
+        "id": "cap-quotes",
+        "text": "Manage quotes and jobs"
+      },
+      {
+        "id": "cap-schedules",
+        "text": "Keep schedules organized"
+      }
+    ],
+    "closing": "Less back-and-forth. More time to actually run your business."
+  },
+  "marketing": {
+    "eyebrow": "Marketing",
+    "title": "Pilot knows your business. Let it handle your marketing.",
+    "subtitle": "Give Pilot your website. It learns your business and creates your content.",
+    "description": "Pilot reads your website and learns your services, products, brand, and story. It uses that knowledge to generate social media content that sounds like you — so you spend less time writing and more time running your business.",
+    "capabilities": [
+      {
+        "id": "mkt-posts",
+        "label": "Social media posts"
+      },
+      {
+        "id": "mkt-captions",
+        "label": "Captions"
+      },
+      {
+        "id": "mkt-images",
+        "label": "Images"
+      },
+      {
+        "id": "mkt-calendars",
+        "label": "Content calendars"
+      },
+      {
+        "id": "mkt-campaigns",
+        "label": "Marketing campaigns"
+      }
+    ],
+    "upcomingNote": "Automatic social publishing is coming soon.",
+    "cta": "Explore Pilot Marketing"
+  },
+  "insights": {
+    "eyebrow": "Business intelligence",
+    "title": "Pilot doesn't just organize your business. It thinks ahead.",
+    "subtitle": "Pilot watches your business so you don't have to.",
+    "description": "Pilot analyzes your business information and identifies patterns, opportunities, and potential problems — before they become urgent.",
+    "exampleNote": "These are examples of the insights Pilot generates from your real business data.",
+    "examples": [
+      {
+        "id": "insight-1",
+        "text": "Your most booked service increased 28% this month.",
+        "kind": "Opportunity"
+      },
+      {
+        "id": "insight-2",
+        "text": "Three customers haven't returned in six months. Would you like me to reach out?",
+        "kind": "Follow-up"
+      },
+      {
+        "id": "insight-3",
+        "text": "You're expecting more appointments Thursday than usual. You may want another employee scheduled.",
+        "kind": "Heads up"
+      }
+    ]
+  },
+  "scheduling": {
+    "eyebrow": "Employee scheduling",
+    "title": "Your team. Organized.",
+    "subtitle": "Employee scheduling without the headache.",
+    "description": "Connection Pilot helps you build schedules, manage employee availability, and communicate schedules to your team — all in one place. Pilot can even draft a schedule for you based on your business needs.",
+    "features": [
+      {
+        "id": "sched-build",
+        "label": "Build weekly schedules",
+        "icon": "calendar"
+      },
+      {
+        "id": "sched-availability",
+        "label": "Manage availability",
+        "icon": "users"
+      },
+      {
+        "id": "sched-communicate",
+        "label": "Communicate to your team",
+        "icon": "briefcase"
+      }
+    ]
+  },
+  "chat": {
+    "eyebrow": "Pilot chat",
+    "title": "Just ask Pilot.",
+    "subtitle": "One conversation. Your entire business.",
+    "disclaimer": "The conversation below shows examples of what Pilot can do today and what it will be able to do as new capabilities are added.",
+    "messages": [
+      {
+        "id": "msg-1",
+        "role": "owner",
+        "text": "How did we do this month?"
+      },
+      {
+        "id": "msg-2",
+        "role": "pilot",
+        "text": "Revenue is up 12%. You had 83 customers, including 17 new customers. Your most booked service was your top package."
+      },
+      {
+        "id": "msg-3",
+        "role": "owner",
+        "text": "Create a post promoting our most popular service."
+      },
+      {
+        "id": "msg-4",
+        "role": "pilot",
+        "text": "Done. I've created three options for you to review."
+      },
+      {
+        "id": "msg-5",
+        "role": "owner",
+        "text": "Schedule the best one for Friday."
+      },
+      {
+        "id": "msg-6",
+        "role": "pilot",
+        "text": "Scheduled for Friday. I'll let you know when it goes live."
+      }
+    ]
+  },
+  "value": {
+    "eyebrow": "Built for the real cost of business",
+    "title": "Built by people who understand what it costs to run a business.",
+    "description": "Running a business is expensive. Software shouldn't make it harder.",
+    "body": "Connection Pilot is built with small businesses in mind — giving you powerful tools without forcing you into expensive plans just to access the features you actually need.",
+    "closing": "More tools. Less overhead. No unnecessary upgrades.",
+    "pillars": [
+      {
+        "id": "value-tools",
+        "headline": "More tools included",
+        "detail": "Substantial functionality is built into lower-priced plans — not locked behind the next tier."
+      },
+      {
+        "id": "value-overhead",
+        "headline": "Less overhead",
+        "detail": "One platform replaces a stack of separate subscriptions. Fewer bills. Less to manage."
+      },
+      {
+        "id": "value-addons",
+        "headline": "Fewer unnecessary add-ons",
+        "detail": "The features you actually need to run your business are included — not sold separately."
+      },
+      {
+        "id": "value-pilot",
+        "headline": "More work handled by Pilot",
+        "detail": "Pilot takes on the repetitive work so your team can focus on the work that actually moves the business forward."
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow": "Get started",
+    "title": "Meet Pilot.",
+    "subtitle": "Your smartest employee doesn't need a desk.",
+    "description": "Pilot learns how your business works, handles repetitive tasks, keeps everything organized, and helps you make better decisions.",
+    "closing": "You run the business. Pilot runs the busywork.",
+    "primaryCta": "Get Started"
+  }
+}

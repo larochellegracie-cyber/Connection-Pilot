@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "eyebrow": "Customer Hub",
+    "title": "Customers",
+    "description": "Every customer, appointment, message, and internal note in one connected workspace.",
+    "addButton": "Add customer"
+  },
+  "summary": {
+    "total": "Total customers",
+    "new": "New customers",
+    "returning": "Returning customers",
+    "upcoming": "Upcoming appointments"
+  },
+  "filters": {
+    "search": "Search name, phone, email, or company",
+    "all": "All active",
+    "apply": "Apply filters"
+  },
+  "empty": {
+    "title": "No customers found",
+    "description": "Add a customer or adjust your search and filters."
+  },
+  "form": {
+    "title": "Add customer",
+    "description": "Matching phone and email details keeps customer profiles unified.",
+    "save": "Save customer"
+  }
+}

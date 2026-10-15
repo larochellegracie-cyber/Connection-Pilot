@@ -1,0 +1,163 @@
+{
+  "hero": {
+    "eyebrow": "Simple pricing",
+    "title": "Choose the right level of customer support.",
+    "description": "Start with the essentials. Add AI conversations or an AI receptionist when you need more help."
+  },
+  "plans": [
+    {
+      "name": "Essential",
+      "tagline": "Stay connected",
+      "description": "For businesses that want a clear, reliable way to manage customer messages and leads.",
+      "monthlyPrice": "$79",
+      "monthlySuffix": "/month",
+      "yearlyMonthlyPrice": "$63.20",
+      "yearlyMonthlySuffix": "/month",
+      "yearlyPrice": "$758.40/year",
+      "savingsLabel": "Save 20%",
+      "features": [
+        {
+          "label": "Customer texting",
+          "id": "VIRzGnTwMN93MtiUdIxHh"
+        },
+        {
+          "label": "Missed-call text-back",
+          "id": "O0DcO70cP2N950Txcl9r7"
+        },
+        {
+          "label": "Lead capture and dashboard",
+          "id": "Hy7Sdxp6q1BuaR_LBnKqV"
+        },
+        {
+          "label": "Customer conversation history",
+          "id": "qieEq6rkoNTslrWlxUW2n"
+        }
+      ],
+      "cta": "Choose Essential",
+      "id": "5IOg9KzH9D8TvKh4m0q2c"
+    },
+    {
+      "name": "Growth",
+      "tagline": "Let AI handle more",
+      "description": "For teams that want AI-assisted customer conversations and deeper customer context.",
+      "monthlyPrice": "$179",
+      "monthlySuffix": "/month",
+      "yearlyMonthlyPrice": "$143.20",
+      "yearlyMonthlySuffix": "/month",
+      "yearlyPrice": "$1,718.40/year",
+      "savingsLabel": "Save 20%",
+      "features": [
+        {
+          "label": "Everything in Essential",
+          "id": "eeC2hcn1XZI7Z1LTU_zNP"
+        },
+        {
+          "label": "AI customer conversations",
+          "id": "tuLvLxhxzhzR1uxW_x4Qd"
+        },
+        {
+          "label": "Customer profiles and memory",
+          "id": "6Yb0HOzHroD0bLy6mro0R"
+        },
+        {
+          "label": "Follow-up assistance",
+          "id": "gKfl2bpjSRJJ-SQucubCw"
+        }
+      ],
+      "cta": "Choose Growth",
+      "id": "VAc_2ffYmGNrLVVa79hvb"
+    },
+    {
+      "name": "Pro",
+      "tagline": "Add an AI receptionist",
+      "description": "For businesses that want AI support for incoming customer calls as well as messages.",
+      "monthlyPrice": "$299",
+      "monthlySuffix": "/month",
+      "yearlyMonthlyPrice": "$239.20",
+      "yearlyMonthlySuffix": "/month",
+      "yearlyPrice": "$2,870.40/year",
+      "savingsLabel": "Save 20%",
+      "features": [
+        {
+          "label": "Everything in Growth",
+          "id": "KzzhrAR1ZrSx4xwKxcQ9T"
+        },
+        {
+          "label": "AI Voice Receptionist",
+          "id": "hwUhEu1cLoVKgs-XepZTJ"
+        },
+        {
+          "label": "Call summaries and lead qualification",
+          "id": "5MLc0kuMG-htQZmr9OdmY"
+        },
+        {
+          "label": "Priority support",
+          "id": "AOtITdBqAbYd7uMtWSn8Y"
+        }
+      ],
+      "cta": "Choose Pro",
+      "id": "5CPn_LIjGTRNLKahmYDTb"
+    }
+  ],
+  "comparison": {
+    "eyebrow": "At a glance",
+    "title": "What changes with each plan.",
+    "features": [
+      {
+        "name": "Customer texting and lead capture",
+        "essential": true,
+        "growth": true,
+        "pro": true,
+        "id": "YGacUTghs7uSqrwNqGDGf"
+      },
+      {
+        "name": "AI customer conversations",
+        "essential": false,
+        "growth": true,
+        "pro": true,
+        "id": "-Q3bqId8mQXpsw5H__oZZ"
+      },
+      {
+        "name": "Customer profiles and follow-up",
+        "essential": false,
+        "growth": true,
+        "pro": true,
+        "id": "yYmAqg7ZvHWtMdfdC50B0"
+      },
+      {
+        "name": "AI Voice Receptionist",
+        "essential": false,
+        "growth": false,
+        "pro": true,
+        "id": "jZKQ8IOcP1vNlBGcoqR8b"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Details when you need them",
+    "title": "Common questions",
+    "items": [
+      {
+        "question": "Can I change plans later?",
+        "answer": "Yes. Choose the plan that fits your business now, then update as your needs change.",
+        "id": "FZKBCLyOZj1EJFvSlxZpw"
+      },
+      {
+        "question": "Which plan includes the AI receptionist?",
+        "answer": "Pro includes the AI Voice Receptionist for incoming customer calls.",
+        "id": "GJWggSMhXl6b9LXtJJHZ9"
+      },
+      {
+        "question": "How do I get started?",
+        "answer": "Choose a plan, create your account, and follow the guided business setup.",
+        "id": "8x0ybp6MnxcxhifcwAKgU"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to get started?",
+    "description": "Choose your plan and set up Connection Pilot for your business.",
+    "primaryCta": "Choose a plan",
+    "secondaryCta": "Contact us"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "seo": {
+    "title": "Business Knowledge | Connection Pilot",
+    "description": "Review and manage the business information Pilot uses to support your customers."
+  },
+  "navigation": {
+    "back": "Back to dashboard",
+    "setup": "Complete business setup"
+  },
+  "loading": "Loading your business information...",
+  "hero": {
+    "eyebrow": "Pilot foundation",
+    "title": "Business knowledge",
+    "description": "Keep the core details Pilot uses current, then add fresh context whenever your business changes."
+  },
+  "setup": {
+    "title": "Give Pilot more to work with",
+    "description": "Pilot will extract key details for your review. Nothing changes until you confirm it.",
+    "tellTitle": "Tell Pilot",
+    "tellDescription": "Describe an update, new service, hours, pricing, policy, or anything else in your own words.",
+    "fileTitle": "Upload a file",
+    "fileDescription": "Upload a text, CSV, Markdown, or JSON file with menus, service lists, policies, or FAQs.",
+    "websiteTitle": "Add your website",
+    "websiteDescription": "Pilot will review the public page you provide and prepare suggested updates.",
+    "reviewTitle": "Review Pilot's suggestions",
+    "reviewDescription": "Check every suggested detail before it becomes part of your business knowledge.",
+    "tellPlaceholder": "Example: We now offer emergency furnace repair across Windsor. Weekdays are 8:00 a.m.–6:00 p.m. and the call-out fee is $129.",
+    "websitePlaceholder": "https://yourbusiness.ca",
+    "uploadHelp": "Supported: .txt, .md, .csv, and .json files up to 1 MB.",
+    "extract": "Review suggestions",
+    "extracting": "Preparing suggestions...",
+    "saveSuggestions": "Confirm and save",
+    "saving": "Saving changes...",
+    "discard": "Discard suggestions"
+  },
+  "teachPilot": {
+    "eyebrow": "Teach Pilot",
+    "title": "Give Pilot the information you already have",
+    "description": "Upload recipes, price lists, service lists, spreadsheets, supplier documents, policies, or other business information. Pilot will organize it for you.",
+    "uploadTitle": "Upload a file",
+    "uploadDescription": "Supported: TXT, CSV, TSV, Markdown, and JSON. You’ll review every finding before Pilot saves it.",
+    "tellTitle": "Tell Pilot",
+    "tellDescription": "Share an update in the Pilot chat. Pilot will recognize clear business facts and keep your existing information protected.",
+    "tellAction": "Tell Pilot",
+    "recentTitle": "Recently learned",
+    "recentDescription": "Confirmed information Pilot can use in future conversations.",
+    "recentEmpty": "No confirmed information yet. Upload a supported file or tell Pilot an important business detail.",
+    "reviewTitle": "Review before saving",
+    "reviewDescription": "Pilot organizes the information it finds. Confirm the facts you want saved, edit them if needed, or reject them.",
+    "uploadAction": "Choose a file",
+    "uploading": "Reading document…",
+    "saveAction": "Save confirmed facts",
+    "saving": "Saving…",
+    "discard": "Discard review",
+    "unsupported": "Pilot couldn't read this file yet. Try a supported file type or tell Pilot the information directly."
+  },
+  "sections": {
+    "core": "Business information",
+    "coreDescription": "These are the primary details Pilot uses to understand your business.",
+    "knowledge": "Services, pricing, and guidance",
+    "knowledgeDescription": "Keep these details practical and current so Pilot can answer more accurately.",
+    "advanced": "Customer communication guidance"
+  },
+  "fields": {
+    "businessName": "Business name",
+    "industry": "Business type",
+    "businessEmail": "Business email",
+    "website": "Website",
+    "address": "Address",
+    "city": "City",
+    "region": "Province / State",
+    "postalCode": "Postal / ZIP code",
+    "serviceArea": "Service area",
+    "hours": "Business hours",
+    "services": "Products and services",
+    "pricing": "Prices and estimates",
+    "faqs": "Frequently asked questions",
+    "policies": "Policies and important notes",
+    "instructions": "Guidance for Pilot",
+    "discloseAutomation": "Disclose automated assistant",
+    "discloseAutomationHelp": "When enabled, Pilot may identify itself as automated in customer conversations."
+  },
+  "actions": {
+    "save": "Save business information",
+    "saved": "Business information saved. Pilot will use these updates in future conversations.",
+    "reviewSaved": "Business knowledge saved after your review."
+  },
+  "errors": {
+    "load": "Unable to load your business information.",
+    "save": "Unable to save your business information.",
+    "extract": "Pilot could not prepare suggestions from that source."
+  }
+}

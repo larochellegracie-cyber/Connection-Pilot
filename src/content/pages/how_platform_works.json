@@ -1,0 +1,137 @@
+{
+  "hero": {
+    "eyebrow": "A simple, connected rhythm",
+    "title": "Connect your business. Understand what is happening. Decide what to do next.",
+    "description": "Connection Pilot brings the important parts of your small business into one operating workspace, with Pilot helping you keep priorities clear.",
+    "flow": [
+      {
+        "label": "Business activity",
+        "id": "how-flow-1"
+      },
+      {
+        "label": "Connection Pilot",
+        "id": "how-flow-2"
+      },
+      {
+        "label": "Context together",
+        "id": "how-flow-3"
+      },
+      {
+        "label": "Pilot insight",
+        "id": "how-flow-4"
+      },
+      {
+        "label": "Your next step",
+        "id": "how-flow-5"
+      }
+    ]
+  },
+  "stepOne": {
+    "eyebrow": "Step one",
+    "title": "1. Bring your day-to-day work together",
+    "description": "Manage customers, leads, orders and jobs, scheduling, employees, quotes, invoices, payments, and inventory directly in Connection Pilot.",
+    "callLabel": "Business activity",
+    "customerLabel": "Today's work",
+    "customerMessage": "A customer needs a follow-up, a job needs scheduling, and an invoice needs review."
+  },
+  "stepTwo": {
+    "eyebrow": "Step two",
+    "title": "2. Connection Pilot keeps the context connected",
+    "description": "Instead of switching between systems, your workspace keeps the customer, work, schedule, and financial context close together.",
+    "messages": [
+      {
+        "sender": "Connection Pilot",
+        "text": "You have two open leads, one job waiting for confirmation, and an invoice due for review.",
+        "id": "how-message-1"
+      },
+      {
+        "sender": "Business owner",
+        "text": "What should I focus on first?",
+        "id": "how-message-2"
+      },
+      {
+        "sender": "Pilot",
+        "text": "Start with the high-value job confirmation, then review the two leads that need follow-up.",
+        "id": "how-message-3"
+      }
+    ]
+  },
+  "stepThree": {
+    "eyebrow": "Step three",
+    "title": "3. Pilot helps you understand what needs attention",
+    "description": "Pilot uses the business context in your workspace to surface useful priorities, questions, risks, and opportunities for the owner to review.",
+    "leadLabel": "Pilot priority",
+    "lead": {
+      "customer": "Friday schedule",
+      "phone": "Two jobs need confirmation",
+      "address": "One customer follow-up is overdue",
+      "service": "Key inventory needs review",
+      "priority": "Owner review recommended"
+    },
+    "items": [
+      {
+        "label": "Customers and leads",
+        "id": "how-detail-1"
+      },
+      {
+        "label": "Orders and jobs",
+        "id": "how-detail-2"
+      },
+      {
+        "label": "Scheduling and employees",
+        "id": "how-detail-3"
+      },
+      {
+        "label": "Quotes, invoices, payments, and inventory",
+        "id": "how-detail-4"
+      }
+    ]
+  },
+  "stepFour": {
+    "eyebrow": "Step four",
+    "title": "4. Make the next decision with the full picture",
+    "description": "Review the organized details, choose the next step, and keep the team moving without losing the context behind the work.",
+    "headers": [
+      {
+        "label": "Area",
+        "id": "how-table-header-1"
+      },
+      {
+        "label": "What needs attention",
+        "id": "how-table-header-2"
+      },
+      {
+        "label": "Next step",
+        "id": "how-table-header-3"
+      }
+    ],
+    "rows": [
+      {
+        "customer": "Lead follow-up",
+        "service": "Open quote needs a response",
+        "status": "Review customer context",
+        "id": "how-row-1"
+      },
+      {
+        "customer": "Schedule",
+        "service": "Friday job awaits confirmation",
+        "status": "Confirm or reschedule",
+        "id": "how-row-2"
+      }
+    ]
+  },
+  "stepFive": {
+    "eyebrow": "Step five",
+    "title": "5. You stay in control",
+    "description": "Pilot is the intelligence layer, not the decision-maker. It helps you understand what is happening and decide what to do next.",
+    "controlNote": "Connection Pilot is built to support the business owner’s judgement, not replace it.",
+    "humanTitle": "Your business, your next move",
+    "humanText": "Use the connected workspace and Pilot’s context to decide the action that is right for your customers and business."
+  },
+  "cta": {
+    "title": "Run your entire business with Pilot.",
+    "description": "Start with the work you have today and build your Connection Pilot workspace from there.",
+    "primary": "Get Started",
+    "secondary": "Contact Us"
+  }
+}

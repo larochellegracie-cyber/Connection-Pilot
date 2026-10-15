@@ -1,0 +1,12 @@
+{
+  "seo": {
+    "title": "My Schedule | Connection Pilot",
+    "description": "View your published work schedule."
+  },
+  "hero": {
+    "eyebrow": "Employee access",
+    "title": "My schedule",
+    "description": "Your upcoming published shifts and approved time off."
+  },
+  "empty": "No upcoming published shifts."
+}

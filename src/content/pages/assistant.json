@@ -1,0 +1,94 @@
+{
+  "hero": {
+    "eyebrow": "Pilot — Your AI business assistant",
+    "title": "Your private business assistant",
+    "description": "Pilot works with you and your authorized team inside this workspace. The upcoming AI Voice Receptionist is a separate future capability."
+  },
+  "chat": {
+    "title": "Talk to Pilot",
+    "description": "Ask about your business records or tell Pilot what you need done. Pilot can prepare actions and asks for confirmation before making important changes.",
+    "placeholder": "Ask Pilot about your business…",
+    "send": "Send",
+    "thinking": "Pilot is checking your workspace…",
+    "greeting": "Hi! I’m Pilot, your AI business assistant.",
+    "subgreeting": "I’m here to help manage your business, customers, appointments, and everyday tasks.",
+    "suggestions": [
+      {
+        "prompt": "Who do I have scheduled tomorrow?",
+        "id": "T6wvMQUNzgBROuKSCgqdl"
+      },
+      {
+        "prompt": "Reschedule Cooper's appointment to Friday.",
+        "id": "ec8Lb67pckV7WucHioZSC"
+      },
+      {
+        "prompt": "Add a note to Sarah's customer profile.",
+        "id": "xVyXTDj6GGoEZn0z9wx6F"
+      },
+      {
+        "prompt": "Who needs a follow-up?",
+        "id": "W_HYGrYw4Hxb0FahZNarr"
+      },
+      {
+        "prompt": "How many new customers did we get this month?",
+        "id": "7N76tSqgRglhKhhJjRZEz"
+      }
+    ]
+  },
+  "capabilities": {
+    "title": "What Pilot can help with",
+    "items": [
+      {
+        "icon": "users",
+        "title": "Customers",
+        "description": "Find customer history, add notes, update records, and organize follow-ups.",
+        "id": "10OYhgexYb0jAHP-Pp_9B"
+      },
+      {
+        "icon": "calendar",
+        "title": "Appointments",
+        "description": "Review schedules and prepare appointment changes for your confirmation.",
+        "id": "p9xEagckEdpyGvQRU5MXY"
+      },
+      {
+        "icon": "messages",
+        "title": "Business context",
+        "description": "Answer questions using the private business records in your workspace.",
+        "id": "RGDNgNxJh6LF-wcUI-mjV"
+      },
+      {
+        "icon": "shield",
+        "title": "Owner control",
+        "description": "Pilot asks before it makes important customer or appointment changes.",
+        "id": "vnSj4R_ptKJmreHO3k52g"
+      }
+    ]
+  },
+  "receptionist": {
+    "eyebrow": "Future customer experience",
+    "title": "AI Voice Receptionist — Coming Soon",
+    "description": "Pilot will answer business calls, help customers, book appointments or orders, and capture important details automatically when voice calling becomes available.",
+    "action": "View upcoming capability",
+    "training": "View AI Voice Receptionist"
+  },
+  "quickActions": {
+    "title": "Get started quickly",
+    "actions": [
+      {
+        "label": "Review follow-ups",
+        "prompt": "Who needs a follow-up?",
+        "id": "RD6L4SF5aw4pKVeOySMTp"
+      },
+      {
+        "label": "Tomorrow’s schedule",
+        "prompt": "Who do I have scheduled tomorrow?",
+        "id": "ik1uFCYeNZZzm07qWhS36"
+      },
+      {
+        "label": "Business briefing",
+        "prompt": "Give me today's business briefing.",
+        "id": "NPTXm90v1bSjkMXDJUSI9"
+      }
+    ]
+  }
+}

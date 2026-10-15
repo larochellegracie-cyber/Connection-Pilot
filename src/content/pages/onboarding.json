@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "title": "Set Up Your Business | Connection Pilot",
+    "description": "Tell Pilot about your business and confirm the details for a personalized Connection Pilot workspace."
+  },
+  "hero": {
+    "eyebrow": "Connection Pilot setup",
+    "title": "Tell Pilot about your business.",
+    "description": "One quick note is all it takes. I’ll pull out the essentials and show you what I understood before anything is saved.",
+    "pilotMessage": "Share your business name, what you do, where your business is located, your hours, and the services you offer — naturally, in your own words."
+  },
+  "prompt": {
+    "label": "Your business, in a few words",
+    "placeholder": "I own a bakery called Staci Bakes in Windsor. We’re open Tuesday to Saturday from 9–5 and sell cakes, cupcakes, cookies and pastries.",
+    "helper": "No need to format it perfectly. Pilot will organize the details for you."
+  },
+  "supplemental": {
+    "title": "Add more information (optional)",
+    "description": "Tell Pilot is all you need. Add a website or a file only if you have more details to share.",
+    "websiteLabel": "Website address",
+    "websitePlaceholder": "https://yourbusiness.ca",
+    "fileLabel": "Upload a menu, price list, PDF, or service list",
+    "fileHelp": "Choose a text, CSV, or PDF file up to 1 MB.",
+    "website": "Add your website",
+    "file": "Upload a file"
+  },
+  "review": {
+    "eyebrow": "Pilot’s understanding",
+    "title": "Here’s what I heard.",
+    "description": "Please make any changes below, then confirm when it looks right.",
+    "name": "Business name",
+    "type": "Business type",
+    "location": "Location",
+    "hours": "Business hours",
+    "services": "Products or services"
+  },
+  "actions": {
+    "review": "Let Pilot organize this",
+    "reviewing": "Pilot is reviewing your note…",
+    "confirm": "Confirm and set up my workspace",
+    "saving": "Saving your business details…",
+    "startOver": "Start over",
+    "skip": "Skip for now"
+  },
+  "notice": "You can update these details anytime in your business settings.",
+  "status": {
+    "loading": "Loading your setup…",
+    "setupCheck": "We could not check your business setup. Please refresh and try again.",
+    "save": "We could not save your business details.",
+    "generic": "Something went wrong. Please try again."
+  },
+  "errors": {
+    "preview": "Pilot could not organize the information you shared. Please try again.",
+    "missing": "Add information through Tell Pilot, your website, or an uploaded file.",
+    "file": "Pilot could not read that file. Try a text, CSV, or PDF file under 1 MB."
+  }
+}

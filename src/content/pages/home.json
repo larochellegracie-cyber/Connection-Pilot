@@ -1,0 +1,451 @@
+{
+  "hero": {
+    "eyebrow": "Your customers. Every conversation. Always connected.",
+    "title": "Your Customers Reach Out. Connection Pilot Answers.",
+    "subtitle": "AI-powered customer communication that helps businesses answer calls, respond to messages, capture leads, and stay connected.",
+    "primaryCta": "Get Started",
+    "secondaryCta": "See How It Works",
+    "trustNote": "Built for businesses that never want to miss an opportunity to connect.",
+    "phoneTitle": "Connection Pilot AI",
+    "phoneSubtitle": "SMS conversation",
+    "customerOne": "Hi, my furnace stopped working.",
+    "aiOne": "I'm sorry to hear that. I can help get some information for our team. What's your name?",
+    "customerTwo": "Sarah.",
+    "aiTwo": "Thanks, Sarah. What's the address where you need service?"
+  },
+  "process": {
+    "eyebrow": "See Connection Pilot in action",
+    "title": "From Customer Call to Organized Lead.",
+    "description": "Connection Pilot helps turn customer conversations into organized information your team can act on.",
+    "steps": [
+      {
+        "id": "p1",
+        "number": "01",
+        "title": "Customer Contacts You",
+        "description": "A customer calls or sends a message."
+      },
+      {
+        "id": "p2",
+        "number": "02",
+        "title": "Connection Pilot Responds",
+        "description": "AI is designed to gather the information your business needs."
+      },
+      {
+        "id": "p3",
+        "number": "03",
+        "title": "Lead Is Captured",
+        "description": "Customer information is organized for your team."
+      },
+      {
+        "id": "p4",
+        "number": "04",
+        "title": "Your Team Takes Over",
+        "description": "Your team can review the lead and continue the conversation when needed."
+      }
+    ]
+  },
+  "receptionist": {
+    "eyebrow": "AI receptionist",
+    "title": "Meet Your AI Receptionist.",
+    "description": "A smarter way to handle customer conversations when your team is busy, unavailable, or away.",
+    "items": [
+      {
+        "id": "r1",
+        "label": "Answer common customer questions"
+      },
+      {
+        "id": "r2",
+        "label": "Collect customer information"
+      },
+      {
+        "id": "r3",
+        "label": "Identify customer needs"
+      },
+      {
+        "id": "r4",
+        "label": "Gather service details"
+      },
+      {
+        "id": "r5",
+        "label": "Support routine conversations"
+      },
+      {
+        "id": "r6",
+        "label": "Escalate to a human when needed"
+      },
+      {
+        "id": "r7",
+        "label": "Help capture leads"
+      }
+    ],
+    "cta": "Explore AI Receptionist",
+    "callLabel": "Incoming customer call",
+    "callName": "Sarah M.",
+    "callStatus": "Needs furnace service"
+  },
+  "demo": {
+    "eyebrow": "Product preview",
+    "title": "See How Your Customers Could Experience Connection Pilot.",
+    "description": "A guided conversation can turn an incoming question into a more organized lead for your team.",
+    "customerOne": "Hi, do you guys repair air conditioners?",
+    "aiReply": "Yes! We'd be happy to help. Can I get your name and the address where service is needed?",
+    "customerTwo": "Sarah, 123 Main Street.",
+    "leadTitle": "New lead",
+    "leadName": "Sarah",
+    "leadPhone": "519-XXX-XXXX",
+    "leadAddress": "123 Main Street",
+    "leadService": "AC Repair",
+    "leadStatus": "Status: New",
+    "caption": "Conversation → Information → Organized Lead"
+  },
+  "dashboard": {
+    "eyebrow": "Private business workspace",
+    "title": "Everything Your Business Needs. In One Place.",
+    "description": "Each business is designed to have a private dashboard for its own customer conversations, leads, and settings.",
+    "cta": "Explore the Platform",
+    "metrics": [
+      {
+        "id": "m1",
+        "value": "12",
+        "label": "New leads"
+      },
+      {
+        "id": "m2",
+        "value": "38",
+        "label": "Customer conversations"
+      },
+      {
+        "id": "m3",
+        "value": "24",
+        "label": "Calls"
+      },
+      {
+        "id": "m4",
+        "value": "6",
+        "label": "Appointments"
+      }
+    ],
+    "navigation": [
+      {
+        "id": "n1",
+        "label": "Overview"
+      },
+      {
+        "id": "n2",
+        "label": "Conversations"
+      },
+      {
+        "id": "n3",
+        "label": "Leads"
+      },
+      {
+        "id": "n4",
+        "label": "Customers"
+      },
+      {
+        "id": "n5",
+        "label": "Insights"
+      },
+      {
+        "id": "n6",
+        "label": "Settings"
+      }
+    ],
+    "leads": [
+      {
+        "id": "l1",
+        "name": "Sarah",
+        "service": "AC Repair",
+        "status": "New"
+      },
+      {
+        "id": "l2",
+        "name": "Mike",
+        "service": "Furnace Repair",
+        "status": "Follow-Up"
+      },
+      {
+        "id": "l3",
+        "name": "John",
+        "service": "Plumbing",
+        "status": "Contacted"
+      },
+      {
+        "id": "l4",
+        "name": "Emily",
+        "service": "HVAC Service",
+        "status": "Booked"
+      }
+    ]
+  },
+  "insights": {
+    "eyebrow": "Customer insights",
+    "title": "Turn Customer Conversations Into Insights.",
+    "description": "Connection Pilot can help businesses understand their customer activity. The figures below are example dashboard data, not actual business results.",
+    "metrics": [
+      {
+        "id": "i1",
+        "value": "127",
+        "label": "New leads"
+      },
+      {
+        "id": "i2",
+        "value": "AC Repair",
+        "label": "Most requested service"
+      },
+      {
+        "id": "i3",
+        "value": "2 min",
+        "label": "Average response time"
+      },
+      {
+        "id": "i4",
+        "value": "384",
+        "label": "Customer conversations"
+      }
+    ],
+    "statuses": [
+      {
+        "id": "s1",
+        "label": "New",
+        "value": "42%"
+      },
+      {
+        "id": "s2",
+        "label": "Contacted",
+        "value": "31%"
+      },
+      {
+        "id": "s3",
+        "label": "Follow-Up",
+        "value": "17%"
+      },
+      {
+        "id": "s4",
+        "label": "Booked",
+        "value": "10%"
+      }
+    ]
+  },
+  "benefits": {
+    "title": "Designed to Keep Communication Clear.",
+    "items": [
+      {
+        "id": "b1",
+        "title": "Never Miss the Conversation",
+        "description": "Help customers connect with your business even when your team is busy."
+      },
+      {
+        "id": "b2",
+        "title": "Save Your Team Time",
+        "description": "Let AI assist with routine conversations and information gathering."
+      },
+      {
+        "id": "b3",
+        "title": "Keep Leads Organized",
+        "description": "Bring customer information together in one central system."
+      },
+      {
+        "id": "b4",
+        "title": "Stay in Control",
+        "description": "Your team can step into conversations whenever human assistance is needed."
+      }
+    ]
+  },
+  "plans": {
+    "eyebrow": "Plans preview",
+    "title": "Choose the Level of Support Your Business Needs.",
+    "description": "Plan features shown here are a preview of how Connection Pilot is designed to grow with your business.",
+    "viewAll": "View All Plans",
+    "items": [
+      {
+        "id": "plan1",
+        "name": "Essential",
+        "tagline": "Stay Connected.",
+        "items": [
+          {
+            "id": "e1",
+            "label": "Customer texting"
+          },
+          {
+            "id": "e2",
+            "label": "Missed-call text-back"
+          },
+          {
+            "id": "e3",
+            "label": "Basic lead capture"
+          },
+          {
+            "id": "e4",
+            "label": "Connection Pilot dashboard"
+          },
+          {
+            "id": "e5",
+            "label": "Customer conversation history"
+          },
+          {
+            "id": "e6",
+            "label": "Basic customer insights"
+          },
+          {
+            "id": "e7",
+            "label": "Business hours and settings"
+          }
+        ],
+        "cta": "Get Started"
+      },
+      {
+        "id": "plan2",
+        "name": "Growth",
+        "tagline": "Let AI Handle More.",
+        "badge": "Most Popular",
+        "items": [
+          {
+            "id": "g1",
+            "label": "Everything in Essential"
+          },
+          {
+            "id": "g2",
+            "label": "AI Customer Assistant"
+          },
+          {
+            "id": "g3",
+            "label": "AI-powered customer texting"
+          },
+          {
+            "id": "g4",
+            "label": "AI customer conversations"
+          },
+          {
+            "id": "g5",
+            "label": "Customer profiles"
+          },
+          {
+            "id": "g6",
+            "label": "Long-term customer memory"
+          },
+          {
+            "id": "g7",
+            "label": "Automated follow-up assistance"
+          },
+          {
+            "id": "g8",
+            "label": "Advanced lead management"
+          },
+          {
+            "id": "g9",
+            "label": "Conversation summaries"
+          },
+          {
+            "id": "g10",
+            "label": "Advanced customer insights"
+          },
+          {
+            "id": "g11",
+            "label": "Human handoff"
+          }
+        ],
+        "cta": "Get Started"
+      },
+      {
+        "id": "plan3",
+        "name": "Pro",
+        "tagline": "Your AI Voice Receptionist.",
+        "items": [
+          {
+            "id": "pr1",
+            "label": "Everything in Growth"
+          },
+          {
+            "id": "pr2",
+            "label": "AI Voice Receptionist"
+          },
+          {
+            "id": "pr3",
+            "label": "Answers incoming customer calls"
+          },
+          {
+            "id": "pr4",
+            "label": "Collects customer information during calls"
+          },
+          {
+            "id": "pr5",
+            "label": "Qualifies leads"
+          },
+          {
+            "id": "pr6",
+            "label": "Call summaries"
+          },
+          {
+            "id": "pr7",
+            "label": "Advanced call handling"
+          },
+          {
+            "id": "pr8",
+            "label": "Advanced automation"
+          },
+          {
+            "id": "pr9",
+            "label": "Advanced analytics"
+          },
+          {
+            "id": "pr10",
+            "label": "Custom AI instructions"
+          },
+          {
+            "id": "pr11",
+            "label": "Priority support"
+          }
+        ],
+        "cta": "Get Started"
+      }
+    ]
+  },
+  "comparison": {
+    "title": "Built for Businesses. Designed for Customers.",
+    "withoutTitle": "Without Connection Pilot",
+    "withTitle": "With Connection Pilot",
+    "without": [
+      {
+        "id": "w1",
+        "label": "Missed calls"
+      },
+      {
+        "id": "w2",
+        "label": "Scattered messages"
+      },
+      {
+        "id": "w3",
+        "label": "Manual lead tracking"
+      },
+      {
+        "id": "w4",
+        "label": "Limited customer insights"
+      }
+    ],
+    "with": [
+      {
+        "id": "c1",
+        "label": "AI-assisted communication"
+      },
+      {
+        "id": "c2",
+        "label": "Organized conversations"
+      },
+      {
+        "id": "c3",
+        "label": "Centralized leads"
+      },
+      {
+        "id": "c4",
+        "label": "Business insights"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Connect More Clearly?",
+    "description": "Bring customer conversations, AI assistance, lead management, and business insights together with Connection Pilot.",
+    "primaryCta": "Get Started",
+    "secondaryCta": "Contact Us"
+  }
+}

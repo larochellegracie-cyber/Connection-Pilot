@@ -1,0 +1,85 @@
+{
+  "seo": {
+    "title": "Jobs | Connection Pilot",
+    "description": "Track scheduled service work from booking through completion in Connection Pilot."
+  },
+  "hero": {
+    "eyebrow": "Service work",
+    "title": "Jobs",
+    "description": "Track booked work, assignments, and service status without losing the customer context.",
+    "addButton": "Add job"
+  },
+  "summary": {
+    "all": "All jobs",
+    "booked": "Booked",
+    "inProgress": "In progress",
+    "complete": "Completed"
+  },
+  "filters": {
+    "search": "Search jobs, customers, or service",
+    "allStatuses": "All statuses",
+    "apply": "Apply"
+  },
+  "table": {
+    "job": "Job",
+    "customer": "Customer",
+    "scheduled": "Scheduled",
+    "assigned": "Assigned",
+    "status": "Status",
+    "action": "Action",
+    "open": "Open"
+  },
+  "empty": {
+    "title": "No jobs found",
+    "description": "Create a job when a lead becomes confirmed service work."
+  },
+  "form": {
+    "title": "Add job",
+    "description": "Add confirmed service work for an existing customer.",
+    "customer": "Customer",
+    "service": "Service",
+    "address": "Service address",
+    "assigned": "Assigned person",
+    "scheduled": "Scheduled date and time",
+    "duration": "Duration (minutes)",
+    "status": "Status",
+    "notes": "Notes",
+    "cancel": "Cancel",
+    "save": "Save job",
+    "saving": "Saving..."
+  },
+  "detail": {
+    "title": "Job details",
+    "activity": "History",
+    "activityEmpty": "No job history yet.",
+    "save": "Save changes",
+    "saving": "Saving changes...",
+    "close": "Close"
+  },
+  "statuses": [
+    {
+      "id": "booked",
+      "label": "Booked"
+    },
+    {
+      "id": "in_progress",
+      "label": "In progress"
+    },
+    {
+      "id": "completed",
+      "label": "Completed"
+    },
+    {
+      "id": "invoiced",
+      "label": "Invoiced"
+    },
+    {
+      "id": "paid",
+      "label": "Paid"
+    },
+    {
+      "id": "cancelled",
+      "label": "Cancelled"
+    }
+  ]
+}
