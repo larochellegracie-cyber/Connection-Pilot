@@ -62,7 +62,25 @@ export type SendEmailInput = {
 export type SendEmailResult = {
 	/** Message id from Resend (or a `local-` id when printed to the terminal). */
 	messageId: string;
+	/** True only when the email provider accepted the message. False means it was just printed to the terminal. */
+	delivered: boolean;
 };
+
+/** Removes anything that looks like a Resend key (and the configured key itself) from text that may be logged or shown. */
+export function redactSecrets(text: string): string {
+	let safe = text.replace(/\bre_[A-Za-z0-9_-]{6,}/g, "[redacted]");
+	const configured = getSecret("RESEND_API_KEY");
+	if (typeof configured === "string" && configured.length >= 6) safe = safe.split(configured).join("[redacted]");
+	return safe;
+}
+
+/** Raised when email cannot be sent because the email service has not been configured. */
+export class EmailNotConfiguredError extends Error {
+	constructor(message = "email not configured: RESEND_API_KEY is not set") {
+		super(message);
+		this.name = "EmailNotConfiguredError";
+	}
+}
 
 type ResendPayload = {
 	from: string;
@@ -88,7 +106,7 @@ export async function sendEmail(input: SendEmailInput): Promise<SendEmailResult>
 
 	if (!apiKey || typeof apiKey !== "string") {
 		if (process.env.NODE_ENV === "production") {
-			throw new Error("email not configured: RESEND_API_KEY is not set");
+			throw new EmailNotConfiguredError();
 		}
 		return logEmailToTerminal(payload);
 	}
@@ -109,11 +127,11 @@ export async function sendEmail(input: SendEmailInput): Promise<SendEmailResult>
 		});
 		body = await parseBody(response);
 	} catch (err) {
-		throw new Error(`email provider unreachable: ${describeError(err)}`);
+		throw new Error(`email provider unreachable: ${redactSecrets(describeError(err))}`);
 	}
 
 	if (!response.ok) {
-		const detail = body.message ?? `HTTP ${response.status}`;
+		const detail = redactSecrets(body.message ?? `HTTP ${response.status}`);
 		throw new Error(`email send failed: ${detail}`);
 	}
 
@@ -121,7 +139,30 @@ export async function sendEmail(input: SendEmailInput): Promise<SendEmailResult>
 		throw new Error("email send succeeded but provider returned no message id");
 	}
 
-	return { messageId: body.id };
+	return { messageId: body.id, delivered: true };
+}
+
+/**
+ * Like sendEmail, but never pretends: if the message was only printed to the terminal
+ * (no RESEND_API_KEY in development) it throws EmailNotConfiguredError. Use this wherever a
+ * screen tells the owner an email was sent (schedules, quotes, invoices, support mail).
+ * Password-reset and similar developer-visible mail can keep using sendEmail.
+ */
+export async function sendEmailOrThrow(input: SendEmailInput): Promise<SendEmailResult> {
+	const result = await sendEmail(input);
+	if (!result.delivered) {
+		throw new EmailNotConfiguredError("email not configured: RESEND_API_KEY is not set (the message was printed to the terminal, not sent)");
+	}
+	return result;
+}
+
+/** Turns a send error into an HTTP status and a message that is safe to show the owner. */
+export function emailFailure(error: unknown): { status: number; error: string; setupRequired?: true } {
+	if (error instanceof EmailNotConfiguredError) {
+		return { status: 503, setupRequired: true, error: "Email isn’t set up yet, so nothing was sent. Add RESEND_API_KEY and EMAIL_FROM to this app’s settings." };
+	}
+	const reason = error instanceof Error ? redactSecrets(error.message).replace(/^email send failed:\s*/i, "").slice(0, 160) : "";
+	return { status: 502, error: reason ? `The email service could not send this message: ${reason}` : "The email service could not send this message. Please try again." };
 }
 
 function logEmailToTerminal(payload: ResendPayload): SendEmailResult {
@@ -145,7 +186,7 @@ function logEmailToTerminal(payload: ResendPayload): SendEmailResult {
 		"",
 	];
 	console.info(lines.join("\n"));
-	return { messageId };
+	return { messageId, delivered: false };
 }
 
 function buildPayload(input: SendEmailInput): ResendPayload {

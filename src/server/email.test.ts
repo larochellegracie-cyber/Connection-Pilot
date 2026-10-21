@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { sendEmail } from './email';
+import { EmailNotConfiguredError, emailFailure, sendEmail, sendEmailOrThrow } from './email';
 
 const originalEnv = { ...process.env };
 
@@ -25,6 +25,7 @@ describe('sendEmail', () => {
     const result = await sendEmail({ to: 'a@example.com', subject: 'Hello', text: 'Body text', fromName: 'Test Co' });
 
     expect(result.messageId).toMatch(/^local-/);
+    expect(result.delivered).toBe(false);
     expect(fetchMock).not.toHaveBeenCalled();
     const printed = String(info.mock.calls[0]?.[0]);
     expect(printed).toContain('Subject:    Hello');
@@ -52,7 +53,7 @@ describe('sendEmail', () => {
       attachments: [{ filename: 'a.txt', content: Buffer.from('hi'), contentType: 'text/plain' }],
     });
 
-    expect(result).toEqual({ messageId: 'msg_123' });
+    expect(result).toEqual({ messageId: 'msg_123', delivered: true });
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(url).toBe('https://api.resend.com/emails');
     expect((init.headers as Record<string, string>).authorization).toBe('Bearer re_test_key');
@@ -72,5 +73,24 @@ describe('sendEmail', () => {
   it('requires a recipient and a body', async () => {
     await expect(sendEmail({ to: [], subject: 'Hi', text: 'x' })).rejects.toThrow(/recipient/);
     await expect(sendEmail({ to: 'a@example.com', subject: 'Hi' })).rejects.toThrow(/body/);
+  });
+
+  it('sendEmailOrThrow refuses to report a printed-only message as sent', async () => {
+    vi.spyOn(console, 'info').mockImplementation(() => {});
+    await expect(sendEmailOrThrow({ to: 'a@example.com', subject: 'Hi', text: 'x' })).rejects.toBeInstanceOf(EmailNotConfiguredError);
+  });
+
+  it('sendEmailOrThrow returns the provider result when Resend accepts the message', async () => {
+    process.env.RESEND_API_KEY = 're_test_key';
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({ id: 'msg_9' }), { status: 200 })));
+    await expect(sendEmailOrThrow({ to: 'a@example.com', subject: 'Hi', text: 'x' })).resolves.toEqual({ messageId: 'msg_9', delivered: true });
+  });
+
+  it('turns failures into clear messages for the owner without leaking the key', () => {
+    expect(emailFailure(new EmailNotConfiguredError())).toMatchObject({ status: 503, setupRequired: true });
+    expect(emailFailure(new EmailNotConfiguredError()).error).toMatch(/isn’t set up yet.*nothing was sent/);
+    const rejected = emailFailure(new Error('email send failed: domain not verified'));
+    expect(rejected).toEqual({ status: 502, error: 'The email service could not send this message: domain not verified' });
+    expect(emailFailure('weird').status).toBe(502);
   });
 });

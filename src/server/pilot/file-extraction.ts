@@ -6,6 +6,7 @@ import { getSecret } from '#airo/secrets';
 
 const maxBytes = 5 * 1024 * 1024;
 const textTypes = new Set(['text/plain', 'text/csv', 'text/markdown', 'application/json', 'text/tab-separated-values']);
+const csvTypes = new Set(['text/csv', 'text/tab-separated-values']);
 const imageTypes = new Set(['image/png', 'image/jpeg', 'image/webp']);
 const spreadsheetTypes = new Set(['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.spreadsheetml.template', 'application/vnd.ms-excel']);
 const wordType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
@@ -24,13 +25,26 @@ export function isSupportedFileType(fileName: string, fileType: string) {
   return textTypes.has(type) || spreadsheetTypes.has(type) || type === wordType || type === pdfType || imageTypes.has(type);
 }
 
-export async function storeOriginalDocument(businessProfileId: string, documentId: string, fileName: string, buffer: Buffer) {
+/**
+ * Keeps a copy of the uploaded original, but only when PILOT_DOCUMENT_STORAGE_DIR points at a
+ * persistent folder (for example a mounted Railway volume). Everything Pilot actually uses, the
+ * extracted text and the findings, is saved in the database, so uploads work without it.
+ * Saving the original is best-effort: a folder that is missing or not writable never fails an upload.
+ */
+export async function storeOriginalDocument(businessProfileId: string, documentId: string, fileName: string, buffer: Buffer): Promise<string | null> {
+  const root = process.env.PILOT_DOCUMENT_STORAGE_DIR?.trim();
+  if (!root) return null;
   const safeName = path.basename(fileName).replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 180) || 'document';
-  const directory = path.join('/private', 'pilot-documents', businessProfileId, documentId);
+  const directory = path.join(root, businessProfileId, documentId);
   const storagePath = path.join(directory, safeName);
-  await mkdir(directory, { recursive: true });
-  await writeFile(storagePath, buffer, { mode: 0o600 });
-  return storagePath;
+  try {
+    await mkdir(directory, { recursive: true });
+    await writeFile(storagePath, buffer, { mode: 0o600 });
+    return storagePath;
+  } catch (error) {
+    console.warn('pilot_document.original_not_saved', { documentId, reason: error instanceof Error ? error.message : String(error) });
+    return null;
+  }
 }
 
 function truncate(value: string) { return value.replace(/\u0000/g, '').slice(0, 60000).trim(); }
@@ -118,8 +132,9 @@ export async function extractReadableFileContent(input: { fileName: string; file
   const buffer = Buffer.from(input.base64, 'base64');
   if (!buffer.length || buffer.length > maxBytes) throw new Error('Choose a readable file smaller than 5 MB.');
   let content = '';
-  if (textTypes.has(fileType)) content = buffer.toString('utf8');
-  else if (spreadsheetTypes.has(fileType)) content = spreadsheetText(buffer);
+  // CSV and TSV are read like spreadsheets so each value keeps its column heading ("Service: Cleaning | Price: 120").
+  if (csvTypes.has(fileType) || spreadsheetTypes.has(fileType)) content = spreadsheetText(buffer);
+  else if (textTypes.has(fileType)) content = buffer.toString('utf8');
   else if (fileType === wordType) content = (await mammoth.extractRawText({ buffer })).value;
   else if (fileType === pdfType) content = await pdfText(buffer);
   else if (imageTypes.has(fileType)) content = await imageText(buffer, fileType);

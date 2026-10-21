@@ -2,6 +2,12 @@ import { createOpenAI } from '@ai-sdk/openai';
 import type { LanguageModel } from 'ai';
 import { getSecret } from '#airo/secrets';
 
+/** True when the OpenAI key Pilot chat needs has been provided. */
+export function isChatConfigured(): boolean {
+  const apiKey = getSecret('OPENAI_API_KEY');
+  return typeof apiKey === 'string' && apiKey.trim().length > 0;
+}
+
 export function getChatModel(): LanguageModel {
   const apiKey = getSecret('OPENAI_API_KEY');
   if (!apiKey || typeof apiKey !== 'string') {
@@ -20,4 +26,6 @@ Dates and times: Use only local display values returned by tools. Never show UTC
 
 Rescheduling: When asked to reschedule, call getRescheduleOptions first. Briefly state the current appointment and offer the returned local times, then ask which one works. Once the owner chooses a time, call changeAppointment with confirmed=false and ask one clear confirmation question using the local time. Only after the owner explicitly confirms that exact proposed change may you call changeAppointment with confirmed=true. Say “Done” only when that tool returns ok=true. If a time is unavailable, offer the returned local alternatives without explaining the process.
 
-Other writes: For every create, edit, cancellation, note, or follow-up, first use the action tool with confirmed=false. Ask for clear confirmation, then perform the action only after explicit confirmation in a later message. Never treat a vague acknowledgement as confirmation. Do not claim to send, book, change, or cancel anything unless the tool returned ok=true. When navigation is requested, name only the relevant area and path.`;
+Other writes: For every create, edit, cancellation, note, or follow-up, first use the action tool with confirmed=false. Ask for clear confirmation, then perform the action only after explicit confirmation in a later message. Never treat a vague acknowledgement as confirmation. Do not claim to send, book, change, or cancel anything unless the tool returned ok=true. When navigation is requested, name only the relevant area and path.
+
+Honesty about actions: Never say something was sent, saved, scheduled, changed or cancelled unless the tool result says ok: true. If a tool returns ok: false, tell the owner plainly that it did NOT happen and why, and offer the next step. You can email an existing invoice (sendInvoice) and create an editable draft schedule (draftSchedule); both need the owner's explicit confirmation first. You cannot publish a schedule or email it to employees, create invoices or quotes, record payments, or send quotes; if asked, say so and point to the right page instead of pretending.`;

@@ -23,6 +23,22 @@ export class MarketingRetrievalError extends Error {
   }
 }
 
+/** Raised when website learning cannot run because no Firecrawl API key has been added. */
+export class FirecrawlNotConfiguredError extends MarketingRetrievalError {
+  constructor() {
+    super('firecrawl_retrieval', 'Website learning isn’t set up yet. A Firecrawl API key needs to be added to this app’s settings. In the meantime you can upload your business information instead.', 503, 'FIRECRAWL_API_KEY is missing.');
+    this.name = 'FirecrawlNotConfiguredError';
+  }
+}
+
+function firecrawlKey(): string | null {
+  const key = getSecret('FIRECRAWL_API_KEY') ?? getSecret('FIRECRAWL_API-KEY');
+  return typeof key === 'string' && key.trim() ? key : null;
+}
+
+/** True when the Firecrawl key needed for website learning has been provided. */
+export function isFirecrawlConfigured(): boolean { return firecrawlKey() !== null; }
+
 export type MarketingWebsiteRecord = {
   url: string;
   title: string;
@@ -122,10 +138,8 @@ function buildSourceText(records: MarketingWebsiteRecord[], source: MarketingRet
 }
 
 async function firecrawlFetch(path: string, init: RequestInit): Promise<Response> {
-  const apiKey = getSecret('FIRECRAWL_API_KEY') ?? getSecret('FIRECRAWL_API-KEY');
-  if (!apiKey || typeof apiKey !== 'string') {
-    throw new MarketingRetrievalError('firecrawl_retrieval', 'Website learning is temporarily unavailable. Please upload your business information instead.', 503, 'FIRECRAWL_API_KEY is missing.');
-  }
+  const apiKey = firecrawlKey();
+  if (!apiKey) throw new FirecrawlNotConfiguredError();
 
   try {
     const headers = new Headers(init.headers);
@@ -232,6 +246,8 @@ export async function retrieveMarketingWebsite(value: string): Promise<Marketing
       warnings: [],
     };
   } catch (directError) {
+    // Without a key there is nothing to fall back to, so say so plainly instead of trying a second failing call.
+    if (directError instanceof FirecrawlNotConfiguredError) throw directError;
     const reason = directError instanceof MarketingRetrievalError ? directError : new MarketingRetrievalError('firecrawl_retrieval', 'I could not retrieve that website. I’ll check public business information next.', 502, directError instanceof Error ? directError.message : String(directError));
     log('warn', { traceId, stage: reason.stage, outcome: 'direct_retrieval_failed', url: url.toString(), detail: reason.message });
 

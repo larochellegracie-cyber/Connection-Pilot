@@ -34,6 +34,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     '/calendar',
     '/customers',
     '/finance',
+    '/insights',
     '/jobs',
     '/leads',
     '/messages',

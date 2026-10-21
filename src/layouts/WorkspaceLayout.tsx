@@ -69,7 +69,7 @@ export default function WorkspaceLayout({ children }: { children: ReactNode }) {
     { title: 'Marketing', href: '/marketing', icon: Megaphone, active: location.pathname === '/marketing' },
     { title: 'Notifications', href: '/notifications', icon: BellRing, active: location.pathname === '/notifications' },
     { title: 'AI Voice Receptionist · Coming Soon', href: '/dashboard/ai-receptionist', icon: PhoneCall, active: location.pathname === '/dashboard/ai-receptionist' },
-    ...(planFeatures.includes('basic_insights') ? [{ title: 'Insights', href: '/dashboard#insights', icon: BarChart3, active: isDashboard && location.hash === '#insights' }] : []),
+    ...(planFeatures.includes('basic_insights') ? [{ title: 'Insights', href: '/insights', icon: BarChart3, active: location.pathname === '/insights' }] : []),
   ], [foodBusiness, isDashboard, location.hash, location.pathname, planFeatures]);
 
   const secondaryNavigation = useMemo(() => [
@@ -80,7 +80,7 @@ export default function WorkspaceLayout({ children }: { children: ReactNode }) {
 
   return (
     <Dashboard
-      className={`workspace-page workspace-page--${workspaceArea} bg-muted`}
+      className={`workspace-page workspace-page--${workspaceArea} bg-[hsl(var(--canvas))]`}
       config={{
         sidebar: {
           logo: { image: '/airo-assets/images/logo/horizontal/dark', text: 'Connection Pilot', href: '/dashboard' },
@@ -103,7 +103,7 @@ export default function WorkspaceLayout({ children }: { children: ReactNode }) {
           userMenu: <><div className="my-1 border-t border-border" /><Link to="/profile" className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold text-secondary transition-colors hover:bg-accent active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><UserRound className="h-4 w-4" />Profile</Link><Link to="/settings" className="mt-1 flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold text-secondary transition-colors hover:bg-accent active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Settings className="h-4 w-4" />Settings</Link><Link to="/dashboard/help" className="mt-1 flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold text-secondary transition-colors hover:bg-accent active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><CircleHelp className="h-4 w-4" />Help</Link><div className="my-1 border-t border-border" /><LogoutButton className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-sm font-semibold text-destructive transition-colors hover:bg-muted active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Log out</LogoutButton></>,
           className: 'border-border bg-background',
         },
-        main: { maxWidth: '2xl', padding: true, className: 'bg-muted' },
+        main: { maxWidth: '2xl', padding: true, className: 'bg-[hsl(var(--canvas))]' },
       }}
     >
       <TrialStatusBanner />

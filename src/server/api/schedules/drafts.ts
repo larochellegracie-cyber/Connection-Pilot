@@ -49,7 +49,17 @@ export async function createDraftFromSeeds(businessProfileId: string, startsAt: 
   return scheduleId;
 }
 
+/**
+ * Moves a date by whole calendar weeks, keeping the local time of day. Adding 7×24 hours is wrong across a
+ * daylight-saving change (that week is 167 or 169 hours long): "last week" would be found an hour out, and a
+ * copied 8:00 AM shift would land at 7:00 AM.
+ */
+export function addWeeks(value: Date, weeks: number): Date {
+  const result = new Date(value);
+  result.setDate(result.getDate() + weeks * 7);
+  return result;
+}
+
 export function shiftWeek(shift: ShiftSeed, weekDifference: number): ShiftSeed {
-  const offset = weekDifference * 7 * 24 * 60 * 60 * 1000;
-  return { ...shift, startsAt: new Date(shift.startsAt.getTime() + offset), endsAt: new Date(shift.endsAt.getTime() + offset) };
+  return { ...shift, startsAt: addWeeks(shift.startsAt, weekDifference), endsAt: addWeeks(shift.endsAt, weekDifference) };
 }

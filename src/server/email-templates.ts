@@ -51,7 +51,8 @@ export function invoiceEmailTemplate(input: { brand: EmailBrand; customerName: s
   const amountSummary = summaryRows([{ label: 'Amount paid', value: money(input.amountPaid) }, { label: 'Amount due', value: money(input.amountDue), emphasis: true }]);
   const footerStart = '<p style="margin:24px 0 0;color:slategray;font-size:14px;line-height:21px;">Thank you for considering';
   const html = quoteLike.html.replace('Your Quote', 'Invoice').replace('>Quote<', '>Invoice<').replace('Quote ', 'Invoice ').replace('Valid until', 'Due').replace(footerStart, `${amountSummary}${footerStart}`);
-  return { html, text: quoteLike.text.replace(/quote/gi, 'invoice').replace('Total:', `Status: ${input.status}\nTotal:`) };
+  const text = quoteLike.text.replace(/quote/gi, 'invoice').replace('Total:', `Status: ${input.status}\nTotal:`).replace(/Total: [^\n]*/, (totalLine) => `${totalLine}\nAmount paid: ${money(input.amountPaid)}\nAmount due: ${money(input.amountDue)}`);
+  return { html, text };
 }
 
 export function scheduleEmailTemplate(input: { brand: EmailBrand; employeeName: string; weekStartsAt: Date; shifts: ScheduleShift[]; timezone: string }) {

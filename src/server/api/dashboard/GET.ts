@@ -1,10 +1,11 @@
 import type { Request, Response } from 'express';
-import { and, desc, eq, gte, inArray, lt, sql } from 'drizzle-orm';
+import { and, desc, eq, gte, inArray, like, lt, sql } from 'drizzle-orm';
 import { db } from '@/server/db/client.js';
-import { businessNotification, customer, customerActivity, customerAppointment, customerInteraction, estimate, invoice, job, jobActivity, lead, leadActivity, payment } from '@/server/db/schema.js';
+import { businessNotification, customer, customerActivity, customerAppointment, customerConversation, customerInteraction, estimate, invoice, job, lead, payment } from '@/server/db/schema.js';
 import { getTenant } from '@/server/api/customers/tenant.js';
 import { isFoodBusiness } from '@/lib/business-workflow.js';
 import { getProactiveBriefing } from '@/server/pilot/proactive-briefing.js';
+import { buildBusinessActivity } from './business-activity.js';
 
 function number(value: unknown): number { return Number(value || 0); }
 
@@ -32,7 +33,7 @@ export default async function handler(req: Request, res: Response) {
     const activeJobStatuses = ['booked', 'in_progress'];
     const openInvoiceStatuses = ['sent', 'overdue', 'open'];
 
-    const [todaySchedule, counts, finance, attentionRows, unreadNotifications, customerActivityRows, leadActivityRows, jobActivityRows, appointmentRows, proactiveBriefing] = await Promise.all([
+    const [todaySchedule, counts, finance, attentionRows, unreadNotifications, appointmentRows, proactiveBriefing] = await Promise.all([
       foodBusiness
         ? db.select({ id: job.id, customerId: customer.id, customerName: customer.name, title: job.service, status: job.status, scheduledAt: job.scheduledAt }).from(job).innerJoin(customer, eq(job.customerId, customer.id)).where(and(eq(job.businessProfileId, tenant.id), activeCustomer, gte(job.scheduledAt, today), lt(job.scheduledAt, tomorrow), sql`${job.status} NOT IN ('cancelled', 'completed')`)).orderBy(job.scheduledAt)
         : db.select({ id: customerAppointment.id, customerId: customer.id, customerName: customer.name, title: customerAppointment.title, status: customerAppointment.status, scheduledAt: customerAppointment.scheduledAt }).from(customerAppointment).innerJoin(customer, eq(customerAppointment.customerId, customer.id)).where(and(activeCustomer, gte(customerAppointment.scheduledAt, today), lt(customerAppointment.scheduledAt, tomorrow), sql`${customerAppointment.status} NOT IN ('cancelled', 'completed')`)).orderBy(customerAppointment.scheduledAt),
@@ -48,9 +49,6 @@ export default async function handler(req: Request, res: Response) {
       ]),
       db.select({ id: customerInteraction.id, customerId: customer.id, customerName: customer.name, title: customerInteraction.summary, occurredAt: customerInteraction.occurredAt }).from(customerInteraction).innerJoin(customer, eq(customerInteraction.customerId, customer.id)).where(and(activeCustomer, eq(customerInteraction.followUpNeeded, true))).orderBy(desc(customerInteraction.occurredAt)).limit(8),
       db.select({ id: businessNotification.id, customerId: businessNotification.customerId, customerName: customer.name, title: businessNotification.title, createdAt: businessNotification.createdAt }).from(businessNotification).innerJoin(customer, eq(businessNotification.customerId, customer.id)).where(and(eq(businessNotification.businessProfileId, tenant.id), sql`${businessNotification.readAt} IS NULL`)).orderBy(desc(businessNotification.createdAt)).limit(8),
-      db.select({ id: customerActivity.id, customerId: customer.id, customerName: customer.name, title: customerActivity.title, detail: customerActivity.detail, occurredAt: customerActivity.occurredAt, type: customerActivity.activityType }).from(customerActivity).innerJoin(customer, eq(customerActivity.customerId, customer.id)).where(activeCustomer).orderBy(desc(customerActivity.occurredAt)).limit(8),
-      db.select({ id: leadActivity.id, title: leadActivity.title, detail: leadActivity.detail, occurredAt: leadActivity.occurredAt, type: leadActivity.activityType }).from(leadActivity).innerJoin(lead, eq(leadActivity.leadId, lead.id)).where(eq(lead.businessProfileId, tenant.id)).orderBy(desc(leadActivity.occurredAt)).limit(8),
-      db.select({ id: jobActivity.id, title: jobActivity.title, detail: jobActivity.detail, occurredAt: jobActivity.occurredAt, type: jobActivity.activityType }).from(jobActivity).innerJoin(job, eq(jobActivity.jobId, job.id)).where(eq(job.businessProfileId, tenant.id)).orderBy(desc(jobActivity.occurredAt)).limit(8),
       db.select({ id: customerAppointment.id, customerId: customer.id, customerName: customer.name, title: customerAppointment.title, occurredAt: customerAppointment.updatedAt, status: customerAppointment.status }).from(customerAppointment).innerJoin(customer, eq(customerAppointment.customerId, customer.id)).where(activeCustomer).orderBy(desc(customerAppointment.updatedAt)).limit(8),
       getProactiveBriefing(tenant),
     ]);
@@ -70,12 +68,31 @@ export default async function handler(req: Request, res: Response) {
       ...cancelledRows.map((item) => ({ id: item.id, customerId: item.customerId, customerName: item.customerName, title: item.title, kind: 'cancelled' as const, occurredAt: item.occurredAt })),
     ].sort((a, b) => b.occurredAt.getTime() - a.occurredAt.getTime()).slice(0, 10);
 
-    const recentActivity = [
-      ...customerActivityRows.map((item) => ({ id: `customer-${item.id}`, customerId: item.customerId, customerName: item.customerName, title: item.title, detail: item.detail, type: item.type, occurredAt: item.occurredAt })),
-      ...leadActivityRows.map((item) => ({ id: `lead-${item.id}`, customerId: null, customerName: 'Lead pipeline', title: item.title, detail: item.detail, type: item.type, occurredAt: item.occurredAt })),
-      ...jobActivityRows.map((item) => ({ id: `job-${item.id}`, customerId: null, customerName: 'Jobs', title: item.title, detail: item.detail, type: item.type, occurredAt: item.occurredAt })),
-      ...appointmentRows.map((item) => ({ id: `appointment-${item.id}`, customerId: item.customerId, customerName: item.customerName, title: item.title, detail: item.status, type: 'appointment', occurredAt: item.occurredAt })),
-    ].sort((a, b) => b.occurredAt.getTime() - a.occurredAt.getTime()).slice(0, 10);
+    // "Recent activity" is built from real business records only; private notes and edits are never read.
+    const [activityAppointments, activityCustomers, activityInteractions, activityConversations, activityJobs, activityQuotes, activityInvoices, activityPayments, pilotActionRows] = await Promise.all([
+      db.select({ id: customerAppointment.id, customerId: customer.id, customerName: customer.name, title: customerAppointment.title, status: customerAppointment.status, scheduledAt: customerAppointment.scheduledAt, createdAt: customerAppointment.createdAt, updatedAt: customerAppointment.updatedAt }).from(customerAppointment).innerJoin(customer, eq(customerAppointment.customerId, customer.id)).where(activeCustomer).orderBy(desc(customerAppointment.updatedAt)).limit(12),
+      db.select({ id: customer.id, name: customer.name, createdAt: customer.createdAt }).from(customer).where(activeCustomer).orderBy(desc(customer.createdAt)).limit(6),
+      db.select({ id: customerInteraction.id, customerId: customer.id, customerName: customer.name, interactionType: customerInteraction.interactionType, direction: customerInteraction.direction, summary: customerInteraction.summary, occurredAt: customerInteraction.occurredAt }).from(customerInteraction).innerJoin(customer, eq(customerInteraction.customerId, customer.id)).where(activeCustomer).orderBy(desc(customerInteraction.occurredAt)).limit(6),
+      db.select({ id: customerConversation.id, customerId: customer.id, customerName: customer.name, channel: customerConversation.channel, direction: customerConversation.direction, content: customerConversation.content, occurredAt: customerConversation.occurredAt }).from(customerConversation).innerJoin(customer, eq(customerConversation.customerId, customer.id)).where(activeCustomer).orderBy(desc(customerConversation.occurredAt)).limit(6),
+      db.select({ id: job.id, customerId: customer.id, customerName: customer.name, service: job.service, status: job.status, createdAt: job.createdAt, updatedAt: job.updatedAt }).from(job).innerJoin(customer, eq(job.customerId, customer.id)).where(and(eq(job.businessProfileId, tenant.id), activeCustomer)).orderBy(desc(job.updatedAt)).limit(8),
+      db.select({ id: estimate.id, customerId: customer.id, customerName: customer.name, status: estimate.status, total: estimate.total, createdAt: estimate.createdAt, updatedAt: estimate.updatedAt }).from(estimate).innerJoin(customer, eq(estimate.customerId, customer.id)).where(and(eq(estimate.businessProfileId, tenant.id), activeCustomer)).orderBy(desc(estimate.updatedAt)).limit(8),
+      db.select({ id: invoice.id, customerId: customer.id, customerName: customer.name, status: invoice.status, total: invoice.total, createdAt: invoice.createdAt, updatedAt: invoice.updatedAt }).from(invoice).innerJoin(customer, eq(invoice.customerId, customer.id)).where(and(eq(invoice.businessProfileId, tenant.id), activeCustomer)).orderBy(desc(invoice.updatedAt)).limit(8),
+      db.select({ id: payment.id, customerId: customer.id, customerName: customer.name, invoiceId: payment.invoiceId, amount: payment.amount, status: payment.status, receivedAt: payment.receivedAt, createdAt: payment.createdAt }).from(payment).innerJoin(customer, eq(payment.customerId, customer.id)).where(and(eq(payment.businessProfileId, tenant.id), activeCustomer, eq(payment.status, 'completed'))).orderBy(desc(payment.createdAt)).limit(8),
+      db.select({ id: customerActivity.id, customerId: customer.id, customerName: customer.name, type: customerActivity.activityType, detail: customerActivity.detail, occurredAt: customerActivity.occurredAt }).from(customerActivity).innerJoin(customer, eq(customerActivity.customerId, customer.id)).where(and(activeCustomer, inArray(customerActivity.activityType, ['appointment_created', 'appointment_rescheduled', 'appointment_cancelled']), like(customerActivity.title, '%by Pilot'))).orderBy(desc(customerActivity.occurredAt)).limit(8),
+    ]);
+    const pilotKinds = { appointment_created: 'appointment_booked', appointment_rescheduled: 'appointment_rescheduled', appointment_cancelled: 'appointment_cancelled' } as const;
+    const recentActivity = buildBusinessActivity({
+      appointments: activityAppointments,
+      customers: activityCustomers,
+      interactions: activityInteractions,
+      conversations: activityConversations,
+      jobs: activityJobs,
+      quotes: activityQuotes,
+      invoices: activityInvoices,
+      payments: activityPayments.map((item) => ({ ...item, occurredAt: item.receivedAt ?? item.createdAt })),
+      receivedByInvoice,
+      pilotActions: pilotActionRows.flatMap((item) => (item.type in pilotKinds ? [{ id: item.id, customerId: item.customerId, customerName: item.customerName, kind: pilotKinds[item.type as keyof typeof pilotKinds], detail: item.detail, occurredAt: item.occurredAt }] : [])),
+    }, { foodBusiness, timezone: 'America/Toronto', limit: 8 });
 
     res.json({ businessName: tenant.businessName, businessType: tenant.businessType, todaySchedule, summary: { openLeads, activeJobs, estimates, invoices, unpaidBalance, revenue }, attention, recentActivity, briefing: { todayAppointments: todaySchedule.length, attentionItems: attention.length, openLeads, activeJobs }, proactiveBriefing });
   } catch (error) { res.status(500).json({ error: 'Unable to load dashboard data.', message: String(error) }); }

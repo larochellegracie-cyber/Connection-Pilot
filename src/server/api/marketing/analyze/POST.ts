@@ -2,11 +2,11 @@ import type { Request, Response } from 'express';
 import { eq } from 'drizzle-orm';
 import { randomUUID } from 'node:crypto';
 import { generateText } from 'ai';
-import { getChatModel } from '@/lib/chatbot/chat-config.js';
+import { getChatModel, isChatConfigured } from '@/lib/chatbot/chat-config.js';
 import { getAuth } from '@/lib/auth/auth.js';
 import { db } from '@/server/db/client.js';
 import { businessProfile, marketingProfile } from '@/server/db/schema.js';
-import { MarketingRetrievalError, retrieveMarketingWebsite } from '@/server/marketing/firecrawl-retrieval.js';
+import { FirecrawlNotConfiguredError, isFirecrawlConfigured, MarketingRetrievalError, retrieveMarketingWebsite } from '@/server/marketing/firecrawl-retrieval.js';
 
 const SYSTEM_PROMPT = `You are a business analyst. You will be given content retrieved directly from a business website or from publicly indexed search results.
 Extract structured business information from the content. Only include information that is actually present in the content — do not invent or assume anything.
@@ -119,6 +119,10 @@ export default async function handler(req: Request, res: Response) {
 
     console.info(JSON.stringify({ event: 'marketing-analysis', traceId, stage: 'authenticated_request', businessProfileId: profile.id, existingMarketingProfileId: existingProfiles[0]?.id ?? null }));
 
+    // Check setup before spending a crawl: both the website reader and the analysis step need their keys.
+    if (!isFirecrawlConfigured()) { const setup = new FirecrawlNotConfiguredError(); res.status(setup.status).json({ error: setup.publicMessage, stage: setup.stage, setupRequired: true }); return; }
+    if (!isChatConfigured()) { res.status(503).json({ error: 'Website learning isn’t set up yet. An OpenAI API key needs to be added to this app’s settings. In the meantime you can upload your business information instead.', stage: 'openai_analysis', setupRequired: true }); return; }
+
     let retrieval: Awaited<ReturnType<typeof retrieveMarketingWebsite>>;
     try {
       retrieval = await retrieveMarketingWebsite(websiteUrl);
@@ -140,7 +144,6 @@ export default async function handler(req: Request, res: Response) {
         model: getChatModel(),
         system: SYSTEM_PROMPT,
         prompt: `Website URL: ${retrieval.website}\nRetrieval source: ${retrieval.source === 'website' ? 'Direct website retrieval' : 'Publicly indexed search results'}\n\nRetrieved content:\n${retrieval.sourceText.slice(0, 80_000)}`,
-        maxTokens: 2000,
       });
       text = response.text;
       console.info(JSON.stringify({ event: 'marketing-analysis', traceId, stage: 'openai_analysis_complete', characters: text.length }));

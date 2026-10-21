@@ -7,7 +7,7 @@ import type { Request, Response } from "express";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { sendEmail } from "@/server/email";
+import { sendEmailOrThrow } from "@/server/email";
 
 interface ContactFormEntry {
 	/** Address that receives submissions for this form. */
@@ -202,7 +202,7 @@ export default async function handler(req: Request, res: Response): Promise<void
 		`<h3>Message</h3><p style="white-space:pre-wrap">${escapeHtml(message)}</p>`;
 
 	try {
-		await sendEmail({
+		await sendEmailOrThrow({
 			fromName: "Connection Pilot Website",
 			to: formConfig.to,
 			subject: `New contact form message (${singleLine(formName, 100)}) from ${visitorName}`,

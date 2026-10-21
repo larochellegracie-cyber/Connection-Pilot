@@ -29,6 +29,7 @@ import JobsPage from './pages/jobs';
 import FinancePage from './pages/finance';
 import ConnectionsPage from './pages/connections';
 import EmployeesPage from './pages/employees';
+import InsightsPage from './pages/insights';
 import SchedulingPage from './pages/scheduling';
 import SubscriptionPage from './pages/subscription';
 import MarketingPage from './pages/marketing';
@@ -142,6 +143,10 @@ export const routes: RouteObject[] = [
   {
     path: '/employees',
     element: <EmployeesPage />,
+  },
+  {
+    path: '/insights',
+    element: <InsightsPage />,
   },
   {
     path: '/scheduling',

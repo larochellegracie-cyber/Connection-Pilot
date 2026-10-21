@@ -3,7 +3,7 @@ import { and, asc, desc, eq, gte, like, lt, or, sql } from 'drizzle-orm';
 import { randomUUID } from 'node:crypto';
 import { stepCountIs, streamText, tool } from 'ai';
 import { z } from 'zod';
-import { getChatModel, SYSTEM_PROMPT } from '@/lib/chatbot/chat-config';
+import { getChatModel, isChatConfigured, SYSTEM_PROMPT } from '@/lib/chatbot/chat-config';
 import { getTenant } from '@/server/api/customers/tenant.js';
 import { db } from '@/server/db/client.js';
 import { businessKnowledge, businessKnowledgeSource, businessNotification, businessProfile, customer, customerActivity, customerAppointment, customerConversation, customerInteraction, customerNote, estimate, invoice, job, lead, marketingProfile, payment } from '@/server/db/schema.js';
@@ -14,6 +14,7 @@ import { jobDetailsFromNotes, orderDetailsFromNotes } from '@/lib/order-record.j
 import { isFoodBusiness } from '@/lib/business-workflow.js';
 import { requirePlanFeature } from '@/server/plan-access.js';
 import { getPilotBusinessContext } from '@/server/pilot/business-context.js';
+import { createActionTools } from '@/server/pilot/action-tools.js';
 import { pilotDateRange, type PilotDatePeriod } from '@/server/pilot/time-context.js';
 import { learnFromOwnerMessage, pilotFactKinds, searchPilotLearning } from '@/server/pilot/learning.js';
 
@@ -95,6 +96,12 @@ export default async function handler(req: Request, res: Response) {
     return;
   }
 
+  if (!isChatConfigured()) {
+    console.error(JSON.stringify({ event: 'business-assistant.not-configured', requestId, tenantId: tenant.id, error: 'OPENAI_API_KEY is not set.' }));
+    res.status(503).json({ error: 'Pilot chat is not set up yet. An OpenAI API key needs to be added to this app’s settings.', setupRequired: true, requestId });
+    return;
+  }
+
   const safeMessages = messages
     .filter((message) => (message.role === 'user' || message.role === 'assistant') && typeof message.content === 'string')
     .slice(-12)
@@ -140,6 +147,8 @@ export default async function handler(req: Request, res: Response) {
         console.info(JSON.stringify({ event: 'business-assistant.completed', requestId, tenantId: tenant.id }));
       },
       tools: {
+        // Actions that change data or send something: each asks for confirmation and reports only real results.
+        ...createActionTools({ tenantId: tenant.id, businessName: tenant.businessName, request: req }),
         learnBusinessFacts: tool({
           description: 'Use when the owner explicitly gives durable business information for Pilot to remember: offerings, prices, resource requirements, suppliers or lead times, operating rules, processes, or observations. Extract only what the owner stated in the newest message. Never infer missing quantities, units, prices, supplier details, dates, or rules. This saves owner-provided facts only; it cannot change prices, inventory, schedules, financial records, or any other business data. Duplicate facts are skipped and conflicting facts are held for owner review rather than overwritten.',
           inputSchema: z.object({

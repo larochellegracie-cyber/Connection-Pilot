@@ -6,8 +6,9 @@ import { employee, employeeAvailability, employeeShift, employeeTimeOffRequest, 
 import { requirePlanFeature } from '@/server/plan-access.js';
 import { getCalendarSettings } from '../../calendar/shared.js';
 import { getTenant, textValue } from '../../customers/tenant.js';
-import { findSchedule, parseWeekStart } from '../drafts.js';
+import { addWeeks, findSchedule, parseWeekStart, shiftWeek } from '../drafts.js';
 import { parsePilotInstruction, type PilotCommand, type PilotEmployee } from '../pilot-parser.js';
+import { dropDuplicateShifts } from './duplicates.js';
 
 type ShiftSeed = { employeeId: string; startsAt: Date; endsAt: Date; location: string | null; notes: string | null };
 type ExistingShift = { id: string; employeeId: string; startsAt: Date; endsAt: Date; location: string | null; notes: string | null };
@@ -84,10 +85,12 @@ export default async function handler(req: Request, res: Response) {
     ]);
     const parsed = parsePilotInstruction(instruction, members as PilotEmployee[], { weekStart: targetWeek, timezone: settings.timezone });
     if (parsed.clarification || !parsed.commands) return void clarification(res, parsed.clarification || 'Please clarify the schedule change.');
-    const weekEnd = new Date(targetWeek.getTime() + 7 * 86400000);
+    // Whole calendar weeks, not 168 hours: a week that contains a clock change is 167 or 169 hours long.
+    const previousWeekStart = addWeeks(targetWeek, -1);
+    const weekEnd = addWeeks(targetWeek, 1);
     const [targetSchedule, sourceSchedule, availability, timeOff] = await Promise.all([
       findSchedule(tenant.id, targetWeek),
-      findSchedule(tenant.id, new Date(targetWeek.getTime() - 7 * 86400000)),
+      findSchedule(tenant.id, previousWeekStart),
       db.select({ employeeId: employeeAvailability.employeeId, dayOfWeek: employeeAvailability.dayOfWeek, startTime: employeeAvailability.startTime, endTime: employeeAvailability.endTime, isAvailable: employeeAvailability.isAvailable }).from(employeeAvailability).where(eq(employeeAvailability.businessProfileId, tenant.id)),
       db.select({ employeeId: employeeTimeOffRequest.employeeId, startsAt: employeeTimeOffRequest.startsAt, endsAt: employeeTimeOffRequest.endsAt }).from(employeeTimeOffRequest).where(and(eq(employeeTimeOffRequest.businessProfileId, tenant.id), eq(employeeTimeOffRequest.status, 'approved'))),
     ]);
@@ -97,8 +100,30 @@ export default async function handler(req: Request, res: Response) {
       sourceSchedule ? db.select({ id: employeeShift.id, employeeId: employeeShift.employeeId, startsAt: employeeShift.startsAt, endsAt: employeeShift.endsAt, location: employeeShift.location, notes: employeeShift.notes }).from(employeeShift).where(and(eq(employeeShift.businessProfileId, tenant.id), eq(employeeShift.weeklyScheduleId, sourceSchedule.id))) : Promise.resolve([] as ExistingShift[]),
     ]);
 
+    let copiedSkipped = 0;
     const additions: ShiftSeed[] = []; const deleteIds = new Set<string>(); const updateMoves: { id: string; startsAt: Date; endsAt: Date }[] = [];
     for (const command of parsed.commands) {
+      if (command.type === 'copy_previous') {
+        const label = new Intl.DateTimeFormat('en-CA', { timeZone: settings.timezone, month: 'long', day: 'numeric' }).format(previousWeekStart);
+        if (!sourceSchedule || !sourceShifts.length) return void clarification(res, `There is no schedule for the previous week (the week of ${label}) to copy.`);
+        for (const source of sourceShifts) {
+          const seed = shiftWeek({ employeeId: source.employeeId, startsAt: source.startsAt, endsAt: source.endsAt, location: source.location, notes: source.notes }, 1);
+          // Copying is best-effort: a shift that now clashes with time off, availability, or a shift already in this week is left out and counted.
+          const blocked = !availabilityAllows(seed, availability, settings.timezone)
+            || timeOff.some((request) => request.employeeId === seed.employeeId && overlaps(seed, request))
+            || targetShifts.some((existing) => existing.employeeId === seed.employeeId && overlaps(seed, existing));
+          if (blocked) copiedSkipped += 1; else additions.push(seed);
+        }
+      }
+      if (command.type === 'fill') {
+        // Days the employee already works: last week's days, this week's existing shifts, and anything added above.
+        const worked = new Set<number>();
+        for (const shift of [...sourceShifts, ...targetShifts]) if (shift.employeeId === command.employeeId) worked.add(localParts(shift.startsAt, settings.timezone).weekday);
+        for (const seed of additions) if (seed.employeeId === command.employeeId) worked.add(localParts(seed.startsAt, settings.timezone).weekday);
+        const days = [1, 2, 3, 4, 5, 6, 0].filter((day) => !worked.has(day));
+        if (!days.length) return void clarification(res, `${command.employeeName} already has a shift on every day, so there is nothing to add.`);
+        additions.push(...days.map((day) => seedFor({ type: 'add', employeeId: command.employeeId, employeeName: command.employeeName, days: [day], start: command.start, end: command.end }, day, targetWeek, settings.timezone)));
+      }
       if (command.type === 'add') additions.push(...command.days.map((day) => seedFor(command, day, targetWeek, settings.timezone)));
       if (command.type === 'repeat') {
         const repeated = repeatSeeds(command, sourceShifts, targetWeek, settings.timezone);
@@ -120,6 +145,10 @@ export default async function handler(req: Request, res: Response) {
 
     const allExisting = await db.select({ id: employeeShift.id, employeeId: employeeShift.employeeId, startsAt: employeeShift.startsAt, endsAt: employeeShift.endsAt }).from(employeeShift).where(and(eq(employeeShift.businessProfileId, tenant.id), lt(employeeShift.startsAt, weekEnd), gte(employeeShift.endsAt, targetWeek)));
     const ignoreIds = new Set([...deleteIds, ...updateMoves.map((move) => move.id)]);
+    // Shifts already on the schedule (or asked for twice) are skipped, not treated as conflicts.
+    const { keep, skipped: duplicates } = dropDuplicateShifts(additions, allExisting, ignoreIds);
+    const skipped = duplicates + copiedSkipped;
+    additions.splice(0, additions.length, ...keep);
     const proposed = [...additions, ...updateMoves.map((move) => ({ ...move, employeeId: targetShifts.find((shift) => shift.id === move.id)?.employeeId || '', location: null, notes: null }))];
     for (const shift of proposed) {
       if (!availabilityAllows(shift, availability, settings.timezone)) {
@@ -139,7 +168,7 @@ export default async function handler(req: Request, res: Response) {
       for (const move of updateMoves) await tx.update(employeeShift).set({ startsAt: move.startsAt, endsAt: move.endsAt }).where(and(eq(employeeShift.id, move.id), eq(employeeShift.businessProfileId, tenant.id), eq(employeeShift.weeklyScheduleId, scheduleId)));
       if (additions.length) await tx.insert(employeeShift).values(additions.map((shift) => ({ id: randomUUID(), businessProfileId: tenant.id, weeklyScheduleId: scheduleId, ...shift })));
     });
-    res.status(201).json({ scheduleId, created: additions.length, moved: updateMoves.length, removed: deleteIds.size, status: 'draft' });
+    res.status(201).json({ scheduleId, created: additions.length, moved: updateMoves.length, removed: deleteIds.size, skipped, status: 'draft' });
   } catch (error) {
     console.error('schedule_pilot_draft.failed', error instanceof Error ? { name: error.name, message: error.message } : { type: typeof error });
     res.status(500).json({ error: 'Pilot could not save that draft. No schedule was published.' });

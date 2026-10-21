@@ -3,7 +3,7 @@ import { and, asc, eq } from 'drizzle-orm';
 import { randomUUID } from 'node:crypto';
 import { db } from '@/server/db/client.js';
 import { businessProfile, customer, estimate, financeLineItem, marketingProfile, quoteEmailDelivery } from '@/server/db/schema.js';
-import { sendEmail } from '@/server/email';
+import { emailFailure, sendEmailOrThrow } from '@/server/email';
 import { quoteEmailTemplate } from '@/server/email-templates';
 import { getTenant, textValue } from '../../../../customers/tenant.js';
 import { logFinanceActivity } from '../../../shared.js';
@@ -36,14 +36,15 @@ export default async function handler(req: Request, res: Response) {
     const subject = `${tenant.businessName} quote ${number}`;
     const message = quoteEmailTemplate({ brand: { businessName: branding?.businessName || tenant.businessName, businessEmail: branding?.businessEmail, phoneNumber: branding?.phoneNumber, logoUrl: branding?.logoUrl, brandColour: firstBrandColour(branding?.brandColors || null) }, customerName: record.customerName, quoteNumber: number, createdAt: record.createdAt, expiresAt: record.expiresAt, lineItems: lineItems.map((item) => ({ description: item.description, quantity: item.quantity, unitPrice: item.unitPrice, subtotal: item.subtotal })), subtotal: record.subtotal, taxTotal: record.taxTotal, total: record.total, notes: record.notes });
     try {
-      const result = await sendEmail({ fromName: branding?.businessName || tenant.businessName, to: recipient, subject, text: message.text, html: message.html });
+      const result = await sendEmailOrThrow({ fromName: branding?.businessName || tenant.businessName, to: recipient, subject, text: message.text, html: message.html });
       await db.transaction(async (tx) => { await tx.update(quoteEmailDelivery).set({ status: 'accepted', providerMessageId: result.messageId, providerStatus: 'accepted', acceptedAt: new Date() }).where(and(eq(quoteEmailDelivery.id, deliveryId), eq(quoteEmailDelivery.businessProfileId, tenant.id))); await tx.update(estimate).set({ status: 'sent' }).where(and(eq(estimate.id, estimateId), eq(estimate.businessProfileId, tenant.id))); await logFinanceActivity(tx, record.customerId, null, 'Quote email accepted', `Quote ${number} accepted by the email provider.`); });
       console.info('quote.email.accepted', { tenantId: tenant.id, estimateId, deliveryId, providerMessageId: result.messageId, providerStatus: 'accepted' });
       return void res.json({ ok: true, messageId: result.messageId });
     } catch (error) {
       const reason = failureMessage(error); await db.update(quoteEmailDelivery).set({ status: 'failed', providerStatus: 'failed', failureReason: reason }).where(and(eq(quoteEmailDelivery.id, deliveryId), eq(quoteEmailDelivery.businessProfileId, tenant.id)));
       console.error('quote.email.failed', { tenantId: tenant.id, estimateId, deliveryId, providerStatus: 'failed', reason });
-      return void res.status(502).json({ error: 'We could not send this quote email. Please try again.' });
+      const failure = emailFailure(error);
+      return void res.status(failure.status).json({ error: failure.error, setupRequired: failure.setupRequired });
     }
   } catch (error) { console.error('quote.email.unexpected_failure', { reason: failureMessage(error) }); res.status(500).json({ error: 'We could not send this quote email. Please try again.' }); }
 }

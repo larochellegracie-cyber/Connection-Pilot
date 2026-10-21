@@ -39,6 +39,7 @@ export default defineConfig({
     alias: {
       'virtual:format-overrides': path.resolve(__dirname, './src/test/format-overrides-module.ts'),
       'virtual:content-runtime': contentRuntimeAlias,
+      'virtual:content': path.resolve(__dirname, './src/test/virtual-content-stub.ts'),
       '@airo/content': path.resolve(__dirname, './content-lib/src/index.ts'),
       '@/': path.resolve(__dirname, './src') + '/',
       '@/components': path.resolve(__dirname, './src/components'),

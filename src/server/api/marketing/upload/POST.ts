@@ -168,7 +168,6 @@ export default async function handler(req: Request, res: Response) {
         { role: 'user', content: `Document filename: ${originalname}\n\nDocument content:\n${text}` },
       ],
       temperature: 0.1,
-      maxTokens: 2000,
     });
 
     const raw = safeJson(aiResponse);

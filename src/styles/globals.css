@@ -55,6 +55,8 @@
     --workspace-pilot: 235 78% 55%;
     --workspace-pilot-soft: 236 100% 97%;
     --workspace-pilot-ink: 254 70% 49%;
+    /* Calm grey-blue canvas behind workspace panels */
+    --canvas: 220 33% 96%;
     /* Extended Colors */
     --chart-1: 225 81% 75%;
     --chart-2: 225 80% 60%;
@@ -244,7 +246,8 @@
     --tone-primary-ink: var(--primary);
   }
 
-  .workspace-page--dashboard { --tone-primary: var(--workspace-pilot); --tone-primary-soft: var(--workspace-pilot-soft); --tone-primary-ink: var(--workspace-pilot-ink); }
+  /* Home: blue means core business actions. Purple is reserved for Pilot surfaces (.cp-pilot, .tone-pilot). */
+  .workspace-page--dashboard { --tone-primary: var(--primary); --tone-primary-soft: var(--accent); --tone-primary-ink: var(--primary); }
   .workspace-page--customers { --tone-primary: var(--workspace-customers); --tone-primary-soft: var(--workspace-customers-soft); --tone-primary-ink: var(--workspace-customers-ink); }
   .workspace-page--leads { --tone-primary: var(--workspace-opportunity); --tone-primary-soft: var(--workspace-opportunity-soft); --tone-primary-ink: var(--workspace-opportunity-ink); }
   .workspace-page--jobs { --tone-primary: var(--workspace-jobs); --tone-primary-soft: var(--workspace-jobs-soft); --tone-primary-ink: var(--workspace-jobs-ink); }
@@ -303,6 +306,103 @@
   .workspace-chart-bar--1 { background-color: hsl(var(--workspace-customers)); }
   .workspace-chart-bar--2 { background-color: hsl(var(--workspace-jobs)); }
   .workspace-chart-bar--3 { background-color: hsl(var(--workspace-opportunity)); }
+
+  /* ---- Connection Pilot design system (cp-*) ---------------------------------
+     Surfaces stay neutral; colour is reserved for meaning:
+       blue = primary action     purple = customers and Pilot / intelligence
+       green = positive money    amber = needs attention     red = genuinely urgent
+     Pages combine these pieces in different shapes (bands, timelines, rows,
+     feeds) instead of repeating one large card. */
+  .workspace-page main .cp-panel,
+  .cp-panel {
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.875rem;
+    overflow: hidden;
+  }
+  .cp-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  .cp-title { font-size: 0.9375rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1.3; color: hsl(var(--secondary)); }
+  .cp-subtle { font-size: 0.75rem; line-height: 1.4; color: hsl(var(--muted-foreground)); }
+  .cp-eyebrow { font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+  .cp-link { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.8125rem; font-weight: 700; color: hsl(var(--tone-primary-ink)); }
+  .cp-link:hover { text-decoration: underline; }
+  .cp-metric-value { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; font-variant-numeric: tabular-nums; color: hsl(var(--secondary)); }
+
+  /* Semantic tones: set --sem* once, reuse for pills, edges, icons and values. */
+  .tone-positive { --sem: var(--workspace-sales); --sem-soft: var(--workspace-sales-soft); --sem-ink: var(--workspace-sales-ink); }
+  .tone-attention { --sem: var(--workspace-opportunity); --sem-soft: var(--workspace-opportunity-soft); --sem-ink: var(--workspace-opportunity-ink); }
+  .tone-urgent { --sem: var(--workspace-appointments); --sem-soft: var(--workspace-appointments-soft); --sem-ink: var(--workspace-appointments-ink); }
+  .tone-info { --sem: var(--workspace-jobs); --sem-soft: var(--workspace-jobs-soft); --sem-ink: var(--workspace-jobs-ink); }
+  .tone-customer { --sem: var(--workspace-customers); --sem-soft: var(--workspace-customers-soft); --sem-ink: var(--workspace-customers-ink); }
+  .tone-pilot { --sem: var(--workspace-pilot); --sem-soft: var(--workspace-pilot-soft); --sem-ink: var(--workspace-pilot-ink); }
+  .tone-neutral { --sem: 216 15% 62%; --sem-soft: 214 32% 94%; --sem-ink: 220 25% 30%; }
+
+  .cp-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    padding: 0.125rem 0.55rem;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    line-height: 1.5;
+    white-space: nowrap;
+    background-color: hsl(var(--sem-soft));
+    color: hsl(var(--sem-ink));
+  }
+  .cp-pill::before { content: ''; width: 0.375rem; height: 0.375rem; border-radius: 50%; background-color: hsl(var(--sem)); }
+  .cp-dot { display: inline-block; width: 0.5rem; height: 0.5rem; flex-shrink: 0; border-radius: 50%; background-color: hsl(var(--sem)); }
+  .cp-edge { border-left: 3px solid hsl(var(--sem)); }
+  .cp-tile { display: flex; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 0.625rem; background-color: hsl(var(--sem-soft)); color: hsl(var(--sem-ink)); font-weight: 800; }
+  .cp-value-tone { color: hsl(var(--sem-ink)); }
+
+  /* Pilot has its own recognisable surface: a lavender-to-blue wash with a violet edge. */
+  .workspace-page main .cp-pilot,
+  .cp-pilot {
+    background: linear-gradient(155deg, hsl(268 100% 94%) 0%, hsl(252 100% 96.5%) 46%, hsl(226 100% 98%) 100%);
+    border: 1px solid hsl(var(--pilot-glow) / 0.5);
+    border-radius: 0.875rem;
+    overflow: hidden;
+  }
+  .cp-pilot .cp-title { color: hsl(var(--workspace-pilot-ink)); }
+  .cp-pilot .cp-panel-head { background: linear-gradient(90deg, hsl(var(--pilot-glow) / 0.16), transparent 75%); border-bottom: 1px solid hsl(var(--pilot-glow) / 0.28); }
+  .cp-pilot-accent { color: hsl(var(--workspace-pilot-ink)); }
+  .cp-pilot-chip { border: 1px solid hsl(var(--pilot-glow) / 0.4); background-color: hsl(var(--card) / 0.85); color: hsl(var(--workspace-pilot-ink)); }
+  .cp-pilot-chip:hover { background-color: hsl(var(--card)); border-color: hsl(var(--pilot-glow)); }
+  .cp-pilot-ask { border: 1px solid hsl(var(--pilot-glow) / 0.4); background-color: hsl(var(--card)); }
+  .cp-pilot-ask:hover { border-color: hsl(var(--pilot-glow)); }
+  /* Softer relative for Pilot's Flight Plan: mostly white, with a lilac wash at the top. */
+  .workspace-page main .cp-pilot--soft,
+  .cp-pilot--soft {
+    background: linear-gradient(180deg, hsl(254 100% 97.5%) 0%, hsl(var(--card)) 42%);
+    border-color: hsl(var(--pilot-glow) / 0.3);
+  }
+  .cp-pilot--soft .cp-panel-head { background: linear-gradient(90deg, hsl(var(--pilot-glow) / 0.1), transparent 70%); border-bottom-color: hsl(var(--pilot-glow) / 0.2); }
+
+  /* Very light tinted headers so panels are not all pure white. */
+  .cp-panel--blue .cp-panel-head { background: linear-gradient(90deg, hsl(214 100% 96%), hsl(var(--card)) 80%); }
+  .cp-panel--cool .cp-panel-head { background-color: hsl(220 33% 97.5%); }
+
+  /* Brand blue as a semantic tone (core business actions). */
+  .tone-brand { --sem: var(--primary); --sem-soft: var(--accent); --sem-ink: var(--primary); }
+
+  /* A soft wash behind the page greeting. */
+  .cp-hero { background: linear-gradient(100deg, hsl(254 100% 97.5%) 0%, hsl(216 100% 97.5%) 55%, hsl(var(--card) / 0) 100%); border: 1px solid hsl(var(--border)); border-radius: 0.875rem; }
+
+  /* KPI cell: coloured top bar, icon tile and a faint tint of its tone. */
+  .cp-kpi { position: relative; background-image: linear-gradient(180deg, hsl(var(--sem-soft) / 0.7), hsl(var(--card)) 62%); }
+  .cp-kpi::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; background-color: hsl(var(--sem)); }
+
+  /* A vertical rail for timelines and activity feeds. */
+  .cp-rail { position: relative; }
+  .cp-rail::before { content: ''; position: absolute; left: 0.4375rem; top: 0.5rem; bottom: 0.5rem; width: 1px; background-color: hsl(var(--border)); }
 }
 
 @layer utilities {

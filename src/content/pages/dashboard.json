@@ -74,7 +74,7 @@
   },
   "activity": {
     "title": "Recent activity",
-    "description": "The newest updates across your connected business records.",
+    "description": "Bookings, new customers, quotes, invoices and payments as they happen.",
     "emptyTitle": "No recent activity yet",
     "emptyDescription": "Customer, lead, job, and appointment updates will appear here.",
     "openCustomer": "Open customer"
