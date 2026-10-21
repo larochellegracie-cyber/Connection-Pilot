@@ -27,12 +27,14 @@ Check what is set at any time with `npm run check:env` (prints names only, never
 | `MYSQLHOST` / `MYSQLPORT` / `MYSQLUSER` / `MYSQLPASSWORD` / `MYSQLDATABASE` | Reference the MySQL service's variables (in Railway: add each as `${{ <MySQL service name>.MYSQLHOST }}`, etc.) |
 | `BETTER_AUTH_SECRET` | A NEW random value (not the local one). Generate: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
 | `BETTER_AUTH_URL` | The exact address people use. While testing: the Railway test address. At launch: `https://connectionpilot.net` |
+| `TZ` | `America/Toronto` (use the business's own time zone). **Set this.** The server groups shifts into schedule weeks using its own clock, and Railway's servers run on UTC, so without it a Sunday-evening shift can land in the wrong week and week lookups ("last week") can be an hour or a day out. Setting `TZ` makes the server match the business |
 
 **Needed for features** (add when you have the accounts)
 
 | Name | Used for |
 |---|---|
-| `RESEND_API_KEY`, `EMAIL_FROM` | All email. In production, email fails (it does not print to a terminal) if the key is missing |
+| `RESEND_API_KEY` | All email (schedules, quotes, invoices, password resets, contact form). In production, email fails with a clear message if the key is missing; it does not print to a terminal and nothing is reported as "sent" |
+| `EMAIL_FROM` | The sender address, on a domain verified in Resend. **Use the bare address only**, for example `noreply@connectionpilot.net`. Do **not** write `Name <noreply@connectionpilot.net>`: the app adds the business name itself (it sends as `"Somerset Pool" <noreply@connectionpilot.net>`), and a name inside this setting produces an invalid sender that Resend rejects. If it is missing, `noreply@connectionpilot.net` is used |
 | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | Payments and subscriptions |
 | `OPENAI_API_KEY` | Pilot assistant, AI receptionist, document review |
 | `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN` | Phone and text |
