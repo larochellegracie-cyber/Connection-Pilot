@@ -33,8 +33,8 @@ export function normalizePhone(value: unknown): string {
   return textValue(value, 40).replace(/[^0-9+]/g, '');
 }
 
-const TWILIO_SMS_WEBHOOK_URL = 'https://00rkwvh8b2.c37.airoapp.ai/api/webhooks/twilio/sms';
-const TWILIO_SMS_PREVIEW_WEBHOOK_URL = 'https://00rkwvh8b2.preview.c37.airoapp.ai/api/webhooks/twilio/sms';
+/** The address Twilio was told to call for texts: the site's own address (BETTER_AUTH_URL, which is the test address while testing and https://connectionpilot.net at launch), and the real domain. */
+const smsWebhookUrls = (): string[] => [...new Set([`${(process.env.BETTER_AUTH_URL ?? '').replace(/\/+$/, '')}/api/webhooks/twilio/sms`, 'https://connectionpilot.net/api/webhooks/twilio/sms'].filter((url) => url.startsWith('http')))];
 
 type SignatureValidation = 'valid' | 'missing_signature' | 'invalid_signature';
 
@@ -43,7 +43,7 @@ function validateSignature(req: Request, token: string): SignatureValidation {
   if (!signature) return 'missing_signature';
 
   const urls = req.path === '/api/webhooks/twilio/sms'
-    ? [TWILIO_SMS_WEBHOOK_URL, TWILIO_SMS_PREVIEW_WEBHOOK_URL, 'https://connectionpilot.net/api/webhooks/twilio/sms']
+    ? smsWebhookUrls()
     : [`${req.protocol}://${req.get('host')}${req.originalUrl}`];
   const entries = Object.entries(req.body as TwilioPayload).sort(([left], [right]) => left.localeCompare(right));
   const received = Buffer.from(signature);

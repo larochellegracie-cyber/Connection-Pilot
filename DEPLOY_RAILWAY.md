@@ -51,7 +51,7 @@ Never put these values in the code, in this file, or in chat. Enter them only in
 
 ## Steps, in order
 
-1. **Put the code somewhere Railway can read it.** The project is not a git repository yet. Either create a *private* GitHub repository (`git init`, commit, push), or use the Railway CLI. `.env` and `node_modules` are already excluded by `.gitignore`, so your local passwords are not uploaded.
+1. **Put the code somewhere Railway can read it.** The project is a git repository with a GitHub remote (`origin`, branch `main`). Push the latest commits there, then connect that repository in Railway. `.env` and `node_modules` are already excluded by `.gitignore`, so your local passwords are not uploaded.
 2. **Create the Railway project** and add a **MySQL** database service. Set a **monthly spending limit** (Settings → Usage) before anything else; memory is the main cost driver.
 3. **Add the app service** from the repository. Railway reads `railway.json`. Add the "Required to start" variables. Do **not** click "Generate Domain" until you want to test in a browser.
 4. **Create the tables** in the empty Railway database. From your computer, run `npm run db:setup` with the database settings pointed at the MySQL service's *public* connection details (shown in the MySQL service's Connect tab: public host, port, user, password, database name). Put them in the terminal for that one command, not in a file you keep. It refuses to touch a database that already has tables. Turn the public connection off again afterwards.
@@ -74,7 +74,8 @@ Never put these values in the code, in this file, or in chat. Enter them only in
 
 ## Known items still open before launch
 
-1. **Twilio signature check** (`src/server/api/webhooks/twilio/shared.ts`) still lists old `airoapp.ai` addresses. It must be updated for the real address or real Twilio webhooks may be rejected.
-2. **Cookie banner wording** still mentions advertising and analytics although no analytics tool is installed.
+1. **Twilio signature check** (`src/server/api/webhooks/twilio/shared.ts`) now checks the text-message webhook against `BETTER_AUTH_URL` and `https://connectionpilot.net`. Set `BETTER_AUTH_URL` correctly and point Twilio's webhook at `<site address>/api/webhooks/twilio/sms`.
+2. ~~Cookie banner wording~~ fixed: it now says only essential cookies are used.
 3. **Stripe webhook** endpoint in the Stripe dashboard must point to `<site address>/api/stripe/webhook` with the matching signing secret.
-4. `package.json` name is still `v8-app-template`.
+4. ~~`package.json` name~~ fixed (`connection-pilot`).
+5. **Legal pages** (`/privacy`, `/terms`) are drafts written from what the app does. They name no legal entity and no governing law: have them reviewed before launch.
