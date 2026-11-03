@@ -81,7 +81,7 @@ function log(level: 'info' | 'warn' | 'error', payload: Record<string, unknown>)
   else console.info(output);
 }
 
-function normaliseUrl(value: string): URL {
+export function normaliseUrl(value: string): URL {
   let raw = value.trim();
   if (!/^https?:\/\//i.test(raw)) raw = `https://${raw}`;
 
@@ -137,7 +137,8 @@ function buildSourceText(records: MarketingWebsiteRecord[], source: MarketingRet
     .slice(0, 100_000);
 }
 
-async function firecrawlFetch(path: string, init: RequestInit): Promise<Response> {
+/** `timeoutMs` is longer for a single-page scrape that also reads branding and structured facts. */
+export async function firecrawlFetch(path: string, init: RequestInit, timeoutMs = REQUEST_TIMEOUT_MS): Promise<Response> {
   const apiKey = firecrawlKey();
   if (!apiKey) throw new FirecrawlNotConfiguredError();
 
@@ -147,7 +148,7 @@ async function firecrawlFetch(path: string, init: RequestInit): Promise<Response
     headers.set('Content-Type', 'application/json');
     return await fetch(`${FIRECRAWL_API}${path}`, {
       ...init,
-      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      signal: AbortSignal.timeout(timeoutMs),
       headers,
     });
   } catch (error) {
@@ -266,4 +267,38 @@ export async function retrieveMarketingWebsite(value: string): Promise<Marketing
       throw finalError;
     }
   }
+}
+
+
+export type WebSearchResult = { title: string; url: string; snippet: string; publishedAt: string | null };
+
+function resultList(payload: { data?: unknown; web?: unknown; results?: unknown }): unknown[] {
+  const candidate = payload.data ?? payload.web ?? payload.results;
+  if (Array.isArray(candidate)) return candidate;
+  if (candidate && typeof candidate === 'object' && Array.isArray((candidate as { web?: unknown }).web)) return (candidate as { web: unknown[] }).web;
+  return [];
+}
+
+/**
+ * Current web search through the same Firecrawl connection website learning uses. It returns only what the search
+ * returned (title, link, snippet and a date when the result has one). Throws a clear error when it is not set up.
+ */
+export async function firecrawlSearch(query: string, limit = 5): Promise<WebSearchResult[]> {
+  if (!isFirecrawlConfigured()) throw new FirecrawlNotConfiguredError();
+  const run = async (extra: Record<string, unknown>) => {
+    const response = await firecrawlFetch('/search', { method: 'POST', body: JSON.stringify({ query, limit, ...extra }) });
+    const payload = await response.json().catch(() => ({})) as { data?: unknown; web?: unknown; results?: unknown; error?: unknown };
+    return { response, payload };
+  };
+  // Ask for recent results first; if the service does not accept that option, ask again without it.
+  let { response, payload } = await run({ tbs: 'qdr:y' });
+  if (response.status === 400) ({ response, payload } = await run({}));
+  if (!response.ok) throw new MarketingRetrievalError('public_search', 'Trend research could not reach the search service right now.', 502, `Firecrawl search failed: HTTP ${response.status}`);
+  return resultList(payload).map((raw) => {
+    const item = (raw && typeof raw === 'object' ? raw : {}) as Record<string, unknown>;
+    const url = asString(item.url) || asString((item.metadata as Record<string, unknown> | undefined)?.sourceURL);
+    const date = asString(item.date) || asString(item.publishedDate) || asString((item.metadata as Record<string, unknown> | undefined)?.publishedTime);
+    const parsed = date ? new Date(date) : null;
+    return { title: asString(item.title) || asString((item.metadata as Record<string, unknown> | undefined)?.title), url, snippet: (asString(item.description) || asString(item.snippet) || asString(item.markdown)).replace(/\s+/g, ' ').slice(0, 400), publishedAt: parsed && !Number.isNaN(parsed.getTime()) ? parsed.toISOString().slice(0, 10) : null };
+  }).filter((result) => /^https?:\/\//.test(result.url) && (result.title || result.snippet)).slice(0, limit);
 }
