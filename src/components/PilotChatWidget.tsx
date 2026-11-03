@@ -1,7 +1,9 @@
-import { ChevronDown, Send, Sparkles, X } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Send, Sparkles, X } from 'lucide-react';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import PilotAvatar from '@/components/PilotAvatar';
+import PilotActionCard from '@/components/PilotActionCard';
+import { createStreamParser } from '@/lib/pilot-chat-stream';
 import { useSession } from '@/lib/auth/auth-client';
 import { readPilotChatMessages, savePilotChatMessages, type PilotChatMessage } from '@/lib/pilot-chat-session';
 
@@ -21,6 +23,8 @@ export default function PilotChatWidget() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // What Pilot is really doing right now, reported by the server while a tool runs.
+  const [status, setStatus] = useState('');
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages, open]);
@@ -39,8 +43,8 @@ export default function PilotChatWidget() {
     setLoading(true);
     setError(null);
     try {
-      const history = [...messages, userMessage].slice(-12).map(({ role, content }) => ({ role, content }));
-      const response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history }) });
+      const history = [...messages, userMessage].slice(-12).map((message) => ({ role: message.role, content: `${message.content}${(message.cards ?? []).filter((item) => item.state !== 'pending' && item.state !== 'running').map((item) => `\n[Action result for “${item.card.title}”: ${item.state === 'done' ? `done. ${item.message ?? ''}` : item.state === 'cancelled' ? 'the owner cancelled it, nothing changed' : `FAILED. ${item.message ?? ''}`}]`).join('')}` }));
+      const response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history, structured: true }) });
       if (!response.ok || !response.body) {
         const failure = await response.json().catch(() => null) as { error?: string; requestId?: string } | null;
         const reference = failure?.requestId ? ` Reference: ${failure.requestId}.` : '';
@@ -49,11 +53,17 @@ export default function PilotChatWidget() {
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let receivedResponse = false;
-      for (let chunk = await reader.read(); !chunk.done; chunk = await reader.read()) {
-        const textChunk = decoder.decode(chunk.value, { stream: true });
-        if (textChunk) receivedResponse = true;
-        setMessages((current) => current.map((message) => message.id === assistantId ? { ...message, content: message.content + textChunk } : message));
-      }
+      const update = (change: (message: ChatMessage) => ChatMessage) => setMessages((current) => current.map((message) => (message.id === assistantId ? change(message) : message)));
+      const parser = createStreamParser((event) => {
+        receivedResponse = true;
+        if (event.type === 'text') update((message) => ({ ...message, content: message.content + event.text }));
+        else if (event.type === 'status') setStatus(event.label);
+        else if (event.type === 'links') update((message) => ({ ...message, links: [...(message.links ?? []), ...event.links.filter((link) => !(message.links ?? []).some((known) => known.href === link.href))] }));
+        else if (event.type === 'card') update((message) => ({ ...message, cards: [...(message.cards ?? []), { token: event.token, tool: event.tool, card: event.card, state: 'pending' }] }));
+        else if (event.type === 'error') setError(event.message);
+      });
+      for (let chunk = await reader.read(); !chunk.done; chunk = await reader.read()) parser.push(decoder.decode(chunk.value, { stream: true }));
+      setStatus('');
       if (!receivedResponse) {
         const reference = response.headers.get('X-Request-Id');
         throw new Error(`Pilot could not complete that request. Please try again.${reference ? ` Reference: ${reference}.` : ''}`);
@@ -62,7 +72,22 @@ export default function PilotChatWidget() {
       setMessages((current) => current.filter((message) => message.id !== assistantId));
       setError(requestError instanceof Error ? requestError.message : 'Pilot could not complete that request.');
     } finally {
-      setLoading(false);
+      setLoading(false); setStatus('');
+    }
+  }
+
+  /** The owner's answer to a confirmation card. Nothing runs unless they press Confirm. */
+  async function decide(messageId: string, token: string, decision: 'confirm' | 'cancel') {
+    const change = (patch: Partial<NonNullable<ChatMessage['cards']>[number]>) => setMessages((current) => current.map((message) => (message.id === messageId ? { ...message, cards: (message.cards ?? []).map((item) => (item.token === token ? { ...item, ...patch } : item)) } : message)));
+    change({ state: decision === 'confirm' ? 'running' : 'cancelled' });
+    try {
+      const response = await fetch('/api/chat/confirm', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token, decision }) });
+      const payload = await response.json().catch(() => null) as { ok?: boolean; message?: string; link?: { label: string; href: string } } | null;
+      if (decision === 'cancel') return;
+      if (response.ok && payload?.ok) change({ state: 'done', message: payload.message, link: payload.link });
+      else change({ state: 'failed', message: payload?.message || 'Something went wrong, and nothing was changed.' });
+    } catch {
+      if (decision === 'confirm') change({ state: 'failed', message: 'The connection failed, so I can’t tell whether it went through. Check the record before trying again.' });
     }
   }
 
@@ -74,7 +99,9 @@ export default function PilotChatWidget() {
       </header>
       <div className="flex flex-1 flex-col overflow-y-auto p-4">
         <div className="mb-3 flex flex-wrap gap-2"><Link to="/calendar" onClick={() => setOpen(false)} className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-bold text-secondary hover:bg-muted">Calendar</Link><Link to="/customers" onClick={() => setOpen(false)} className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-bold text-secondary hover:bg-muted">Customers</Link><Link to="/messages" onClick={() => setOpen(false)} className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-bold text-secondary hover:bg-muted">Messages</Link></div>
-        <div className="grid gap-3">{messages.map((message) => message.content ? <div key={message.id} className={`flex gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>{message.role === 'assistant' && <PilotAvatar size="sm" state={loading && message.id === messages[messages.length - 1].id ? 'thinking' : 'idle'} />}<p className={`max-w-[82%] whitespace-pre-wrap rounded-2xl px-3 py-2.5 text-sm leading-6 ${message.role === 'user' ? 'rounded-br-sm bg-primary text-primary-foreground' : 'rounded-bl-sm bg-muted text-secondary'}`}>{message.content}</p></div> : null)}{loading && !messages[messages.length - 1]?.content && <div className="flex items-center gap-2 text-sm text-muted-foreground"><PilotAvatar size="sm" state="thinking" /><span>Pilot is checking your business data…</span></div>}<div ref={bottomRef} /></div>
+        <div className="grid gap-3">{messages.map((message) => message.content || message.cards?.length ? <div key={message.id} className={`flex gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>{message.role === 'assistant' && <PilotAvatar size="sm" state={loading && message.id === messages[messages.length - 1].id ? 'thinking' : 'idle'} />}<div className="grid max-w-[85%] gap-2">{message.content && <p className={`whitespace-pre-wrap rounded-2xl px-3 py-2.5 text-sm leading-6 ${message.role === 'user' ? 'rounded-br-sm bg-primary text-primary-foreground' : 'rounded-bl-sm bg-muted text-secondary'}`}>{message.content}</p>}
+          {(message.cards ?? []).map((item) => <PilotActionCard key={item.token} item={item} onDecision={(decision) => void decide(message.id, item.token, decision)} onNavigate={() => setOpen(false)} />)}
+          {!!message.links?.length && <div className="flex flex-wrap gap-1.5">{message.links.map((link) => <Link key={link.href} to={link.href} onClick={() => setOpen(false)} className="inline-flex items-center gap-1 rounded-full border border-border bg-card px-2.5 py-1 text-xs font-bold text-primary hover:border-primary">{link.label}<ArrowUpRight size={11} aria-hidden="true" /></Link>)}</div>}</div></div> : null)}{loading && <div className="flex items-center gap-2 text-sm text-muted-foreground"><PilotAvatar size="sm" state="thinking" /><span role="status">{status || (messages[messages.length - 1]?.content ? '' : 'Thinking…')}</span></div>}<div ref={bottomRef} /></div>
       </div>
       <form onSubmit={sendMessage} className="border-t border-border bg-background p-3"><div className="flex items-end gap-2"><label className="sr-only" htmlFor="pilot-chat-input">Message Pilot</label><textarea id="pilot-chat-input" value={input} onChange={(event) => setInput(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); event.currentTarget.form?.requestSubmit(); } }} placeholder="Ask Pilot anything…" rows={1} disabled={loading} className="max-h-28 min-h-11 flex-1 resize-none rounded-xl border border-border bg-card px-3 py-2.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring disabled:bg-muted" /><button type="submit" disabled={loading || !input.trim()} className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground transition-transform hover:bg-secondary disabled:opacity-50" aria-label="Send message"><Send size={17} /></button></div>{error && <p role="alert" className="mt-2 text-xs text-destructive">{error}</p>}</form>
     </section>}

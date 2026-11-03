@@ -137,7 +137,7 @@ export default function CookieBanner() {
           <div className="flex-1">
             <h3 className="text-sm font-semibold text-gray-900 mb-1">Cookie Consent</h3>
             <p id="cookie-banner-description" className="text-sm text-gray-600">
-              We serve cookies. We use tools, such as cookies, to enable essential services and functionality on our site and to collect data on how visitors interact with our site, products and services. By clicking Accept, you agree to our use of these tools for advertising, analytics and support.
+              We use cookies that keep you signed in and the site working. We do not use advertising cookies, and we will ask you before adding any analytics. See our Privacy page for details.
             </p>
           </div>
           <div className="flex items-center gap-3 flex-shrink-0">

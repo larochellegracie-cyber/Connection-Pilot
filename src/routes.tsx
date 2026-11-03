@@ -5,6 +5,8 @@ import SolutionsPage from './pages/solutions';
 import HowItWorksPage from './pages/how-it-works';
 import GetStartedPage from './pages/get-started';
 import OnboardingPage from './pages/onboarding';
+import ImportPage from './pages/import';
+import SetupWithPilotPage from './pages/setup-with-pilot';
 import WelcomePage from './pages/welcome';
 import FeaturesPage from './pages/features';
 import PricingPage from './pages/pricing';
@@ -34,6 +36,7 @@ import SchedulingPage from './pages/scheduling';
 import SubscriptionPage from './pages/subscription';
 import MarketingPage from './pages/marketing';
 import ContactPage from './pages/contact';
+import { PrivacyPage, TermsPage } from './pages/legal';
 import AuthPage from './pages/auth/AuthPage';
 import { ForgotPasswordPage, ResetPasswordPage } from './pages/auth/PasswordResetPage';
 import CartPage from './pages/cart';
@@ -67,6 +70,14 @@ export const routes: RouteObject[] = [
   {
     path: '/onboarding',
     element: <OnboardingPage />,
+  },
+  {
+    path: '/setup-with-pilot',
+    element: <SetupWithPilotPage />,
+  },
+  {
+    path: '/import',
+    element: <ImportPage />,
   },
   {
     path: '/welcome',
@@ -209,6 +220,14 @@ export const routes: RouteObject[] = [
     element: <MarketingPage />,
   },
   {
+    path: '/privacy',
+    element: <PrivacyPage />,
+  },
+  {
+    path: '/terms',
+    element: <TermsPage />,
+  },
+  {
     path: '/contact',
     element: <ContactPage />,
   },
@@ -236,6 +255,6 @@ export const routes: RouteObject[] = [
 ];
 
 // Types for type-safe navigation
-export type Path = '/' | '/how-it-works' | '/pilot' | '/ai-receptionist' | '/customer-management' | '/faqs' | '/help' | '/get-started' | '/onboarding' | '/welcome' | '/features' | '/pricing' | '/about' | '/business-profile' | '/phone-connection' | '/login' | '/calendar' | '/assistant';
+export type Path = '/' | '/how-it-works' | '/pilot' | '/ai-receptionist' | '/customer-management' | '/faqs' | '/help' | '/get-started' | '/onboarding' | '/setup-with-pilot' | '/import' | '/welcome' | '/features' | '/pricing' | '/about' | '/business-profile' | '/phone-connection' | '/login' | '/calendar' | '/assistant';
 
 export type Params = Record<string, string | undefined>;

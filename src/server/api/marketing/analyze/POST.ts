@@ -6,6 +6,7 @@ import { getChatModel, isChatConfigured } from '@/lib/chatbot/chat-config.js';
 import { getAuth } from '@/lib/auth/auth.js';
 import { db } from '@/server/db/client.js';
 import { businessProfile, marketingProfile } from '@/server/db/schema.js';
+import { describeFacts, extractWebsiteFacts, profileValuesFrom, type WebsiteFacts } from '@/server/marketing/website-knowledge.js';
 import { FirecrawlNotConfiguredError, isFirecrawlConfigured, MarketingRetrievalError, retrieveMarketingWebsite } from '@/server/marketing/firecrawl-retrieval.js';
 
 const SYSTEM_PROMPT = `You are a business analyst. You will be given content retrieved directly from a business website or from publicly indexed search results.
@@ -188,6 +189,17 @@ export default async function handler(req: Request, res: Response) {
       socialLinks: JSON.stringify(socialObj(raw.socialLinks)),
     };
 
+    // Firecrawl's own reading of the page (logo, colours, contact details, hours, services). Its checked facts replace the text model's guesses
+    // for those fields; if this step fails the text analysis above is still saved.
+    let facts: WebsiteFacts | null = null;
+    try {
+      facts = await extractWebsiteFacts(retrieval.website);
+      Object.assign(extracted, profileValuesFrom(facts, extracted));
+      console.info(JSON.stringify({ event: 'marketing-analysis', traceId, stage: 'website_facts_complete', logo: !!facts.logoUrl, colors: !!facts.brandColors, services: facts.services.length }));
+    } catch (error) {
+      console.warn(JSON.stringify({ event: 'marketing-analysis', traceId, stage: 'website_facts', outcome: 'skipped', detail: error instanceof Error ? error.message : String(error) }));
+    }
+
     try {
       const existing = await db.select({ id: marketingProfile.id }).from(marketingProfile).where(eq(marketingProfile.businessProfileId, profile.id)).limit(1);
       if (existing[0]) {
@@ -200,6 +212,7 @@ export default async function handler(req: Request, res: Response) {
       res.json({
         marketingProfile: rows[0],
         pagesAnalyzed: retrieval.records.length,
+        ...(facts ? { websiteFacts: { found: describeFacts(facts), warnings: facts.warnings } } : {}),
         retrievalSource: retrieval.source,
         warnings: retrieval.warnings.length > 0 ? retrieval.warnings : undefined,
       });

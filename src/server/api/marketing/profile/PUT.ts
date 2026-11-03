@@ -4,6 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { getAuth } from '@/lib/auth/auth.js';
 import { db } from '@/server/db/client.js';
 import { businessProfile, marketingProfile } from '@/server/db/schema.js';
+import { syncConfirmedProfile } from '@/server/marketing/website-knowledge.js';
 
 function str(value: unknown, max = 2000): string {
   return typeof value === 'string' ? value.trim().slice(0, max) : '';
@@ -102,6 +103,9 @@ export default async function handler(req: Request, res: Response) {
       services: JSON.parse(saved.services ?? '[]'),
       products: JSON.parse(saved.products ?? '[]'),
     }));
+    // fill Pilot's receptionist knowledge (hours, services) and the business profile (email, website) where still empty; never replaces the owner's own entries
+    const synced = await syncConfirmedProfile(profile.id, { businessHours: saved.businessHours, services: saved.services, contactEmail: saved.contactEmail, websiteUrl: saved.websiteUrl }).catch(() => null);
+    console.info(JSON.stringify({ event: 'marketing-profile.knowledge-sync', requestId, businessProfileId: profile.id, synced }));
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     res.json({ marketingProfile: saved, verified: true });
   } catch (error) {

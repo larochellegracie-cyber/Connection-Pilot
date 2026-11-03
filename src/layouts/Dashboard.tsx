@@ -31,6 +31,8 @@ export interface DashboardConfig {
       }>;
     };
     footer?: React.ReactNode;
+    /** Sits between the logo and the navigation (the "+ Create" menu). */
+    topAction?: React.ReactNode;
     className?: string;
     theme?: 'light' | 'dark';
   };
@@ -93,6 +95,7 @@ export default function Dashboard({
     logo = { text: "Dashboard" },
     navigation = {},
     footer: sidebarFooter,
+    topAction: sidebarTopAction,
     className: sidebarClassName,
     theme: sidebarTheme = 'light'
   } = sidebar;
@@ -118,17 +121,17 @@ export default function Dashboard({
       {/* Sidebar */}
       <aside className={cn(
         "fixed inset-y-0 left-0 z-50 w-64 border-r shadow-sm transform transition-transform duration-200 ease-in-out lg:translate-x-0 lg:static lg:inset-0",
-        darkSidebar ? "border-primary bg-secondary text-secondary-foreground" : "bg-card",
+        darkSidebar ? "border-white/10 bg-[#0B1F44] text-white" : "border-border bg-card",
         sidebarOpen ? "translate-x-0" : "-translate-x-full",
         sidebarClassName
       )}>
         <div className="flex h-full flex-col">
           {/* Sidebar Header */}
-          <div className={cn("flex h-16 items-center justify-between gap-3 border-b px-4", darkSidebar && "border-primary")}>
+          <div className={cn("flex h-16 items-center justify-between gap-3 border-b px-4", darkSidebar && "border-white/10")}>
             {logo.href ? (
               <a href={logo.href} className={cn("min-w-0 flex-1", darkSidebar && "text-primary-foreground")}>
                 {logo.image ? (
-                  <img src={logo.image} alt={logo.text || 'Dashboard'} width={196} height={48} className="block h-auto max-h-10 w-auto max-w-full object-contain" />
+                  <img src={logo.image} alt={logo.text || 'Dashboard'} width={196} height={48} className={cn("block h-auto max-h-10 w-auto max-w-full object-contain", darkSidebar && "brightness-0 invert")} />
                 ) : (
                   <span className="font-semibold">{logo.text}</span>
                 )}
@@ -136,7 +139,7 @@ export default function Dashboard({
             ) : (
               <div className={cn("min-w-0 flex-1", darkSidebar && "text-primary-foreground")}>
                 {logo.image ? (
-                  <img src={logo.image} alt={logo.text || 'Dashboard'} width={196} height={48} className="block h-auto max-h-10 w-auto max-w-full object-contain" />
+                  <img src={logo.image} alt={logo.text || 'Dashboard'} width={196} height={48} className={cn("block h-auto max-h-10 w-auto max-w-full object-contain", darkSidebar && "brightness-0 invert")} />
                 ) : (
                   <span className="font-semibold">{logo.text}</span>
                 )}
@@ -152,24 +155,27 @@ export default function Dashboard({
             </Button>
           </div>
 
+          {sidebarTopAction && <div className="px-3 pt-3">{sidebarTopAction}</div>}
+
           {/* Sidebar Navigation */}
-          <nav className="flex-1 space-y-1 px-2 py-4 overflow-y-auto">
+          <nav className="flex-1 space-y-0.5 px-2 py-3 overflow-y-auto">
             {navigation.main && navigation.main.length > 0 && (
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 {navigation.main.map((item, index) => {
                   const Icon = item.icon;
                   return (
                     <a
                       key={index}
                       href={item.href}
+                      aria-current={item.active ? "page" : undefined}
                       className={cn(
-                        "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-semibold transition-colors",
+                        "group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-semibold transition-colors",
                         item.active
-                          ? (darkSidebar ? "bg-primary text-primary-foreground shadow-md" : "bg-accent text-primary")
-                          : (darkSidebar ? "text-secondary-foreground hover:bg-primary hover:text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-secondary")
+                          ? (darkSidebar ? "bg-primary text-primary-foreground shadow-md" : "bg-primary text-primary-foreground shadow-sm")
+                          : (darkSidebar ? "text-white/90 hover:bg-white/10 hover:text-white" : "text-secondary hover:bg-accent")
                       )}
                     >
-                      {Icon && <Icon className="h-4 w-4" />}
+                                            {Icon && <Icon className={cn("h-[1.05rem] w-[1.05rem] shrink-0 transition-colors", darkSidebar ? (item.active ? "text-white" : "text-[#6C98FF]") : (item.active ? "text-primary-foreground" : "text-primary"))} />}
                       <span className="flex-1">{item.title}</span>
                       {item.badge !== undefined && (
                         <span className="ml-auto flex h-5 min-w-[20px] items-center justify-center rounded-full bg-muted px-1 text-xs text-muted-foreground">
@@ -184,17 +190,17 @@ export default function Dashboard({
 
             {navigation.secondary && navigation.secondary.length > 0 && (
               <>
-                <div className={cn("my-4 border-t", darkSidebar && "border-primary")} />
-                <div className="space-y-1">
+                <div className={cn("my-3 border-t", darkSidebar && "border-white/10")} />
+                <div className="space-y-0.5">
                   {navigation.secondary.map((item, index) => {
                     const Icon = item.icon;
                     return (
                       <a
                         key={index}
                         href={item.href}
-                        className={cn("flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-semibold transition-colors", darkSidebar ? "text-secondary-foreground hover:bg-primary hover:text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-secondary")}
+                        className={cn("group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-semibold transition-colors", darkSidebar ? "text-white/90 hover:bg-white/10 hover:text-white" : "text-secondary hover:bg-accent")}
                       >
-                        {Icon && <Icon className="h-4 w-4" />}
+                        {Icon && <Icon className={cn("h-4 w-4 shrink-0", darkSidebar ? "text-[#6C98FF]" : "text-primary")} />}
                         <span>{item.title}</span>
                       </a>
                     );
@@ -206,7 +212,7 @@ export default function Dashboard({
 
           {/* Sidebar Footer */}
           {sidebarFooter && (
-            <div className={cn("border-t p-4", darkSidebar && "border-primary")}>
+            <div className={cn("border-t p-3", darkSidebar && "border-white/10")}>
               {sidebarFooter}
             </div>
           )}
@@ -282,7 +288,7 @@ export default function Dashboard({
                     className="h-8 w-8 rounded-full"
                   />
                 ) : (
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-sm font-bold text-primary">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
                     {user.initials}
                   </div>
                 )}

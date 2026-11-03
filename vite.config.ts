@@ -455,6 +455,8 @@ export default defineConfig(({ mode, isSsrBuild }) => ({
     copyPublicDir: false,
     ssr: "src/server/entry.ts",
     rollupOptions: {
+      // native programs and files that must be loaded from node_modules at run time, not bundled
+      external: ["@napi-rs/canvas", "@ffmpeg-installer/ffmpeg"],
       output: {
         format: "es",
         entryFileNames: "server.bundle.mjs",

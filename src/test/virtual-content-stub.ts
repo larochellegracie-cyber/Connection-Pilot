@@ -14,3 +14,5 @@ export const dashboard = dashboardContent;
 export const scheduling = schedulingContent;
 import financeContent from '../content/pages/finance.json';
 export const finance = financeContent;
+import calendarContent from '../content/pages/calendar.json';
+export const calendar = calendarContent;

@@ -104,5 +104,7 @@ export async function render(url: string, siteOrigin?: string): Promise<RenderRe
         .join('\n')
     : '';
 
-  return { html, head, status: context.statusCode ?? 200 };
+  // an address no page owns matches the catch-all route: it shows the not-found page, and it must also say 404 (not 200) so search engines do not index it
+  const notFound = context.matches.some((m) => m.route.path === '*');
+  return { html, head, status: notFound ? 404 : context.statusCode ?? 200 };
 }

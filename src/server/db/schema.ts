@@ -1,4 +1,4 @@
-import { boolean, decimal, int, mysqlTable, text, timestamp, uniqueIndex, varchar } from 'drizzle-orm/mysql-core';
+import { boolean, decimal, index, int, mysqlTable, text, timestamp, uniqueIndex, varchar } from 'drizzle-orm/mysql-core';
 
 export const user = mysqlTable('user', {
   id: varchar('id', { length: 36 }).primaryKey(),
@@ -172,6 +172,26 @@ export const marketingGeneratedPost = mysqlTable('marketing_generated_post', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().onUpdateNow(),
 });
+
+/**
+ * One Marketing job: what the owner asked Pilot for (their own words) and the structured creative brief Pilot understood from it.
+ * It records the request and where it stands (status); it does not hold any generated media. Every row belongs to one business.
+ */
+export const marketingJob = mysqlTable('marketing_job', {
+  id: varchar('id', { length: 36 }).primaryKey(),
+  businessProfileId: varchar('business_profile_id', { length: 36 }).notNull().references(() => businessProfile.id, { onDelete: 'cascade' }),
+  status: varchar('status', { length: 30 }).notNull().default('brief_ready'),
+  userMessage: text('user_message').notNull(),
+  briefJson: text('brief_json').notNull(),
+  /** Which of the business's own uploaded media fit this brief (set when the job is confirmed). Null until then. */
+  selectionJson: text('selection_json'),
+  /** The scene plan Pilot wrote for the video (set when generation starts). */
+  storyboardJson: text('storyboard_json'),
+  /** The finished video (its link, caption and details), or why it could not be made. Set when generation ends. */
+  resultJson: text('result_json'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().onUpdateNow(),
+}, (table) => [index('marketing_job_business_created_idx').on(table.businessProfileId, table.createdAt)]);
 
 export const pilotKnowledgeDocument = mysqlTable('pilot_knowledge_document', {
   id: varchar('id', { length: 36 }).primaryKey(),

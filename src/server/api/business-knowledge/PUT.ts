@@ -41,8 +41,8 @@ export default async function handler(req: Request, res: Response) {
     const policies = value(req.body?.policies);
     const receptionistInstructions = value(req.body?.receptionistInstructions);
     const discloseAutomation = Boolean(req.body?.discloseAutomation);
-    if (!businessName || !businessType || !address || !city || !region || !postalCode || !serviceArea || !businessHours || !servicesOffered) {
-      res.status(400).json({ error: 'Add your business name, type, location, hours, service area, and products or services before saving.' });
+    if (!businessName || !businessType || !address || !city || !region || !postalCode || !serviceArea || !servicesOffered) {
+      res.status(400).json({ error: 'Add your business name, type, location, service area, and products or services before saving. Hours are optional.' });
       return;
     }
     if (businessEmail && !/^\S+@\S+\.\S+$/.test(businessEmail)) {

@@ -9,6 +9,7 @@
 import { Helmet } from '@dr.pogodin/react-helmet';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import { site } from 'virtual:content';
 const siteUrl = 'https://connectionpilot.net';
 const cancelTitle = 'Checkout Canceled | Connection Pilot';
 const cancelDescription = 'Your Connection Pilot checkout was canceled. You can return to pricing whenever you are ready.';
@@ -61,7 +62,7 @@ export default function CheckoutCancel() {
 
         <p className="mt-6 text-sm text-gray-500">
           {t('stripe.need_help_text')}{' '}
-          <a href="mailto:support@example.com" className="text-blue-600 hover:underline">
+          <a href={`mailto:${site.contactEmail}`} className="text-blue-600 hover:underline">
             {t('stripe.contact_support_link')}
           </a>
         </p>

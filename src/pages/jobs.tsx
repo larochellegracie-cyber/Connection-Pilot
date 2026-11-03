@@ -1,5 +1,6 @@
 import { Helmet } from '@dr.pogodin/react-helmet';
 import { type FormEvent, useEffect, useState } from 'react';
+import { useCreateIntent } from '@/lib/create-intent';
 import { BriefcaseBusiness, PackagePlus, Plus, Search, Trash2, X } from 'lucide-react';
 import { ProtectedRoute } from '@/lib/auth/auth-client';
 import { isFoodBusiness } from '@/lib/business-workflow';
@@ -30,6 +31,7 @@ function JobsContent() {
   const food = isFoodBusiness(data?.businessType); const copy = food ? operations.orders : operations.jobs; const recordName = food ? 'order' : 'job';
   async function load(nextQuery = query, nextStatus = status) { try { const params = new URLSearchParams(); if (nextQuery) params.set('q', nextQuery); if (nextStatus) params.set('status', nextStatus); const [jobResponse, customerResponse] = await Promise.all([fetch(`/api/jobs?${params}`, { credentials: 'include' }), fetch('/api/customers', { credentials: 'include' })]); const payload = await jobResponse.json() as Data & { error?: string }; if (!jobResponse.ok) throw new Error(payload.error || `Unable to load ${recordName}s.`); setData(payload); if (customerResponse.ok) setCustomers((await customerResponse.json() as { customers: Customer[] }).customers); setError(''); } catch (failure) { setError(failure instanceof Error ? failure.message : `Unable to load ${recordName}s.`); } }
   useEffect(() => { void load('', ''); }, []);
+  useCreateIntent('job', () => openModal('create'));
   function openModal(nextModal: 'create' | 'edit', record?: Job) { setSelected(record || null); setItems(record?.items?.length ? record.items : [{ name: '', quantity: 1 }]); setModal(nextModal); }
   async function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setSaving(true); try { const form = Object.fromEntries(new FormData(event.currentTarget).entries()); const response = await fetch(selected ? `/api/jobs/${selected.id}` : '/api/jobs', { method: selected ? 'PATCH' : 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...form, ...(food ? { items } : {}) }) }); const responsePayload = await response.json() as { error?: string }; if (!response.ok) throw new Error(responsePayload.error || `Unable to save ${recordName}.`); setModal(null); setSelected(null); await load(); } catch (failure) { setError(failure instanceof Error ? failure.message : `Unable to save ${recordName}.`); } finally { setSaving(false); } }
   async function remove() { if (!selected || !window.confirm(`Delete this ${recordName}?`)) return; try { const response = await fetch(`/api/jobs/${selected.id}`, { method: 'DELETE', credentials: 'include' }); const payload = await response.json() as { error?: string }; if (!response.ok) throw new Error(payload.error || `Unable to delete ${recordName}.`); setModal(null); setSelected(null); await load(); } catch (failure) { setError(failure instanceof Error ? failure.message : `Unable to delete ${recordName}.`); } }

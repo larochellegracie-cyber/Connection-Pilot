@@ -55,8 +55,8 @@
     --workspace-pilot: 235 78% 55%;
     --workspace-pilot-soft: 236 100% 97%;
     --workspace-pilot-ink: 254 70% 49%;
-    /* Calm grey-blue canvas behind workspace panels */
-    --canvas: 220 33% 96%;
+    /* Light workspace: very light blue-grey page (#F4F7FC) behind white cards */
+    --canvas: 218 64% 97.5%;
     /* Extended Colors */
     --chart-1: 225 81% 75%;
     --chart-2: 225 80% 60%;
@@ -248,15 +248,6 @@
 
   /* Home: blue means core business actions. Purple is reserved for Pilot surfaces (.cp-pilot, .tone-pilot). */
   .workspace-page--dashboard { --tone-primary: var(--primary); --tone-primary-soft: var(--accent); --tone-primary-ink: var(--primary); }
-  .workspace-page--customers { --tone-primary: var(--workspace-customers); --tone-primary-soft: var(--workspace-customers-soft); --tone-primary-ink: var(--workspace-customers-ink); }
-  .workspace-page--leads { --tone-primary: var(--workspace-opportunity); --tone-primary-soft: var(--workspace-opportunity-soft); --tone-primary-ink: var(--workspace-opportunity-ink); }
-  .workspace-page--jobs { --tone-primary: var(--workspace-jobs); --tone-primary-soft: var(--workspace-jobs-soft); --tone-primary-ink: var(--workspace-jobs-ink); }
-  .workspace-page--calendar, .workspace-page--booking-rules { --tone-primary: var(--workspace-appointments); --tone-primary-soft: var(--workspace-appointments-soft); --tone-primary-ink: var(--workspace-appointments-ink); }
-  .workspace-page--finance { --tone-primary: var(--workspace-sales); --tone-primary-soft: var(--workspace-sales-soft); --tone-primary-ink: var(--workspace-sales-ink); }
-  .workspace-page--messages, .workspace-page--phone-connection { --tone-primary: var(--workspace-jobs); --tone-primary-soft: var(--workspace-jobs-soft); --tone-primary-ink: var(--workspace-jobs-ink); }
-  .workspace-page--assistant, .workspace-page--ai-receptionist { --tone-primary: var(--workspace-pilot); --tone-primary-soft: var(--workspace-pilot-soft); --tone-primary-ink: var(--workspace-pilot-ink); }
-  .workspace-page--business-knowledge, .workspace-page--profile, .workspace-page--settings, .workspace-page--help { --tone-primary: var(--workspace-customers); --tone-primary-soft: var(--workspace-customers-soft); --tone-primary-ink: var(--workspace-customers-ink); }
-  .workspace-page--notifications { --tone-primary: var(--workspace-opportunity); --tone-primary-soft: var(--workspace-opportunity-soft); --tone-primary-ink: var(--workspace-opportunity-ink); }
 
   .workspace-page main > section:first-child > div > p:first-child,
   .workspace-page main > section:first-child > p:first-child {
@@ -282,26 +273,21 @@
   .workspace-page main > section.border-b { border-radius: 0; }
   .workspace-page main thead { background-color: hsl(var(--tone-primary-soft)); }
   .workspace-page main tr:hover { background-color: hsl(var(--tone-primary-soft)); }
-  .workspace-page--customers main .rounded-lg.bg-accent,
-  .workspace-page--customers main .rounded-xl.bg-accent { background-color: hsl(var(--workspace-customers-soft)); color: hsl(var(--workspace-customers-ink)); }
-  .workspace-page--calendar main .bg-accent { background-color: hsl(var(--workspace-appointments-soft)); }
-  .workspace-page--jobs main .bg-accent { background-color: hsl(var(--workspace-jobs-soft)); }
-  .workspace-page--finance main .bg-accent { background-color: hsl(var(--workspace-sales-soft)); }
 
   .workspace-kpi { position: relative; overflow: hidden; }
   .workspace-kpi::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; background: hsl(var(--kpi-tone)); }
   .workspace-kpi > span { background-color: hsl(var(--kpi-soft)); color: hsl(var(--kpi-ink)); }
-  .workspace-kpi--sales { --kpi-tone: var(--workspace-sales); --kpi-soft: var(--workspace-sales-soft); --kpi-ink: var(--workspace-sales-ink); }
-  .workspace-kpi--opportunity { --kpi-tone: var(--workspace-opportunity); --kpi-soft: var(--workspace-opportunity-soft); --kpi-ink: var(--workspace-opportunity-ink); }
-  .workspace-kpi--jobs { --kpi-tone: var(--workspace-jobs); --kpi-soft: var(--workspace-jobs-soft); --kpi-ink: var(--workspace-jobs-ink); }
-  .workspace-kpi--attention { --kpi-tone: var(--workspace-appointments); --kpi-soft: var(--workspace-appointments-soft); --kpi-ink: var(--workspace-appointments-ink); }
+  .workspace-kpi--sales { --kpi-tone: var(--primary); --kpi-soft: var(--accent); --kpi-ink: var(--primary); }
+  .workspace-kpi--opportunity { --kpi-tone: var(--primary); --kpi-soft: var(--accent); --kpi-ink: var(--primary); }
+  .workspace-kpi--jobs { --kpi-tone: var(--primary); --kpi-soft: var(--accent); --kpi-ink: var(--primary); }
+  .workspace-kpi--attention { --kpi-tone: var(--primary); --kpi-soft: var(--accent); --kpi-ink: var(--primary); }
 
-  .workspace-icon--sales { background-color: hsl(var(--workspace-sales-soft)); color: hsl(var(--workspace-sales-ink)); }
-  .workspace-icon--customers { background-color: hsl(var(--workspace-customers-soft)); color: hsl(var(--workspace-customers-ink)); }
-  .workspace-icon--appointments { background-color: hsl(var(--workspace-appointments-soft)); color: hsl(var(--workspace-appointments-ink)); }
-  .workspace-icon--jobs { background-color: hsl(var(--workspace-jobs-soft)); color: hsl(var(--workspace-jobs-ink)); }
-  .workspace-icon--opportunity { background-color: hsl(var(--workspace-opportunity-soft)); color: hsl(var(--workspace-opportunity-ink)); }
-  .workspace-icon--attention { background-color: hsl(var(--workspace-appointments-soft)); color: hsl(var(--workspace-appointments-ink)); }
+  .workspace-icon--sales { background-color: hsl(var(--accent)); color: hsl(var(--primary)); }
+  .workspace-icon--customers { background-color: hsl(var(--accent)); color: hsl(var(--primary)); }
+  .workspace-icon--appointments { background-color: hsl(var(--accent)); color: hsl(var(--primary)); }
+  .workspace-icon--jobs { background-color: hsl(var(--accent)); color: hsl(var(--primary)); }
+  .workspace-icon--opportunity { background-color: hsl(var(--accent)); color: hsl(var(--primary)); }
+  .workspace-icon--attention { background-color: hsl(var(--accent)); color: hsl(var(--primary)); }
   .workspace-chart-bar--0 { background-color: hsl(var(--workspace-sales)); }
   .workspace-chart-bar--1 { background-color: hsl(var(--workspace-customers)); }
   .workspace-chart-bar--2 { background-color: hsl(var(--workspace-jobs)); }
@@ -340,7 +326,7 @@
   .tone-attention { --sem: var(--workspace-opportunity); --sem-soft: var(--workspace-opportunity-soft); --sem-ink: var(--workspace-opportunity-ink); }
   .tone-urgent { --sem: var(--workspace-appointments); --sem-soft: var(--workspace-appointments-soft); --sem-ink: var(--workspace-appointments-ink); }
   .tone-info { --sem: var(--workspace-jobs); --sem-soft: var(--workspace-jobs-soft); --sem-ink: var(--workspace-jobs-ink); }
-  .tone-customer { --sem: var(--workspace-customers); --sem-soft: var(--workspace-customers-soft); --sem-ink: var(--workspace-customers-ink); }
+  .tone-customer { --sem: var(--primary); --sem-soft: var(--accent); --sem-ink: var(--primary); }
   .tone-pilot { --sem: var(--workspace-pilot); --sem-soft: var(--workspace-pilot-soft); --sem-ink: var(--workspace-pilot-ink); }
   .tone-neutral { --sem: 216 15% 62%; --sem-soft: 214 32% 94%; --sem-ink: 220 25% 30%; }
 
@@ -608,4 +594,77 @@
 /* Unless told otherwise, keep it for smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+
+/* =============================================================================
+   Connection Pilot workspace: light, premium and cohesive.
+   Very light blue-grey page, white cards with a hairline border and a soft shadow,
+   navy text, Connection Pilot blue for actions. Colour is an accent, not a background.
+   ============================================================================= */
+@layer components {
+  /* One white card that can hold several sections separated by hairlines. */
+  .cp-card { background-color: #fff; border: 1px solid hsl(var(--border)); border-radius: 1rem; box-shadow: 0 1px 2px hsl(220 66% 14% / 0.04), 0 8px 24px -16px hsl(220 66% 14% / 0.16); }
+  .cp-card-section { padding: 1.125rem 1.25rem; }
+  .cp-card-section + .cp-card-section { border-top: 1px solid hsl(var(--border)); }
+  .cp-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.75rem; }
+  .cp-head-title { display: flex; align-items: center; gap: 0.625rem; min-width: 0; }
+  .cp-h2 { font-size: 1rem; font-weight: 800; letter-spacing: -0.015em; line-height: 1.25; color: hsl(var(--secondary)); }
+
+  /* Compact list rows separated by hairlines (schedule, alerts, activity, pipeline). */
+  .cp-list { display: grid; }
+  .cp-item { display: flex; align-items: center; gap: 0.875rem; min-width: 0; padding: 0.625rem 0.5rem; margin: 0 -0.5rem; border-radius: 0.625rem; transition: background-color 0.15s ease; }
+  .cp-list > li + li > .cp-item, .cp-list > .cp-item + .cp-item { border-top: 1px solid hsl(var(--border)); border-top-left-radius: 0; border-top-right-radius: 0; }
+  a.cp-item:hover { background-color: hsl(var(--muted)); }
+  .cp-item-name { font-size: 0.9375rem; font-weight: 700; line-height: 1.3; color: hsl(var(--secondary)); }
+  .cp-item-sub { font-size: 0.8125rem; line-height: 1.35; color: hsl(var(--muted-foreground)); }
+  .cp-avatar { display: flex; height: 2.25rem; width: 2.25rem; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 999px; background-color: hsl(var(--accent)); color: hsl(var(--primary)); font-size: 0.8125rem; font-weight: 800; }
+  .cp-avatar[class*="tone-"] { background-color: hsl(var(--sem-soft)); color: hsl(var(--sem-ink)); }
+  .cp-dot-lg { display: inline-block; height: 0.625rem; width: 0.625rem; flex-shrink: 0; border-radius: 50%; background-color: hsl(var(--sem)); }
+  .cp-empty { padding: 0.5rem 0 0.25rem; text-align: center; }
+
+  /* Calm, empty-state friendly text on white. */
+  .cp-empty-title { font-size: 0.9375rem; font-weight: 700; color: hsl(var(--secondary)); }
+  .cp-empty-sub { margin: 0.125rem auto 0; max-width: 24rem; font-size: 0.8125rem; line-height: 1.45; color: hsl(var(--muted-foreground)); }
+
+  /* Page greeting: the dark navy Connection Pilot header. */
+  .cp-hero { background: linear-gradient(135deg, #0B1F44 0%, #12306b 100%); color: #fff; border-radius: 1rem; box-shadow: 0 12px 32px -18px rgba(11, 31, 68, 0.6); }
+  .cp-hero .cp-eyebrow, .workspace-page main > section.cp-hero p.cp-eyebrow, .workspace-page main > section.cp-hero > div > p.cp-eyebrow { color: #8FB3FF; }
+  /* Today-at-a-glance numbers that live inside the navy header. */
+  .cp-stat { border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.14); background-color: rgba(255, 255, 255, 0.07); padding: 0.75rem 0.875rem; }
+  .cp-stat .cp-eyebrow { color: #A9C2F5; }
+  .cp-stat-value { font-size: 1.625rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; font-variant-numeric: tabular-nums; color: #fff; }
+  .cp-stat-note { font-size: 0.75rem; line-height: 1.35; color: #A9C2F5; }
+
+  /* Dark navy section (Pilot's Briefing): white text, blue accents. */
+  .cp-navy { background-color: #0B1F44; color: #fff; border-radius: 1rem; box-shadow: 0 12px 32px -18px rgba(11, 31, 68, 0.6); }
+  .cp-navy .cp-h2, .cp-navy .cp-item-name, .cp-navy .cp-empty-title { color: #fff; }
+  .cp-navy .cp-subtle, .cp-navy .cp-item-sub, .cp-navy .cp-empty-sub, .cp-navy .cp-eyebrow { color: #A9C2F5; }
+  .cp-navy .cp-link { color: #8FB3FF; }
+  .cp-navy .cp-tile, .cp-navy .cp-avatar, .cp-navy .cp-avatar[class*="tone-"] { background-color: rgba(255, 255, 255, 0.1); color: #8FB3FF; }
+  .cp-navy .cp-list > li + li > .cp-item { border-top-color: rgba(255, 255, 255, 0.12); }
+  .cp-navy a.cp-item:hover { background-color: rgba(255, 255, 255, 0.07); }
+  .cp-navy .cp-brief { border: 1px solid rgba(255, 255, 255, 0.16); background-color: rgba(255, 255, 255, 0.06); border-radius: 0.75rem; padding: 0.625rem 0.75rem; }
+  .cp-navy .cp-brief-body { color: #D5E2FB; }
+
+  /* KPI cards: white, a thin accent along the top, small icon. */
+  .cp-kpi-card { position: relative; overflow: hidden; border-radius: 1rem; background-color: #fff; box-shadow: 0 1px 2px hsl(220 66% 14% / 0.04), 0 8px 24px -16px hsl(220 66% 14% / 0.16); }
+
+  /* Trial and status banners: small, rounded, quiet. */
+  .cp-banner { margin-bottom: 0.875rem; border-radius: 0.75rem; border: 1px solid hsl(214 58% 88%); background-color: hsl(216 100% 97%); padding: 0.4rem 0.875rem; font-size: 0.8125rem; }
+}
+
+/* ---- Tables that become stacked cards on small screens ------------------------
+   Add cp-stack-table to a table and a data-label to each cell that needs a caption.
+   On phones each row turns into a card; from tablet width up it is a normal table. */
+@media (max-width: 767px) {
+  .workspace-page main .cp-stack-table { min-width: 0 !important; display: block; width: 100%; }
+  .workspace-page main .cp-stack-table thead { display: none; }
+  .workspace-page main .cp-stack-table tbody { display: grid; }
+  .workspace-page main .cp-stack-table tr { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem 1rem; padding: 1rem; border-bottom: 1px solid hsl(var(--border)); }
+  .workspace-page main .cp-stack-table tr:last-child { border-bottom: 0; }
+  .workspace-page main .cp-stack-table td { display: block; min-width: 0; padding: 0 !important; text-align: left !important; }
+  .workspace-page main .cp-stack-table td:first-child, .workspace-page main .cp-stack-table td[data-label="Contact"], .workspace-page main .cp-stack-table td[data-label^="Next"], .workspace-page main .cp-stack-table td:last-child { grid-column: 1 / -1; }
+  .workspace-page main .cp-stack-table td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 0.25rem; font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+  .workspace-page main .cp-stack-table td[colspan] { grid-column: 1 / -1; }
 }

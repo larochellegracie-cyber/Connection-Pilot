@@ -1,7 +1,8 @@
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router';
-import { BarChart3, BellRing, CalendarDays, CircleHelp, LayoutDashboard, MessageSquare, Megaphone, PlugZap, PhoneCall, ReceiptText, Settings, TrendingUp, UserRound, Users } from 'lucide-react';
+import { BarChart3, BellRing, CalendarDays, CircleHelp, LayoutDashboard, MessageSquare, Megaphone, PlugZap, ReceiptText, Settings, TrendingUp, UserRound, Users } from 'lucide-react';
 import Dashboard from '@/layouts/Dashboard';
+import CreateMenu from '@/components/CreateMenu';
 import TrialStatusBanner from '@/components/TrialStatusBanner';
 import { LogoutButton, useSession } from '@/lib/auth/auth-client';
 import { isFoodBusiness } from '@/lib/business-workflow';
@@ -60,15 +61,13 @@ export default function WorkspaceLayout({ children }: { children: ReactNode }) {
     { title: 'Customers', href: '/customers', icon: Users, active: location.pathname === '/customers' || location.pathname.startsWith('/dashboard/customers/') },
     { title: 'Leads', href: '/leads', icon: TrendingUp, active: location.pathname === '/leads' },
     { title: foodBusiness ? 'Orders' : 'Jobs', href: '/jobs', icon: BarChart3, active: location.pathname === '/jobs' },
-    { title: 'Scheduling', href: '/scheduling', icon: CalendarDays, active: location.pathname === '/scheduling' },
+    { title: 'Scheduling', href: '/scheduling', icon: CalendarDays, active: location.pathname === '/scheduling' || location.pathname === '/calendar' },
     { title: 'Employees', href: '/employees', icon: Users, active: location.pathname === '/employees' },
-    ...(!foodBusiness ? [{ title: 'Calendar', href: '/calendar', icon: CalendarDays, active: location.pathname === '/calendar' }] : []),
+    { title: 'Messages', href: '/messages', icon: MessageSquare, active: location.pathname === '/messages' },
     { title: 'Quotes & invoices', href: '/finance', icon: ReceiptText, active: location.pathname === '/finance' },
     ...(planFeatures.includes('connections') ? [{ title: 'Connections', href: '/connections', icon: PlugZap, active: location.pathname === '/connections' }] : []),
-    { title: 'Messages', href: '/messages', icon: MessageSquare, active: location.pathname === '/messages' },
     { title: 'Marketing', href: '/marketing', icon: Megaphone, active: location.pathname === '/marketing' },
     { title: 'Notifications', href: '/notifications', icon: BellRing, active: location.pathname === '/notifications' },
-    { title: 'AI Voice Receptionist · Coming Soon', href: '/dashboard/ai-receptionist', icon: PhoneCall, active: location.pathname === '/dashboard/ai-receptionist' },
     ...(planFeatures.includes('basic_insights') ? [{ title: 'Insights', href: '/insights', icon: BarChart3, active: location.pathname === '/insights' }] : []),
   ], [foodBusiness, isDashboard, location.hash, location.pathname, planFeatures]);
 
@@ -83,16 +82,17 @@ export default function WorkspaceLayout({ children }: { children: ReactNode }) {
       className={`workspace-page workspace-page--${workspaceArea} bg-[hsl(var(--canvas))]`}
       config={{
         sidebar: {
-          logo: { image: '/airo-assets/images/logo/horizontal/dark', text: 'Connection Pilot', href: '/dashboard' },
+          logo: { image: '/airo-assets/images/logo/horizontal', text: 'Connection Pilot', href: '/dashboard' },
           navigation: { main: navigation, secondary: secondaryNavigation },
           theme: 'dark',
+          topAction: <CreateMenu foodBusiness={foodBusiness} />,
           footer: (
             <div className="grid gap-3">
               <div>
-                <p className="text-xs font-bold text-primary-foreground">Business workspace</p>
-                <p className="mt-1 truncate text-sm font-semibold text-secondary-foreground">{displayName}</p>
+                <p className="text-xs font-bold uppercase tracking-wide text-[#8FB3FF]">Business workspace</p>
+                <p className="mt-1 truncate text-sm font-semibold text-white">{displayName}</p>
               </div>
-              <LogoutButton className="rounded-lg border border-primary bg-secondary px-3 py-2 text-left text-sm font-bold text-secondary-foreground hover:bg-primary" />
+              <LogoutButton className="rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-left text-sm font-bold text-white transition-colors hover:border-[#6C98FF] hover:bg-white/10" />
             </div>
           ),
         },

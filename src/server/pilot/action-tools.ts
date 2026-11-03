@@ -10,8 +10,11 @@ import copyPreviousWeek from '@/server/api/schedules/copy-previous/POST.js';
 import pilotDraft from '@/server/api/schedules/pilot-draft/POST.js';
 import { callRoute, errorText, succeeded } from './route-call.js';
 import { resolveScheduleWeek } from './schedule-week.js';
+import { card } from './confirmation-card.js';
+import { createCoreWriteTools } from './core-write-tools.js';
+import { createRecordTools } from './record-tools.js';
 
-type Context = { tenantId: string; businessName: string; request: Pick<Request, 'headers'>; now?: () => Date };
+type Context = { tenantId: string; businessName: string; businessType?: string; request: Pick<Request, 'headers'>; now?: () => Date };
 
 const money = (value: string | number) => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(Number(value) || 0);
 const STOP_WORDS = new Set(['the', 'for', 'his', 'her', 'their', 'and', 'with', 'invoice', 'job', 'service', 'work', 'that', 'this', 'from']);
@@ -22,7 +25,7 @@ const words = (text: string) => text.toLowerCase().split(/[^a-z0-9]+/).filter((w
  * asks for confirmation first, runs the same code the screens use, and only reports success when
  * that code succeeded. A failure is reported as a failure, with its reason.
  */
-export function createActionTools({ tenantId, businessName, request, now = () => new Date() }: Context) {
+export function createActionTools({ tenantId, businessName, businessType, request, now = () => new Date() }: Context) {
   const findCustomer = (name: string) => db.select({ id: customer.id, name: customer.name, email: customer.email }).from(customer)
     .where(and(eq(customer.businessProfileId, tenantId), sql`${customer.archivedAt} IS NULL`, like(customer.name, `%${name.trim()}%`))).limit(3);
 
@@ -59,11 +62,11 @@ export function createActionTools({ tenantId, businessName, request, now = () =>
         const email = person.email?.trim();
         if (!email) return { ok: false, message: `${person.name} has no email address on file, so the invoice cannot be sent. The owner can add one on the customer's profile.` };
         const summary = { customerName: person.name, sendTo: email, ...describe(chosen), alreadySent: chosen.status !== 'draft' };
-        if (!confirmed) return { ok: false, needsConfirmation: true, ...summary, message: 'Nothing has been sent yet. Ask the owner to confirm sending this exact invoice to this email address.' };
+        if (!confirmed) return { ok: false, needsConfirmation: true, ...summary, card: card(`Email invoice to ${person.name}`, [`${summary.invoiceNumber}: ${summary.for}`, `Total: ${summary.total}`, `Sent to: ${email}`, summary.alreadySent ? `This invoice is already marked “${chosen.status}”, so this would send it again` : ''], 'Send invoice', 'Sending the invoice…', { label: 'Open invoices', href: '/finance' }), message: 'Nothing has been sent yet. Ask the owner to confirm sending this exact invoice to this email address.' };
 
         const result = await sendInvoiceEmail({ id: tenantId, businessName }, chosen.id);
         if (!result.ok) return { ok: false, sent: false, message: `The invoice was NOT sent. ${result.error}`, ...(result.setupRequired && { setupRequired: true }) };
-        return { ok: true, sent: true, customerName: person.name, sentTo: result.sentTo, invoiceNumber: result.invoiceNumber, message: `Invoice ${result.invoiceNumber} was emailed to ${result.sentTo}.` };
+        return { ok: true, sent: true, customerName: person.name, sentTo: result.sentTo, invoiceNumber: result.invoiceNumber, link: { label: 'Open invoices', href: '/finance' }, message: `Invoice ${result.invoiceNumber} was emailed to ${result.sentTo}.` };
       },
     }),
 
@@ -81,7 +84,7 @@ export function createActionTools({ tenantId, businessName, request, now = () =>
         const target = resolveScheduleWeek(week, now(), timezone);
         if (!target) return { ok: false, message: 'Which week? Use "this", "next", or a date.' };
         const plan = { week: target.label, copyPreviousWeek: copy, changes };
-        if (!confirmed) return { ok: false, needsConfirmation: true, proposedDraft: plan, message: `Nothing has been created yet. Ask the owner to confirm creating an editable draft schedule for ${target.label}. It will not be published or sent to employees.` };
+        if (!confirmed) return { ok: false, needsConfirmation: true, proposedDraft: plan, card: card(`Build a draft schedule for ${target.label}`, [copy ? 'Start from the previous week\'s shifts' : '', ...changes.map((change) => `Apply: ${change}`), 'Saved as an editable draft: nothing is published or emailed. Existing shifts are not overwritten.'], 'Create draft', 'Preparing the schedule…', { label: 'Open scheduling', href: '/scheduling' }), message: `Nothing has been created yet. Ask the owner to confirm creating an editable draft schedule for ${target.label}. It will not be published or sent to employees.` };
 
         const done: string[] = [];
         if (copy) {
@@ -95,8 +98,10 @@ export function createActionTools({ tenantId, businessName, request, now = () =>
           const summary = [applied.body.created ? `${applied.body.created} added` : '', applied.body.removed ? `${applied.body.removed} removed` : '', applied.body.moved ? `${applied.body.moved} moved` : '', applied.body.skipped ? `${applied.body.skipped} already there` : ''].filter(Boolean).join(', ');
           done.push(`${change}${summary ? ` (${summary})` : ''}`);
         }
-        return { ok: true, draft: true, week: target.label, completed: done, message: `Draft schedule saved for ${target.label}. It is a draft: it has not been published or sent to employees. Review and publish it from the Scheduling page.` };
+        return { ok: true, draft: true, week: target.label, completed: done, link: { label: 'Open scheduling', href: '/scheduling' }, message: `Draft schedule saved for ${target.label}. It is a draft: it has not been published or sent to employees. Review and publish it from the Scheduling page.` };
       },
     }),
+    ...createRecordTools({ tenantId, businessName, businessType, request, now }),
+    ...createCoreWriteTools({ tenantId }),
   };
 }

@@ -31,12 +31,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
   const isWorkspaceRoute = location.pathname.startsWith('/dashboard') || [
     '/assistant',
     '/business-profile',
+    '/import',
     '/calendar',
+    '/connections',
     '/customers',
+    '/employees',
     '/finance',
     '/insights',
     '/jobs',
     '/leads',
+    '/marketing',
     '/messages',
     '/notifications',
     '/phone-connection',
@@ -45,7 +49,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     '/settings',
     '/subscription',
   ].includes(location.pathname);
-  const isOnboardingRoute = location.pathname === '/onboarding';
+  const isOnboardingRoute = location.pathname === '/onboarding' || location.pathname === '/setup-with-pilot';
   const needsWorkspaceShell = location.pathname === '/phone-connection';
 
   return (

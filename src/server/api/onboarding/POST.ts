@@ -6,6 +6,7 @@ import { db } from '@/server/db/client.js';
 import { businessKnowledge, businessProfile, businessSubscription } from '@/server/db/schema.js';
 import { crawlBusinessWebsite } from '@/server/business-knowledge/website-crawl.js';
 import { replaceWebsiteKnowledgeSources } from '@/server/business-knowledge/sources.js';
+import { createGuidedBusiness, guidedAnswersFrom } from '@/server/onboarding/guided.js';
 
 function stringValue(value: unknown, limit = 12000): string {
   return typeof value === 'string' ? value.trim().slice(0, limit) : '';
@@ -36,6 +37,15 @@ export default async function handler(req: Request, res: Response) {
     const session = await auth.api.getSession({ headers: new Headers(req.headers as Record<string, string>) });
     if (!session?.user?.id) {
       res.status(401).json({ error: 'Please sign in before saving your business profile.' });
+      return;
+    }
+
+    if (req.body.mode === 'guided') {
+      // The question-by-question setup: same business, trial and knowledge records as first-time setup.
+      const answers = guidedAnswersFrom(req.body);
+      if ('error' in answers) { res.status(400).json({ error: answers.error }); return; }
+      const created = await createGuidedBusiness({ userId: session.user.id, email: session.user.email ?? null }, answers);
+      res.status(created.created ? 201 : 200).json({ ok: true, businessProfileId: created.id });
       return;
     }
 

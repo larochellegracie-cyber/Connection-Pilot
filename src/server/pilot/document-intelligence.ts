@@ -192,3 +192,6 @@ export async function confirmDocumentReview(businessProfileId: string, documentI
 }
 
 export const documentIntelligenceSupport = { fileTypes: ['.docx', '.pdf', '.xlsx', '.xltx', '.xls', '.csv', '.tsv', '.txt', '.md', '.markdown', '.json', '.png', '.jpg', '.jpeg', '.webp'], note: 'PDFs are read when they contain extractable text; image-only PDFs remain unreadable. Spreadsheets retain sheet, header, and row context for review. Document intake never changes inventory, prices, suppliers, schedules, customers, employees, or financial records automatically.' };
+
+/** The same duplicate key Pilot uses for saved facts, so imports never save a fact twice. */
+export function knowledgeFactKey(fact: Pick<ExtractedFact, 'kind' | 'subject' | 'predicate'>) { return key(fact); }

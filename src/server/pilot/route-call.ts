@@ -7,7 +7,7 @@ export type RouteResult = { status: number; body: Record<string, unknown> };
  * validation, plan checks and business rules instead of duplicating them. The original request's
  * headers (the session cookie) are passed through; only the body is replaced.
  */
-export async function callRoute(handler: (req: Request, res: Response) => unknown, original: Pick<Request, 'headers'>, body: Record<string, unknown>): Promise<RouteResult> {
+export async function callRoute(handler: (req: Request, res: Response) => unknown, original: Pick<Request, 'headers'>, body: Record<string, unknown>, params: Record<string, string> = {}): Promise<RouteResult> {
   const result: RouteResult = { status: 200, body: {} };
   const res = {
     headersSent: false,
@@ -15,7 +15,7 @@ export async function callRoute(handler: (req: Request, res: Response) => unknow
     json(payload: Record<string, unknown>) { result.body = payload; return res; },
     setHeader() { return res; },
   } as unknown as Response;
-  const req = { headers: original.headers, body, params: {}, query: {}, method: 'POST' } as unknown as Request;
+  const req = { headers: original.headers, body, params, query: {}, method: 'POST' } as unknown as Request;
   await handler(req, res);
   return result;
 }

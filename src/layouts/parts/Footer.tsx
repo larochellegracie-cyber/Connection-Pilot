@@ -20,10 +20,14 @@ export default function Footer() {
             <Link to="/about" className="transition-colors hover:text-primary">{site.megaNavigation.company.label}</Link>
             <Link to={site.navigation[0].href} className="transition-colors hover:text-primary">{site.navigation[0].label}</Link>
             <Link to="/how-it-works" className="transition-colors hover:text-primary">{site.megaNavigation.resources.label}</Link>
+            <Link to="/contact" className="transition-colors hover:text-primary">Contact</Link>
+            <Link to="/privacy" className="transition-colors hover:text-primary">Privacy</Link>
+            <Link to="/terms" className="transition-colors hover:text-primary">Terms</Link>
           </nav>
         </div>
         <div className="mt-base border-t border-primary pt-base">
-          <p className="text-sm text-secondary-foreground">{site.footer.copyright}</p>
+          <p className="text-sm text-secondary-foreground">{site.footer.supportLabel} <a className="font-semibold underline" href={`mailto:${site.footer.supportEmail}`}>{site.footer.supportEmail}</a></p>
+          <p className="mt-1 text-sm text-secondary-foreground">{site.footer.copyright}</p>
         </div>
       </div>
     </footer>

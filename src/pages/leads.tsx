@@ -1,5 +1,6 @@
 import { Helmet } from '@dr.pogodin/react-helmet';
 import { type FormEvent, useEffect, useState } from 'react';
+import { useCreateIntent } from '@/lib/create-intent';
 import { ArrowUpRight, CircleDollarSign, ClipboardList, Plus, Search, UserRoundCheck, X } from 'lucide-react';
 import { ProtectedRoute } from '@/lib/auth/auth-client';
 import WorkspaceLayout from '@/layouts/WorkspaceLayout';
@@ -32,6 +33,7 @@ function LeadsContent() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
+  useCreateIntent('lead', () => setShowCreate(true));
   const [detail, setDetail] = useState<LeadDetailResponse | null>(null);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');

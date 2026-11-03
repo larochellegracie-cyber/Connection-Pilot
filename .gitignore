@@ -24,6 +24,9 @@ pnpm-lock.yaml
 *.sln
 *.sw?
 
+# Local marketing media (pictures, videos, uploaded photos)
+/media/
+
 # Environment variables
 .env
 .env.local
@@ -85,3 +88,4 @@ pids
 .airo/qa-runs/
 .airo/qa-report.json
 .airo/security-report.json
+.venv-codevideo/

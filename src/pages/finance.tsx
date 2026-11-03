@@ -1,5 +1,6 @@
 import { Helmet } from '@dr.pogodin/react-helmet';
 import { type FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { useCreateIntent } from '@/lib/create-intent';
 import { FilePlus2, ReceiptText, WalletCards, Plus } from 'lucide-react';
 import { ProtectedRoute } from '@/lib/auth/auth-client';
 import WorkspaceLayout from '@/layouts/WorkspaceLayout';
@@ -32,6 +33,7 @@ function FinanceContent() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [tab, setTab] = useState<Tab>('estimates');
   const [modal, setModal] = useState<Tab | null>(null);
+  useCreateIntent(['quote', 'invoice'], (kind) => openNew(kind === 'quote' ? 'estimates' : 'invoices'));
   const [editing, setEditing] = useState<EditableRecord | null>(null);
   const [selectedCustomerId, setSelectedCustomerId] = useState('');
   const [error, setError] = useState('');

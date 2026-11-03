@@ -6,17 +6,24 @@ import { z } from 'zod';
 import { getChatModel, isChatConfigured, SYSTEM_PROMPT } from '@/lib/chatbot/chat-config';
 import { getTenant } from '@/server/api/customers/tenant.js';
 import { db } from '@/server/db/client.js';
-import { businessKnowledge, businessKnowledgeSource, businessNotification, businessProfile, customer, customerActivity, customerAppointment, customerConversation, customerInteraction, customerNote, estimate, invoice, job, lead, marketingProfile, payment } from '@/server/db/schema.js';
-import { createAppointmentChangeNotification } from '@/server/appointment-notifications.js';
-import { logCustomerActivity } from '@/server/api/customers/activity.js';
-import { assertSchedulingAvailability, findNextAvailableSlots, getCalendarSettings } from '@/server/api/calendar/shared.js';
+import { businessKnowledge, businessKnowledgeSource, businessNotification, businessProfile, customer, customerAppointment, customerConversation, customerInteraction, estimate, invoice, job, lead, marketingProfile, payment } from '@/server/db/schema.js';
+import { findNextAvailableSlots, getCalendarSettings } from '@/server/api/calendar/shared.js';
 import { jobDetailsFromNotes, orderDetailsFromNotes } from '@/lib/order-record.js';
 import { isFoodBusiness } from '@/lib/business-workflow.js';
 import { requirePlanFeature } from '@/server/plan-access.js';
 import { getPilotBusinessContext } from '@/server/pilot/business-context.js';
 import { createActionTools } from '@/server/pilot/action-tools.js';
+import { forModel, linksFor, statusFor, type PendingCard } from '@/server/pilot/chat-actions.js';
 import { pilotDateRange, type PilotDatePeriod } from '@/server/pilot/time-context.js';
+import { onboardingContext } from '@/server/onboarding/guided.js';
 import { learnFromOwnerMessage, pilotFactKinds, searchPilotLearning } from '@/server/pilot/learning.js';
+import { detectCreativeRequest } from '@/lib/marketing-creative-mode.js';
+import { enterCreativeMode } from '@/server/marketing/creative-mode.js';
+import { handleModeFollowUp, lastAssistantInMode } from '@/server/marketing/creative-followup.js';
+import { aiComplete } from '@/server/marketing/service.js';
+
+/** Separates reply text from the records (progress, links, cards) in the structured stream. */
+const RECORD = '\u001e';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -88,6 +95,7 @@ export default async function handler(req: Request, res: Response) {
     return;
   }
 
+  const structured = req.body?.structured === true;
   const tenant = await getTenant(req, res);
   if (!tenant) return;
   const access = await requirePlanFeature(tenant.id, 'pilot_assistant');
@@ -114,6 +122,41 @@ export default async function handler(req: Request, res: Response) {
   console.info(JSON.stringify({ event: 'business-assistant.request', requestId, tenantId: tenant.id, messageCount: safeMessages.length }));
 
   try {
+    // Marketing Creative Mode: a request to MAKE marketing content (video, TikTok, Instagram post, reel, ad...) is noticed here,
+    // before the chat model is called. Pilot loads this business's profile and its full list of uploaded media, reads the request into
+    // a structured brief, saves it as a Marketing Job (status brief_ready), and asks the owner to confirm. It creates nothing yet.
+    // The business comes from the session, never from the message.
+    // Already in the mode (Pilot's last message was a Marketing Creative Mode message): "yes" confirms the brief, and "make it darker"
+    // revises it as a new job. Anything else falls through to a new creative request or the normal chat.
+    const lastUserMessage = [...safeMessages].reverse().find((message) => message.role === 'user')?.content ?? '';
+    if (lastAssistantInMode(safeMessages)) {
+      const followUp = await handleModeFollowUp({ tenant, message: lastUserMessage, format: 'markdown', complete: aiComplete });
+      if (followUp) {
+        res.status(200);
+        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+        res.setHeader('Cache-Control', 'no-cache, no-transform');
+        res.setHeader('X-Accel-Buffering', 'no');
+        res.setHeader('X-Request-Id', requestId);
+        res.setHeader('X-Pilot-Mode', 'marketing-creative');
+        res.write(followUp.reply);
+        res.end();
+        return;
+      }
+    }
+    const creativeRequest = detectCreativeRequest([...safeMessages].reverse().find((message) => message.role === 'user')?.content ?? '');
+    if (creativeRequest.isCreative) {
+      const { reply } = await enterCreativeMode({ tenant, message: [...safeMessages].reverse().find((message) => message.role === 'user')?.content ?? '', detection: creativeRequest, format: 'markdown', complete: aiComplete });
+      res.status(200);
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+      res.setHeader('Cache-Control', 'no-cache, no-transform');
+      res.setHeader('X-Accel-Buffering', 'no');
+      res.setHeader('X-Request-Id', requestId);
+      res.setHeader('X-Pilot-Mode', 'marketing-creative');
+      res.write(reply);
+      res.end();
+      return;
+    }
+
     const model = getChatModel();
     const tenantCustomer = eq(customer.businessProfileId, tenant.id);
     const [savedKnowledge, approvedMarketingProfile] = await Promise.all([
@@ -125,15 +168,17 @@ export default async function handler(req: Request, res: Response) {
     const knowledgeContext = savedKnowledge ? `\n\nSaved Business Knowledge (use this before saying information is unavailable):\n${JSON.stringify(savedKnowledge).slice(0, 18000)}` : '';
     const officialProfileContext = approvedMarketingProfile ? `\n\nOfficial Business Profile — owner confirmed this is the source of truth for marketing and business details. Never advertise, recommend, or imply an offering that is not present here. When it conflicts with website text or unconfirmed extracted data, use this approved profile:\n${JSON.stringify(approvedMarketingProfile).slice(0, 18000)}` : '';
     const latestUserMessage = [...safeMessages].reverse().find((message) => message.role === 'user')?.content ?? '';
-    const [learnedFacts, importedWebsiteContext] = await Promise.all([
+    const [learnedFacts, importedWebsiteContext, setupContext] = await Promise.all([
       searchPilotLearning(tenant.id, isBusinessWideQuestion(latestUserMessage) ? '' : latestUserMessage),
       websiteKnowledgeContext(tenant.id, latestUserMessage),
+      onboardingContext(tenant.id).catch(() => ''),
     ]);
     const confirmedLearningContext = learnedFactsContext(learnedFacts, latestUserMessage);
 
+    const queuedCards: PendingCard[] = [];
     const result = streamText({
       model,
-      system: `${SYSTEM_PROMPT.replace('{{businessName}}', tenant.businessName)}${knowledgeContext}${officialProfileContext}${confirmedLearningContext}${importedWebsiteContext}`,
+      system: `${SYSTEM_PROMPT.replace('{{businessName}}', tenant.businessName)}${knowledgeContext}${officialProfileContext}${setupContext}${confirmedLearningContext}${importedWebsiteContext}`,
       messages: safeMessages,
       // Tool-enabled conversations require more than one model step: one step to
       // request a tool and another to turn its tenant-scoped result into a reply.
@@ -148,7 +193,7 @@ export default async function handler(req: Request, res: Response) {
       },
       tools: {
         // Actions that change data or send something: each asks for confirmation and reports only real results.
-        ...createActionTools({ tenantId: tenant.id, businessName: tenant.businessName, request: req }),
+        ...forModel(createActionTools({ tenantId: tenant.id, businessName: tenant.businessName, businessType: tenant.businessType, request: req }), { tenantId: tenant.id, canConfirm: structured, onCard: (pending) => queuedCards.push(pending) }),
         learnBusinessFacts: tool({
           description: 'Use when the owner explicitly gives durable business information for Pilot to remember: offerings, prices, resource requirements, suppliers or lead times, operating rules, processes, or observations. Extract only what the owner stated in the newest message. Never infer missing quantities, units, prices, supplier details, dates, or rules. This saves owner-provided facts only; it cannot change prices, inventory, schedules, financial records, or any other business data. Duplicate facts are skipped and conflicting facts are held for owner review rather than overwritten.',
           inputSchema: z.object({
@@ -354,31 +399,6 @@ export default async function handler(req: Request, res: Response) {
             if (matches.length !== 1) return { ok: false, message: matches.length ? 'More than one customer matches that name.' : 'No active customer matches that name.' };
             const messages = await db.select({ channel: customerConversation.channel, direction: customerConversation.direction, content: customerConversation.content, occurredAt: customerConversation.occurredAt }).from(customerConversation).where(eq(customerConversation.customerId, matches[0].id)).orderBy(desc(customerConversation.occurredAt)).limit(20);
             return { customerName: matches[0].name, messages };
-          },
-        }),
-        addCustomerNote: tool({
-          description: 'Save a note to a customer profile only when the owner explicitly asks, the customer is uniquely identified, and the owner has confirmed the exact note in this conversation.',
-          inputSchema: z.object({ customerName: z.string().min(1).max(120), note: z.string().min(1).max(2000), confirmed: z.boolean().default(false) }),
-          execute: async ({ customerName, note, confirmed }) => {
-            const matches = await db.select({ id: customer.id, name: customer.name }).from(customer).where(and(tenantCustomer, sql`${customer.archivedAt} IS NULL`, like(customer.name, `%${customerName.trim()}%`))).limit(3);
-            if (matches.length !== 1) return { ok: false, message: matches.length ? 'More than one customer matches that name.' : 'No active customer matches that name.' };
-            if (!confirmed) return { ok: false, needsConfirmation: true, customerName: matches[0].name, proposedNote: note, message: 'Ask the owner to confirm before saving this customer note.' };
-            await db.insert(customerNote).values({ id: randomUUID(), customerId: matches[0].id, body: note.trim() });
-            await logCustomerActivity(matches[0].id, 'customer_note_added', 'Pilot added a customer note', note.trim());
-            return { ok: true, customerName: matches[0].name, message: 'Customer note saved.' };
-          },
-        }),
-        updateCustomer: tool({
-          description: 'Update a customer name, email, address, or status only after the owner confirms the exact change.',
-          inputSchema: z.object({ customerName: z.string().min(1).max(120), updates: z.object({ name: z.string().min(1).max(255).optional(), email: z.string().email().optional(), address: z.string().max(1000).optional(), status: z.enum(['new', 'active', 'inactive', 'returning']).optional() }), confirmed: z.boolean().default(false) }),
-          execute: async ({ customerName, updates, confirmed }) => {
-            const matches = await db.select({ id: customer.id, name: customer.name }).from(customer).where(and(tenantCustomer, sql`${customer.archivedAt} IS NULL`, like(customer.name, `%${customerName.trim()}%`))).limit(3);
-            if (matches.length !== 1) return { ok: false, message: matches.length ? 'More than one customer matches that name.' : 'No active customer matches that name.' };
-            if (!Object.keys(updates).length) return { ok: false, message: 'No customer updates were supplied.' };
-            if (!confirmed) return { ok: false, needsConfirmation: true, customerName: matches[0].name, proposedUpdates: updates, message: 'Ask the owner to confirm before changing this customer record.' };
-            await db.update(customer).set(updates).where(eq(customer.id, matches[0].id));
-            await logCustomerActivity(matches[0].id, 'customer_updated', 'Pilot updated customer information', JSON.stringify(updates));
-            return { ok: true, customerName: matches[0].name, message: 'Customer information updated.' };
           },
         }),
         searchBusinessKnowledge: tool({
@@ -590,101 +610,32 @@ export default async function handler(req: Request, res: Response) {
             };
           },
         }),
-        changeAppointment: tool({
-          description: 'Create, reschedule, or cancel an appointment. Always identify a single customer and require explicit owner confirmation before making any change. Date/time must be a valid ISO 8601 datetime with timezone offset.',
-          inputSchema: z.object({ action: z.enum(['create', 'reschedule', 'cancel']), customerName: z.string().min(1).max(120), appointmentId: z.string().uuid().optional(), title: z.string().min(1).max(255).optional(), scheduledAt: z.string().datetime({ offset: true }).optional(), durationMinutes: z.number().int().min(15).max(480).multipleOf(15).optional(), confirmed: z.boolean().default(false) }),
-          execute: async ({ action, customerName, appointmentId, title, scheduledAt, durationMinutes, confirmed }) => {
-            const matches = await db.select({ id: customer.id, name: customer.name }).from(customer).where(and(tenantCustomer, sql`${customer.archivedAt} IS NULL`, like(customer.name, `%${customerName.trim()}%`))).limit(3);
-            if (matches.length !== 1) return { ok: false, message: matches.length ? 'More than one customer matches that name.' : 'No active customer matches that name.' };
-            const customerRecord = matches[0];
-            if (action === 'create') {
-              if (!title || !scheduledAt) return { ok: false, message: 'A title and an ISO date/time are required to create an appointment.' };
-              const date = new Date(scheduledAt);
-              const duration = durationMinutes || 60;
-              if (!confirmed) return { ok: false, needsConfirmation: true, customerName: customerRecord.name, proposedChange: { action, title, scheduledAt, durationMinutes: duration }, message: 'Ask the owner to confirm before creating this appointment.' };
-              try {
-                await assertSchedulingAvailability(tenant.id, date, duration);
-              } catch {
-                const availableTimes = await findNextAvailableSlots(tenant.id, date, duration);
-                const timezone = (await getCalendarSettings(tenant.id)).timezone;
-                return {
-                  ok: false,
-                  unavailable: true,
-                  message: 'That time is not available.',
-                  availableTimes: availableTimes.map((time) => ({ localTime: formatPilotDateTime(time, timezone), internalScheduledAt: time.toISOString() })),
-                };
-              }
-              const id = randomUUID();
-              await db.insert(customerAppointment).values({ id, customerId: customerRecord.id, title, scheduledAt: date, durationMinutes: duration });
-              const timezone = (await getCalendarSettings(tenant.id)).timezone;
-              await logCustomerActivity(customerRecord.id, 'appointment_created', 'Appointment created by Pilot', `${title} at ${formatPilotDateTime(date, timezone)}`);
-              return { ok: true, appointmentId: id, message: 'Appointment created.' };
-            }
-            const appointments = await db.select().from(customerAppointment).where(and(eq(customerAppointment.customerId, customerRecord.id), appointmentId ? eq(customerAppointment.id, appointmentId) : sql`${customerAppointment.status} = 'scheduled'`)).orderBy(asc(customerAppointment.scheduledAt)).limit(5);
-            const timezone = (await getCalendarSettings(tenant.id)).timezone;
-            if (appointments.length !== 1) return {
-              ok: false,
-              appointments: appointments.map((item) => ({ id: item.id, title: item.title, scheduledAt: formatPilotDateTime(item.scheduledAt, timezone), status: item.status })),
-              message: appointments.length ? 'More than one appointment matches. Ask the owner which appointment to change.' : 'No scheduled appointment matches that customer.',
-            };
-            const appointment = appointments[0];
-            if (!confirmed) return {
-              ok: false,
-              needsConfirmation: true,
-              customerName: customerRecord.name,
-              proposedChange: {
-                action,
-                appointmentId: appointment.id,
-                title: appointment.title,
-                currentTime: formatPilotDateTime(appointment.scheduledAt, timezone),
-                scheduledAt: scheduledAt ? formatPilotDateTime(new Date(scheduledAt), timezone) : null,
-                durationMinutes,
-              },
-              message: `Ask the owner to confirm before ${action === 'cancel' ? 'cancelling' : 'rescheduling'} this appointment.`,
-            };
-            if (action === 'cancel') {
-              await db.update(customerAppointment).set({ status: 'cancelled' }).where(eq(customerAppointment.id, appointment.id));
-              await logCustomerActivity(customerRecord.id, 'appointment_cancelled', 'Appointment cancelled by Pilot', appointment.title);
-              await createAppointmentChangeNotification({ businessProfileId: tenant.id, customerId: customerRecord.id, customerName: customerRecord.name, appointmentId: appointment.id, before: appointment, after: { ...appointment, status: 'cancelled' } });
-              return { ok: true, message: 'Appointment cancelled.' };
-            }
-            if (!scheduledAt) return { ok: false, message: 'A new ISO date/time is required to reschedule an appointment.' };
-            const date = new Date(scheduledAt);
-            const duration = durationMinutes || appointment.durationMinutes;
-            try {
-              await assertSchedulingAvailability(tenant.id, date, duration, appointment.id);
-            } catch {
-              const availableTimes = await findNextAvailableSlots(tenant.id, date, duration, 3);
-              const timezone = (await getCalendarSettings(tenant.id)).timezone;
-                return {
-                  ok: false,
-                  unavailable: true,
-                  message: 'That time is not available.',
-                  availableTimes: availableTimes.map((time) => ({ localTime: formatPilotDateTime(time, timezone), internalScheduledAt: time.toISOString() })),
-                };
-            }
-            await db.update(customerAppointment).set({ scheduledAt: date, durationMinutes: duration }).where(eq(customerAppointment.id, appointment.id));
-            await logCustomerActivity(customerRecord.id, 'appointment_rescheduled', 'Appointment rescheduled by Pilot', `${appointment.title} to ${formatPilotDateTime(date, timezone)}`);
-            await createAppointmentChangeNotification({ businessProfileId: tenant.id, customerId: customerRecord.id, customerName: customerRecord.name, appointmentId: appointment.id, before: appointment, after: { ...appointment, scheduledAt: date, durationMinutes: duration } });
-            return { ok: true, message: 'Appointment rescheduled.' };
-          },
-        }),
-        addFollowUpNote: tool({
-          description: 'Add a follow-up activity note to a specific customer record only after the owner confirms the exact note.',
-          inputSchema: z.object({ customerName: z.string().min(1).max(120), note: z.string().min(1).max(1000), confirmed: z.boolean().default(false) }),
-          execute: async ({ customerName, note, confirmed }) => {
-            const matches = await db.select({ id: customer.id, name: customer.name })
-              .from(customer)
-              .where(and(tenantCustomer, sql`${customer.archivedAt} IS NULL`, like(customer.name, `%${customerName.trim()}%`)))
-              .limit(3);
-            if (matches.length !== 1) return { ok: false, message: matches.length ? 'More than one customer matches that name. Ask the owner to be more specific before saving a note.' : 'No active customer matches that name.' };
-            if (!confirmed) return { ok: false, needsConfirmation: true, customerName: matches[0].name, proposedNote: note, message: 'Ask the owner to confirm before saving this follow-up note.' };
-            await db.insert(customerActivity).values({ id: randomUUID(), customerId: matches[0].id, activityType: 'assistant_follow_up', title: 'Pilot follow-up note added', detail: note.trim() });
-            return { ok: true, customerName: matches[0].name, message: 'Follow-up note saved to the customer activity record.' };
-          },
-        }),
       },
     });
+
+    if (structured) {
+      // The chat window gets the reply text plus real progress, links and confirmation cards, as small records between text.
+      res.status(200);
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+      res.setHeader('Cache-Control', 'no-cache, no-transform');
+      res.setHeader('X-Accel-Buffering', 'no');
+      res.setHeader('X-Request-Id', requestId);
+      const record = (value: unknown) => res.write(`${RECORD}${JSON.stringify(value)}${RECORD}`);
+      try {
+        for await (const part of result.fullStream) {
+          if (part.type === 'text-delta') res.write(part.text);
+          else if (part.type === 'tool-call') record({ type: 'status', label: statusFor(part.toolName, part.input as Record<string, unknown> | undefined) });
+          else if (part.type === 'tool-result') {
+            const links = linksFor(part.toolName, part.input as Record<string, unknown> | undefined, part.output);
+            if (links.length) record({ type: 'links', links });
+            while (queuedCards.length) record({ type: 'card', ...queuedCards.shift() });
+            record({ type: 'status', label: '' });
+          } else if (part.type === 'tool-error') record({ type: 'status', label: '' });
+          else if (part.type === 'error') record({ type: 'error', message: 'Pilot ran into a problem while working on that.' });
+        }
+      } finally { res.end(); }
+      return;
+    }
 
     const textResponse = result.toTextStreamResponse({ headers: { 'Cache-Control': 'no-cache, no-transform', 'X-Accel-Buffering': 'no', 'X-Request-Id': requestId } });
     res.status(textResponse.status);

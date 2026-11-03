@@ -77,4 +77,11 @@ describe('Customers page profile links', () => {
     expect((await row('Cooling Carl')).textContent).toContain('Returning');
     expect((await row('Quiet Quinn')).textContent).toContain('Quiet');
   });
+  it('lets the table reflow into labelled cards on phones: marked table, captions on each cell', async () => {
+    renderCustomers();
+    const table = (await screen.findByRole('link', { name: 'Jordan Rivera' })).closest('table') as HTMLTableElement;
+    expect(table.className).toContain('cp-stack-table');
+    const captions = [...table.querySelectorAll('tbody td[data-label]')].map((cell) => cell.getAttribute('data-label'));
+    expect(captions).toEqual(['Contact', 'Status', 'Activity', 'Next appointment']);
+  });
 });
