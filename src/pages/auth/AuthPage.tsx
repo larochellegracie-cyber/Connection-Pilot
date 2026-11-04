@@ -18,7 +18,7 @@
  *   and sign in in place.
  */
 
-import { useState, FormEvent, ReactElement } from 'react';
+import { useRef, useState, FormEvent, ReactElement } from 'react';
 import { Helmet } from '@dr.pogodin/react-helmet';
 import { Navigate, useNavigate, useLocation } from 'react-router';
 import { signIn, signUp, useSession } from '@/lib/auth/auth-client';
@@ -119,6 +119,7 @@ export default function AuthPage({ mode, providers }: AuthPageProps) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const justSignedUp = useRef(false);
   const [socialLoading, setSocialLoading] = useState<string | null>(null);
   // Shown when social sign-in is diverted to a new tab (preview iframe only).
   const [oauthNotice, setOauthNotice] = useState('');
@@ -137,7 +138,8 @@ export default function AuthPage({ mode, providers }: AuthPageProps) {
   }
 
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
+    // right after a new sign-up the session flips to signed-in before the handler below runs: send a brand-new account to onboarding, not the dashboard
+    return <Navigate to={justSignedUp.current ? '/onboarding' : '/dashboard'} replace />;
   }
 
   async function handleEmailSubmit(e: FormEvent) {
@@ -154,10 +156,12 @@ export default function AuthPage({ mode, providers }: AuthPageProps) {
     }
     setLoading(true);
     try {
+      if (!isLogin) justSignedUp.current = true;
       const result = isLogin
         ? await signIn.email({ email, password })
         : await signUp.email({ email, password, name: name || '' });
       if (result.error) {
+        justSignedUp.current = false;
         setError(result.error.message || 'Authentication failed');
         return;
       }
