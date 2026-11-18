@@ -5,9 +5,9 @@ import { db } from '@/server/db/client.js';
 import { businessSubscription } from '@/server/db/schema.js';
 
 export const CONNECTION_PILOT_PRICES = {
-  'starter-monthly': 'price_1ULvwnAhedvpkEdkGp73i1xl',
-  'growth-monthly': 'price_1ULvwnAhedvpkEdklZ6uIqTT',
-  'pro-monthly': 'price_1ULvwnAhedvpkEdkLpgY5sfY',
+  'starter-monthly': 'price_1ULvziQ6NJ9yEPwhs50vpJyp',
+  'growth-monthly': 'price_1ULw1RQ6NJ9yEPwhjyIelUlg',
+  'pro-monthly': 'price_1ULw1gQ6NJ9yEPwh1Qmxls2z',
 } as const;
 
 export type PlanKey = keyof typeof CONNECTION_PILOT_PRICES;

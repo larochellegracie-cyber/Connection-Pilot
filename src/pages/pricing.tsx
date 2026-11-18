@@ -7,9 +7,9 @@ import { useSession } from '@/lib/auth/auth-client';
 import { public_messaging } from 'virtual:content';
 
 const priceIds = {
-  Starter: 'price_1ULvwnAhedvpkEdkGp73i1xl',
-  Growth: 'price_1ULvwnAhedvpkEdklZ6uIqTT',
-  Pro: 'price_1ULvwnAhedvpkEdkLpgY5sfY',
+  Starter: 'price_1ULvziQ6NJ9yEPwhs50vpJyp',
+  Growth: 'price_1ULw1RQ6NJ9yEPwhjyIelUlg',
+  Pro: 'price_1ULw1gQ6NJ9yEPwh1Qmxls2z',
 } as const;
 const siteUrl = 'https://connectionpilot.net';
 const pageTitle = 'Plans and Pricing | Connection Pilot';

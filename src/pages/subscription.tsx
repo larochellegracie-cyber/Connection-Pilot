@@ -8,9 +8,9 @@ import WorkspaceLayout from '@/layouts/WorkspaceLayout';
 import { subscription } from 'virtual:content';
 
 const priceIds = {
-  starter: 'price_1ULvwnAhedvpkEdkGp73i1xl',
-  growth: 'price_1ULvwnAhedvpkEdklZ6uIqTT',
-  pro: 'price_1ULvwnAhedvpkEdkLpgY5sfY',
+  starter: 'price_1ULvziQ6NJ9yEPwhs50vpJyp',
+  growth: 'price_1ULw1RQ6NJ9yEPwhjyIelUlg',
+  pro: 'price_1ULw1gQ6NJ9yEPwh1Qmxls2z',
 } as const;
 
 type Subscription = { planKey: string; planName: string; status: string; trialEndsAt: string | null; trialDaysRemaining: number; currentPeriodEnd: string | null; cancelAtPeriodEnd: boolean; hasBillingCustomer: boolean; canResetStripeTestBilling: boolean; features: string[] };
